@@ -1,0 +1,95 @@
+This is an example of how to include code listing within dissertation. 
+
+\lstset{language=HTML, linewidth=6in, breaklines=true, 
+  breakatwhitespace=true, breakindent=5pt, postbreak=\space}
+\begin{lstlisting}{}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Rosette Nebula Geometry</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <style>
+      body {
+        color: #fff;
+        font-family: Monospace;
+        font-size: 13px;
+        text-align: center;
+        font-weight: bold;
+
+        background-color: #000;
+        margin: 0px;
+        overflow: hidden;
+      }
+
+      #info {
+        position: absolute;
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+      }
+
+      a { color: blue; }
+
+    </style> 
+    
+  </head>
+  <body>
+    <div id="info">
+            <a href="http://www.astro.louisville.edu" target="_blank">University of Louisville Physics & Astronomy</a>
+            <br/>
+            Jeremy Huber - Rosette Nebula
+    </div>
+    
+    <!-- Threedotjs -->
+    
+    <script src="js/three.min.js"></script>
+
+    <!-- Shaders adapted from http://stemkoski.github.io/Three.js/Shader-Glow.html -->
+
+     <script id="starvertexShader" type="x-shader/x-vertex">
+      varying float intensity;
+      void main() 
+      {
+                                                              
+        intensity = 1.;
+        // Pass the 2D position for this vertex to the shader
+        gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+      }
+    </script>
+
+    <script id="starfragmentShader" type="x-shader/x-vertex"> 
+      uniform vec3 starglowColor;
+      varying float intensity;
+      void main() 
+      {
+        vec3 glow = starglowColor * intensity;
+        gl_FragColor = vec4( glow, 1.0 );
+      }
+    </script>
+    
+
+
+     <script id="clustervertexShader" type="x-shader/x-vertex">
+      void main() 
+      {
+        // Pass the 2D position for this vertex to the shader
+        gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+      }
+    </script>
+
+    <script id="clusterfragmentShader" type="x-shader/x-vertex"> 
+      uniform vec3 clusterglowColor;
+      void main() 
+      {
+        vec3 glow = clusterglowColor * 1.0;
+        gl_FragColor = vec4( glow, 1.0 );
+      }
+    </script>
+
+  </body>
+</html>
+
+\end{lstlisting}

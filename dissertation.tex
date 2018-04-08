@@ -1,0 +1,199 @@
+\RequirePackage{snapshot}
+\documentclass[final]{ulthesis}
+
+\include{journals}
+
+\usepackage[pdfauthor={Patrick Trainor},
+            pdftitle={Bayesian Graphical Modeling for Interactome Modeling and Compound Identification in Metabolomics},
+            pdfsubject={Bayesian Metabolomics},
+            pdfkeywords={Bayesian Statistics, Metabolomics, Mass Spectrometry, Interactome},
+            pdfproducer={Latex with hyperref},
+            pdfcreator={latex->dvips->ps2pdf},
+            pdfpagemode=UseOutlines,
+            bookmarksopen=true,
+            bookmarksnumbered=true]{hyperref}
+\usepackage{memhfixc}
+
+%Additional packages that are useful
+\usepackage[pdftex]{graphicx}
+\usepackage{verbatim,color,amsmath,amssymb,amsthm,amsfonts,listings,subfig} 
+\usepackage{hyperref}  % use without arguments for no metatdata
+\usepackage[labelsep=period, labelfont=bf]{caption} % boldface with period
+\usepackage{chngcntr}   % use to serially number figures and tables 
+
+\DeclareMathOperator{\PP}{P}
+\DeclareMathOperator{\EE}{E}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\ent}{H}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\DE}{DE}
+\DeclareMathOperator{\EXP}{EXP}
+\DeclareMathOperator{\GA}{GA}
+\DeclareMathAlphabet\mathbfcal{OMS}{cmsy}{b}{n}
+
+\makeatletter
+\renewcommand\@memmain@floats{%
+
+% Enable serially numbered figures, tables and equations
+\counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
+\counterwithout{equation}{chapter}}
+
+% Suppress section numbering in TOC
+\renewcommand{\cftsectionpresnum}{\begin{lrbox}{\@tempboxa}}
+\renewcommand{\cftsectionaftersnum}{\end{lrbox}}
+\makeatletter
+\setlength{\cftsectionnumwidth}{0pt}
+
+% Restarts section numbered from 1 on each chapter
+\renewcommand{\thesection}{\arabic{section}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+% ---------------------------------------
+% Front matter
+% ---------------------------------------
+%Dissertation author 
+\author{Patrick J. Trainor}
+
+% Degree
+\authordegree{M.S. in Biostatistics, 2014\\M.A. in Mathematics, 2014\\B.S. in Mathematics, 2012}
+
+% Dissertation title
+\title{Bayesian Graphical Modeling for Compound Identification and Interactome Modeling in Metabolomics}
+
+% Dissertation degree
+\dissertationdegree{Doctor of Philosophy}
+
+% Dissertation discipline (may differ from the department name)
+\dissertationdiscipline{Bioinformatics}
+
+% Month and year of degree award
+\dissertationdate{May 2018}
+
+% Month day and year of dissertation approval
+\approvaldate{April 15, 2018}
+
+% College or school
+\school{School of Interdisciplinary and Graduate Studies }
+
+% Department in which the candidate is enrolled
+\department{Bioinformatics}
+
+% Advisors and committee members
+\advisor{Shesh N. Rai, Ph.D.}
+\firstmember{Andrew P. DeFilippis, M.D., M.Sc.}
+\secondmember{Eric C. Rouchka, D.Sc.}
+\thirdmember{Juw W. Park, Ph.D.}
+\fourthmember{Fourth Member}
+
+% Use the same keywords for the pdf headers above
+\keywords{Appropriate key search words separated by commas}
+
+%This builds the title page and other front content
+\frontmatter
+
+\maketitle
+% Now we add edited content page by page.
+% Retain each section, edit as needed.
+% Keep this order of sections and end with the tables of contents.
+
+\begin{dedication}
+For those who know why.
+\end{dedication}
+
+\begin{acknowledgments}
+People, grants, lab
+\end{acknowledgments}
+
+% Dissertation abstract 
+\begin{dissertationabstract}
+Abstract goes here
+\end{dissertationabstract}
+
+% These commands will generate the required tables of contents. 
+% The \clearpage commands insure that the next one begins on a new page.
+\tableofcontents \clearpage
+\listoftables \clearpage
+\listoffigures \clearpage
+
+% ---------------------------------------------
+% Main matter
+% ---------------------------------------------
+% Note we need this to insure proper formatting for the body of the dissertation.
+\mainmatter
+
+% Use separate files for chapters and include the chapter titles here.
+% Having the titles here is necessary to get them properly indexed and 
+% formatted.
+
+\chapter{Introduction}
+\input{intro.tex}
+
+\chapter{Preliminaries: Bayesian statistics}
+\input{prelimBayesianStats.tex}
+
+\chapter{Preliminaries: Metabolomics}
+\input{prelimMetabolomics.tex}
+
+\chapter{Preliminaries: Gaussian graphical modeling}
+\input{prelimGGM.tex}
+
+\chapter{Prior approaches for higher-order inference in metabolomics}
+
+\chapter{Inferring metabolite interactomes via Bayesian graphical model selection utilizing molecular structure informative priors}
+
+\chapter{Prior approaches for compound identification}
+
+\chapter{Sibami: Similarity-Informed Bayesian Metabolite Identification}
+
+\chapter{Conclusions} 
+\input{conclusions.tex}
+
+% ---------------------------------------------
+% Back matter
+% ---------------------------------------------
+% The layout changes for the last part and you need this command
+
+\backmatter
+
+% You can change the style of the bibliography for whatever would be
+% accepted by your discipline and the University format checkers.
+% There are several bibliography managers that may be used with LaTeX.
+% Here we have defaulted to bibtex, but if this does not work for you
+%  try others.
+
+% Style "apalike" is similar to the Harvard style.  
+% If you prefer numbered references, try "plain".
+
+% The ulthesis package includes a copy of the Optical Society of America's
+%   bibliography style which retains titles and provides a clean looking
+%   bibliography in order of citation in the body. It is used here by default.
+
+% If you want a true Harvard style you can use "biblatex" or "natbib" instead
+%   of bibtex, which requires some other modifications.  There is help for this
+%   on Sharelatex and on Overleaf, as well as through Google searches.
+
+%\bibliographystyle{apalike}
+%\bibliographystyle{plain}
+\bibliographystyle{osajnl}
+\bibliography{dissertation}
+
+
+% Appendices and the Vita are treated as chapters in the back matter
+
+\chapter{Appendix A: Commonly Used Acronyms}
+\input{acronyms.tex}
+
+
+\chapter{Appendix B: Model Code}
+\input{code.tex}
+
+
+\chapter{Vita}
+\input{vita.tex}
+
+
+\end{document}
