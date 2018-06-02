@@ -1,15 +1,64 @@
 \section{Bayes rule}
 
-The central foundation of Bayesian statistics is Bayes rule. 
+The central foundation of Bayesian statistics is Bayes rule \cite{gelman2004}. 
 \begin{theorem} If $A$ and $B$ are events with $\PP(B)>0$, then:
 	\begin{gather}
-		\PP(A|B) = \frac{\PP(B|A)\PP(B)}{\PP(B)}
+		\PP(A|B) = \frac{\PP(B|A)\PP(A)}{\PP(B)}
 	\end{gather}.	
 \end{theorem}
-Further, Bayes rule can be extended to any arbitrary partitioning of a sample space.
+
+Further, Bayes rule can be extended to any arbitrary partitioning of a sample space \cite{casella2002}.
 \begin{theorem}
 	Let $\mathcal{P}=\{A_i: i=1,2, \hdots, N\}$ represents an arbitrary partitioning of a sample space $S$, then for a specific $A_i$:
 	\begin{gather}
-			 \PP(A_i|B)=\frac{\PP(B|A_i)P(A_i)}{\sum_{A_i\in \mathcal{P}}\PP(B|A_i)P(A_i)}
+			 \PP(A_i|B)=\frac{\PP(B|A_i)P(A_i)}{\sum_{A_j\in \mathcal{P}}\PP(B|A_j)P(A_j)}
 	\end{gather}.
 \end{theorem}
+
+\section{Bayesian inference regarding a parameter}
+Let $\theta$ (or $\boldsymbol{\theta}$ in the multivariate case) represent a parameter of a probability mass function (pmf) or probability distribution function (pdf)  $f(x|\theta)$ of a random variable $X$. Without loss of generality, we discuss the univariate case of one random variable $X$ and one population parameter $\theta$, although multivariate generalization is straightforward. The objective of statistical inference regarding $\theta$ is to utilize a random sample $X_1, X_2, \hdots X_n$ from a population with pmf/pdf $f(x|\theta)$ to determine likely values of $\theta$ \cite{casella2002}. Denoting a fixed sample as $\textbf{x}=\{x_1, x_2,\hdots, x_n \}$, we note that $\textbf{x}$ is a realization from the sample space $\mathcal{X}$ of all possible samples from the population. In Bayesian inference, the population parameter $\theta$ is regarded as unknown \cite{hoff2009}. It is assumed that the uncertainty regarding the true population value of $\theta$, can be represented by the prior probability distribution $p(\theta)$. Since the true population value is unknown, a set of possible values for $\theta$, that is the parameter space $\Theta$ comprises the support of $p(\theta)$. In Bayesian analysis, a sampling model describing the probability of observing realization $x$ of the random variable $X$ conditioned on a fixed value of the parameter $\theta$, that is $p(x|\theta)$ must also be specified. When considering a fixed sample, this term is also referred to as the  likelihood \cite{casella2002}. 
+\begin{theorem}
+	 If $X_1, X_2, \hdots, X_n$ are independent and identically distributed (iid) random variables, then $f(x_1,x_2,\hdots, x_n|\theta)=\prod_{i=1}^n f(x_i|\theta)$.
+\end{theorem}
+More specifically, we refer to the joint distribution function of a sample $x$, conditional on the value of the parameter $\theta$ as the likelihood of theta given the sample, or $\mathcal{L}(\theta|\textbf{x})$. Given a prior distribution for $\theta\in \Theta$, a random sample from the population $\textbf{x}$,and a sampling model or likelihood, the posterior distribution for $\theta$ can then be determined utilizing Bayes rule, as below\cite{hoff2009}:
+\begin{gather}
+	p(\theta|\textbf{x})=\frac{p(\textbf{x}|\theta)p(\theta)}{\int_{\tilde{\theta} \in \Theta} p(\textbf{x}|\tilde{\theta})p(\tilde{\theta})d\tilde{\theta}}=\frac{p(\textbf{x}|\theta)p(\theta)}{p(\textbf{x})}.
+\end{gather}
+The denominator term is referred to as the marginal likelihood. As the marginal likelihood involves only a fixed sample, the denominator is a constant, which justifies the following relation involving the posterior distribution of $\theta$:
+\begin{gather}
+	p(\theta|\textbf{x}) \propto p(\textbf{x}|\theta)p(\theta). 
+\end{gather}
+From this relation, it can be noted that the posterior distribution for $\theta$, after observing a random sample $\textbf{x}$ is proportional to the likelihood times the prior.
+
+\section{Example Bayesian inference regarding a parameter}
+Consider a mass spectrometer with a counting detector that records the counts per second over a fixed $m/z$ window. The number of counts recorded by the detector over a fixed time interval may be a Poisson process. Let $X$ be the random variable representing the number of counts recorded by the detector over a one second time interval, with an average number of counts per second (population parameter) of $\lambda$. We then say that $X\sim Pois(\lambda)$, and note that the probability mass function for $X$ is:
+\begin{gather}
+	f(x|\lambda)=\frac{\lambda^x e^{-\lambda}}{x!}, \quad x \in \mathbb{N}, \quad \lambda \in \left[0, \infty \right)
+\end{gather}
+ Assume a sample has been observed with the following counts: $\{107, 103, 110, 99, 108, 108, 105\}$ and that we wish to determine plausible values of the rate parameter $\lambda$. In order to determine plausible values, we will conduct Bayesian inference over $\lambda$. Assume that we have collected ten prior count observations and that the sum of counts from these observations was 1,000. We may then choose a prior distribution for $\lambda$ of $Gamma(\alpha, \beta)$ with parameters $\alpha=1000$ and $\beta=10$. We note the following form of the Gamma distribution pdf: 
+\begin{gather}
+	f(\lambda|\alpha,\beta) =\frac{\beta^{\alpha}}{\Gamma(\alpha)}\lambda^{\alpha-1}e^{-\beta \lambda}, \quad \lambda \in \left[0, \infty \right), \quad \alpha,\beta >0.
+\end{gather}
+We note that the likelihood for the Poisson distribution factorizes as in the following:
+\begin{align}
+	\mathcal{L}(\lambda|\textbf{x})=p(\textbf{x}|\lambda)=\prod_{i=1}^n \frac{\lambda^{x_i}e^{-\lambda}}{x_i!}= \left( \prod_{i=1}^n x_i! \right)^{-1} \times \lambda^{\sum_{i=1}^n x_i} e^{-n\lambda}. 
+	\label{eq:poissonLik}
+\end{align}
+From Eq. \ref{eq:poissonLik} we can note that the likelihood term that involves $\lambda$ and are is not fixed by the sample $\textbf{x}$ is $\lambda^{\sum_{i=1}^n x_i} e^{-n\lambda}$. Thus the posterior distribution for $\lambda$ has the following form:
+\begin{align}
+	p(\lambda|\textbf{x})\propto p(\lambda) p(\textbf{x}|\lambda) \propto p(\lambda)\lambda^{\sum_{i=1}^n x_i} e^{-n\lambda}
+\end{align}
+Considering the prior distribution that we have specified:
+\begin{align}
+	p(\lambda|\textbf{x})&\propto \frac{\beta^{\alpha}}{\Gamma(\alpha)}\lambda^{\alpha-1}e^{-\beta \lambda} \lambda^{\sum_{i=1}^n x_i} e^{-n\lambda} \\
+	&\propto \frac{\beta^{\alpha}}{\Gamma(\alpha)} \lambda^{\alpha + \sum_{i=1}^n x_i -1} e^{-(\beta+n)\lambda},
+\end{align}
+we can note that:
+\begin{align}
+p(\lambda|\textbf{x}) =c(\textbf{x},\alpha,\beta)^{-1} \lambda^{\alpha + \sum_{i=1}^n x_i -1} e^{-(\beta+n)\lambda},
+\end{align}
+where $c(\textbf{x},\alpha,\beta)$ is a normalizing constant that depends only on the prior distribution parameters and the observed sample. Thus it is evident that the posterior distribution for $\lambda$ is also a Gamma distribution, specifically $p(\lambda|\textbf{x})\sim Gamma(\alpha+ \sum_{i=1}^n x_i, b+n)$.
+
+\section{Selection of prior distribution}
+
+\section{MCMC methods for inference}
