@@ -33,6 +33,8 @@
 \DeclareMathOperator{\GA}{GA}
 \DeclareMathAlphabet\mathbfcal{OMS}{cmsy}{b}{n}
 
+\newtheorem{theorem}{Theorem}[section]
+
 \makeatletter
 \renewcommand\@memmain@floats{%
 
@@ -132,22 +134,26 @@ Abstract goes here
 \chapter{Introduction}
 \input{intro.tex}
 
-\chapter{Preliminaries: Bayesian statistics}
-\input{prelimBayesianStats.tex}
-
 \chapter{Preliminaries: Metabolomics}
 \input{prelimMetabolomics.tex}
+
+\chapter{Preliminaries: Bayesian statistics}
+\input{prelimBayesianStats.tex}
 
 \chapter{Preliminaries: Gaussian graphical modeling}
 \input{prelimGGM.tex}
 
 \chapter{Prior approaches for higher-order inference in metabolomics}
+\input{priorHigherOrderIn.tex}
 
 \chapter{Inferring metabolite interactomes via Bayesian graphical model selection utilizing molecular structure informative priors}
+\input{structureAdBLG.tex}
 
 \chapter{Prior approaches for compound identification}
+\input{priorCompID.tex}
 
 \chapter{Sibami: Similarity-Informed Bayesian Metabolite Identification}
+\input{myCompID.tex}
 
 \chapter{Conclusions} 
 \input{conclusions.tex}
@@ -187,10 +193,8 @@ Abstract goes here
 \chapter{Appendix A: Commonly Used Acronyms}
 \input{acronyms.tex}
 
-
-\chapter{Appendix B: Model Code}
+\chapter{Appendix B: Software developed for the Bayesian Graphical Lasso}
 \input{code.tex}
-
 
 \chapter{Vita}
 \input{vita.tex}

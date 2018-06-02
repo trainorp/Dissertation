@@ -1,38 +1,15 @@
+\section{Bayes rule}
 
-\section{Dust}
- 
-This is an example of how to continue a chapter with additional sections by
-using addtional files.  
-
-In order to determine the temperature of the dust in these regions, 
-the Spectral Energy Distribution (SED)  must be fitted to a thermal 
-emission curve. The fitting function we used is based on an optically 
-thin modified blackbody. A true black body absorbs all incident 
-radiation and emits thermal continuum according to the 
-Planck function \cite{irwin2007}.
-
-\begin{equation}
-B_{\nu}(T) = \frac{2h\nu^3}{c^2} \frac{1}{e^{\frac{h\nu}{kT}}-1}
-\end{equation}
-
-\noindent However, dust does not behave like a true black body, 
-as some radiation is reflected. As a result, a modified black body 
-curve is used to account for these effects. 
-
-A detailed understanding of dust emission and absorption  requires accounting
-for a diversity of factors including composition and grain size. To get a
-general idea of dust temperature, however, we can utilize a generic fitting
-function used by the Planck consortium.
-
-\begin{equation}
-I_{\nu} = \tau_{\nu_0} \cdot (\frac{\nu}{\nu_0})^{\beta} \cdot B_{\nu}(T)
-\end{equation}
-
-\noindent Here, I$_{\nu}$, $\tau_{\nu_0}$ is the optical depth at frequency
-$\nu_0$, $\beta$ is the spectral emissivity index, and B$_{\nu}$(T) is the
-Planck function \cite{planck2011thermal}. In keeping with assumptions from
-Planck studies for generic dust clouds, a spectral emissivity index value of
-$\beta$ = 1.5 was adopted for all wavelengths greater than 250 $\mu$m and
-$\beta$ was taken to be unity below this wavelength. These are typical
-assumptions based on extragalactic surveys \cite{planck2015}.
-
+The central foundation of Bayesian statistics is Bayes rule. 
+\begin{theorem} If $A$ and $B$ are events with $\PP(B)>0$, then:
+	\begin{gather}
+		\PP(A|B) = \frac{\PP(B|A)\PP(B)}{\PP(B)}
+	\end{gather}.	
+\end{theorem}
+Further, Bayes rule can be extended to any arbitrary partitioning of a sample space.
+\begin{theorem}
+	Let $\mathcal{P}=\{A_i: i=1,2, \hdots, N\}$ represents an arbitrary partitioning of a sample space $S$, then for a specific $A_i$:
+	\begin{gather}
+			 \PP(A_i|B)=\frac{\PP(B|A_i)P(A_i)}{\sum_{A_i\in \mathcal{P}}\PP(B|A_i)P(A_i)}
+	\end{gather}.
+\end{theorem}

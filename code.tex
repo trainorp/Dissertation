@@ -1,95 +1,529 @@
-This is an example of how to include code listing within dissertation. 
+\section{High-level R code}
 
-\lstset{language=HTML, linewidth=6in, breaklines=true, 
+\lstset{language=R, linewidth=6in, breaklines=true, 
+	breakatwhitespace=true, breakindent=5pt, postbreak=\space}
+\subsection{Main high-level Function for generating a BGL object}
+
+\begin{lstlisting}
+#' Block Gibbs sampler for Bayesian Graphical Lasso
+#'
+#' Blockwise sampling from the conditional distribution of a permuted column/row
+#' for simulating the posterior distribution for the concentration matrix specifying
+#' a Gaussian Graphical Model
+#' @param X Data matrix
+#' @param iterations Length of Markov chain after burn-in
+#' @param burnIn Number of burn-in iterations
+#' @param adaptive Logical; Adaptive graphical lasso (TRUE) or regular (FALSE). Default is FALSE.
+#' @param lambdaPriora Shrinkage parameter (lambda) gamma distribution shape hyperparameter
+#' (Ignored if adaptive=TRUE)
+#' @param lambdaPriorb Shrinkage parameter (lambda) gamma distribution scale hyperparameter
+#' (Ignored if adaptive=TRUE)
+#' @param adaptiveType Choose of adaptive type. Options are "norm" for norm of concentration
+#' matrix based adaptivity and "priorHyper" for informative adaptivity
+#' @param priorHyper Matrix of gamma scale hyper parameters (Ignord if adaptiveType="norm")
+#' @param gammaPriors labmda_ij gamma distribution shape prior (Ignored if adaptive=FALSE)
+#' @param gammaPriort lambda_ij gamma distribution rate prior (Ignored if adaptive=FALSE)
+#' @param lambdaii lambda_ii hyperparameter (Ignored if adaptive=FALSE)
+#' @param keepLambdas Logical: Should lambda MCMC chain (vector / matrix) be kept?
+#' @param illStart Method for generating a positive definite estimate of the sample covariance matrix if sample covariance matrix is not semi-positive definite
+#' @param rho Regularization parameter for the graphical lasso estimate of the sample covariance matrix (if illStart="glasso")
+#' @param verbose logical; if TRUE return MCMC progress
+#' @details Implements the block Gibbs sampler for the posterior distribution of
+#' a GGM concentration matrix estimated via the Bayesian Graphical Lasso
+#' introduced by Wang (2012) or the Bayesian Adaptive Graphical Lasso. For the adaptive case,
+#' the element-wise shrinkage parameter is drawn from a gamma distribution where the scale
+#' parameter is adaptively modulated directly from the estimated concentration matrix
+#' or a user can supply their own informative prior.
+#' 
+#' @return
+#' \item{Omega}{List of concentration matrices from the Markov chains}
+#' \item{Lambda}{Vector of simulated lambda parameters}
+#' @author Patrick Trainor (University of Louisville)
+#' @author Hao Wang
+#' @references Wang, H. (2012). Bayesian graphical lasso models and efficient
+#' posterior computation. \emph{Bayesian Analysis, 7}(4). <doi:10.1214/12-BA729> .
+#' @examples
+#' \donttest{
+	#' # Generate true covariance matrix:
+	#' s<-.9**toeplitz(0:9)
+	#' # Generate multivariate normal distribution:
+	#' set.seed(5)
+	#' x<-MASS::mvrnorm(n=100,mu=rep(0,10),Sigma=s)
+	#' blockGLasso(X=x)
+	#' }
+#' # Same example with short MCMC chain:
+#' s<-.9**toeplitz(0:9)
+#' set.seed(6)
+#' x<-MASS::mvrnorm(n=100,mu=rep(0,10),Sigma=s)
+#' blockGLasso(X=x,iterations=100,burnIn=100)
+#' @export
+blockGLasso<-function(X,iterations=2000,burnIn=1000,adaptive=FALSE,
+lambdaPriora=1,lambdaPriorb=1/10,
+adaptiveType=c("norm","priorHyper"), priorHyper=NULL,
+gammaPriors=1,gammaPriort=1,
+lambdaii=1,keepLambdas=TRUE,illStart=c("identity","glasso"),rho=.1,
+verbose=TRUE,...)
+{
+	if(adaptive)
+	{
+		UseMethod("blockAdGLasso")
+	}else{
+	UseMethod("blockGLasso")
+}
+}
+
+\end{lstlisting}
+
+\subsection{Function for calling the non-adaptive block Gibbs sampler}
+\begin{lstlisting}
+#' @export
+blockGLasso.default<-function(X,iterations=2000,burnIn=1000, lambdaPriora=1,lambdaPriorb=1/10,
+illStart=c("identity","glasso"), keepLambdas=TRUE,rho=.1,
+verbose=TRUE,...){
+	# Total iterations:
+	totIter<-iterations+burnIn
+	
+	# Ill conditioned start:
+	illStart<-match.arg(illStart)
+	
+	# Sum of product matrix, covariance matrix, n
+	S<-t(X)%*%X
+	n=nrow(X)
+	Sigma=S/n
+	p<-dim(Sigma)[1]
+	
+	# Concentration matrix and it's dimension:
+	if(rcond(Sigma)<.Machine$double.eps){
+		if(illStart=="identity"){
+			Omega<-diag(nrow(Sigma))+1/(p**2)
+		}
+		else{
+			Omega<-glasso::glasso(cov(X),rho=rho)$wi + 1/(p**2)
+		}
+	}
+	else{
+		Omega<-MASS::ginv(Sigma)
+	}
+	rownames(Omega)<-rownames(Sigma)
+	colnames(Omega)<-colnames(Sigma)
+	
+	# Gamma distirbution posterior parameter a:
+	lambdaPosta<-(lambdaPriora+(p*(p+1)/2))
+	
+	# Keep lambdas?
+	keepLambdas<-ifelse(keepLambdas,1L,0L)
+	
+	# Call sampler:
+	bglObj<-bgl(n=n,iters=totIter,lambdaPriorb=lambdaPriorb, lambdaPosta=lambdaPosta,
+	S=S,Sigma=Sigma,Omega=Omega,keepLambdas=keepLambdas)
+	
+	bglObj<-c(bglObj,burnIn=burnIn)
+	class(bglObj)<-"BayesianGLasso"
+	return(bglObj)
+}
+
+\end{lstlisting}
+
+\subsection{Function for calling the non-adaptive block Gibbs sampler}
+\begin{lstlisting}
+#' @export
+blockAdGLasso.default<-function(X,iterations=2000,burnIn=1000, adaptiveType=c("norm","priorHyper"),
+priorHyper=NULL,gammaPriors=1,gammaPriort=1,
+lambdaii=1,keepLambdas=TRUE,illStart=c("identity","glasso"),
+rho=.1,verbose=TRUE,...){
+	# Total iterations:
+	totIter<-iterations+burnIn
+	
+	# Ill conditioned start:
+	illStart<-match.arg(illStart)
+	
+	# Sum of product matrix, covariance matrix, n
+	S<-t(X)%*%X
+	n=nrow(X)
+	Sigma=S/n
+	p<-dim(Sigma)[1]
+	
+	# Adaptive type:
+	adaptiveType<-match.arg(adaptiveType)
+	if(adaptiveType=="priorHyper"){
+		if(is.null(priorHyper)) stop("Must specify matrix of prior hyperparameters")
+		if(class(priorHyper)!="matrix") stop("Prior hyperparameters must be provided as a matrix")
+		if(!all(dim(Sigma)==dim(priorHyper))) stop("Dimesion of hyperparameters does not equal dimension
+		of the concentration matrix")
+		priorLogical<-TRUE
+	}else{
+	priorLogical<-FALSE
+	priorHyper<-matrix(1,nrow=p,ncol=p)
+}
+
+# Concentration matrix and it's dimension:
+if(rcond(Sigma)<.Machine$double.eps){
+	if(illStart=="identity"){
+		Omega<-diag(nrow(Sigma))+1/(p**2)
+	}
+	else{
+		Omega<-glasso::glasso(cov(X),rho=rho)$wi+1/(p**2)
+	}
+}else{
+Omega<-MASS::ginv(Sigma)
+}
+rownames(Omega)<-rownames(Sigma)
+colnames(Omega)<-colnames(Sigma)
+
+# Keep lambdas?
+keepLambdas<-ifelse(keepLambdas,1L,0L)
+
+# Call sampler:
+bglObj<-bAdgl(n=n, iters=totIter, gammaPriors=gammaPriors,
+gammaPriort=gammaPriort, lambdaii=lambdaii, S=S, Sigma=Sigma,
+Omega=Omega, priorLogical=priorLogical, priorHyper=priorHyper,
+keepLambdas=keepLambdas)
+
+bglObj<-c(bglObj,burnIn=burnIn)
+class(bglObj)<-"BayesianGLasso"
+return(bglObj)
+}
+
+\end{lstlisting}
+
+\subsection{Posterior inference method for BGL object}
+
+\begin{lstlisting}
+#' Posterior inference 
+#'
+#' Inferential statistics for the simulated posterior distributions of the covariance 
+#' and concentration parameter matrices for Gaussian Graphical Models estimated
+#' via the adaptive or non-adaptive Bayesian Graphical Lasso
+#' 
+#' @param x Bayesian Graphical Lasso object as returned by the function blockGLasso
+#' @param parameter Options are "Omega" for the posterior distribution of the 
+#' concentration matrix or "Sigma" for the covariance matrix
+#' @return
+#' \item{posteriorMean}{Matrix of mean values of the simulated posterior distribution}
+#' \item{posteriorSd}{Matrix of standard deviation values of the simulated posterior distribution}
+#' \item{posteriorMedian}{Matrix of median values of the simulated posterior distribution}
+#' \item{lowerCI}{Lower limit of the Bayesian credible interval for each matrix parameter}
+#' \item{upperCI}{Upper limit of the Bayesian credible interval for each matrix parameter}
+#' @export
+posteriorInference<-function(bglObj,parameter="Omega",
+alpha=.05,...){
+	UseMethod("posteriorInference")
+}
+
+#' @export
+posteriorInference.BayesianGLasso<-function(bglObj,parameter="Omega",
+alpha=.05){
+	# Check parameters
+	if(! parameter %in% c("Omega","Sigma")){
+	stop("Parameter argument must be Omega (concentration matrix) or 
+	Sigma (covariance matrix)")
+}
+
+stats<-c("mean","sd","length","median")
+
+# Discard burn in:
+x2<-bglObj
+x2$Sigmas<-x2$Sigmas[(x2$burnIn+1):length(x2$Sigmas)]
+x2$Omegas<-x2$Omegas[(x2$burnIn+1):length(x2$Omegas)]
+if(!is.null(x2$lambdas)) x2$lambdas<-x2$lambdas[(x2$burnIn+1):length(x2$lambdas)]
+
+for(stat in stats){
+	statMatrix<-matrix(NA,nrow=nrow(x2$Omegas[[1]]), ncol=ncol(x2$Omegas[[1]]))
+	for(i in 1:nrow(statMatrix)){
+		for(j in 1:ncol(statMatrix)){
+			statMatrix[i,j]<-eval(call(stat, sapply(x2$Omegas,FUN=function(y) y[i,j])))
+		}
+	}
+	assign(paste0("stat",stat),statMatrix)
+}
+
+lq<-function(z) quantile(z,probs=alpha/2)
+uq<-function(z) quantile(z,probs=1-(alpha/2))
+lqMatrix<-uqMatrix<-matrix(NA,nrow=nrow(x2$Omegas[[1]]), ncol=ncol(x2$Omegas[[1]]))
+for(i in 1:nrow(lqMatrix)){
+	for(j in 1:ncol(lqMatrix)){
+		lqMatrix[i,j]<-eval(call("lq",sapply(x2$Omegas, FUN=function(y) y[i,j])))
+		uqMatrix[i,j]<-eval(call("uq",sapply(x2$Omegas, FUN=function(y) y[i,j])))
+	}
+}
+
+list(parameter=parameter,alpha=alpha,posteriorMean=statmean,posteriorSd=statsd,
+posteriorMedian=statmedian,lowerCI=lqMatrix,upperCI=uqMatrix)
+}
+
+\end{lstlisting}
+
+\lstset{language=C++, linewidth=6in, breaklines=true, 
   breakatwhitespace=true, breakindent=5pt, postbreak=\space}
+\section{Preamble and internal C++ functions}
 \begin{lstlisting}{}
+#include <RcppArmadillo.h>
+// #include <gperftools/profiler.h>
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Rosette Nebula Geometry</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <style>
-      body {
-        color: #fff;
-        font-family: Monospace;
-        font-size: 13px;
-        text-align: center;
-        font-weight: bold;
+// [[Rcpp::depends(RcppArmadillo)]]
 
-        background-color: #000;
-        margin: 0px;
-        overflow: hidden;
-      }
+using namespace Rcpp;
+// using namespace arma; 
 
-      #info {
-        position: absolute;
-        padding: 10px;
-        width: 100%;
-        text-align: center;
-        color: #fff;
-      }
+double rInvG(double mu, double lambda){
+	double val = 0;
+	double z,y,x,u;
+	z = rnorm(1)[0];
+	y = z*z;
+	x = mu + 0.5*mu*mu*y/lambda - 0.5*(mu/lambda) * sqrt(4*mu*lambda*y + mu*mu*y*y);
+	u = runif(1)[0];
+	if(u <= mu/(mu+x)){
+		val = x;
+	}else{
+	val = mu*mu/x;
+}
+return(val);
+}
 
-      a { color: blue; }
+arma::vec upperTri(arma::mat a){
+	arma::mat b = trimatu(a);
+	arma::mat b2 = trimatl(a);
+	arma::uvec c = find(b);
+	arma::uvec c2 = find(b2);
+	NumericVector d = wrap(c);
+	NumericVector d2 = wrap(c2);
+	NumericVector e = setdiff(d,d2);
+	e=e.sort();
+	arma::uvec f = as<arma::uvec>(e);
+	arma::vec g = a.elem(f);
+	return g; 
+}
 
-    </style> 
-    
-  </head>
-  <body>
-    <div id="info">
-            <a href="http://www.astro.louisville.edu" target="_blank">University of Louisville Physics & Astronomy</a>
-            <br/>
-            Jeremy Huber - Rosette Nebula
-    </div>
-    
-    <!-- Threedotjs -->
-    
-    <script src="js/three.min.js"></script>
+IntegerMatrix permFun(int p){
+	IntegerVector permInt = seq_len(p) - 1;
+	IntegerMatrix perms(p-1,p);
+	IntegerVector permInt2(p);
+	for(int i = 0; i < p; i++)
+	{
+		permInt2 = permInt[permInt != i];
+		perms(_,i) = permInt2;
+	}
+	return perms;
+}
+\end{lstlisting}
 
-    <!-- Shaders adapted from http://stemkoski.github.io/Three.js/Shader-Glow.html -->
+\section{Regular Bayesian Graphical Lasso C++ code}
+\begin{lstlisting}{}
+// [[Rcpp::export]]
+List bgl(int n, int iters, double lambdaPriorb, double lambdaPosta,
+arma::mat S, arma::mat Sigma, arma::mat Omega, int keepLambdas){
+	// ProfilerStart("myprof.log");
+	
+	int p = Omega.n_cols;
+	IntegerMatrix idk = permFun(p);
+	List OmegaList(iters);
+	
+	NumericVector lambdaList;
+	if(keepLambdas==1){
+		lambdaList = NumericVector(iters);
+	}
+	else{
+		lambdaList = NumericVector(1);
+	}
+	
+	for(int iter=0; iter < iters; ++iter){
+		
+		// Sample lambda:
+		arma::vec Omega2 = vectorise(Omega);
+		double lambdaPostb = lambdaPriorb + sum(abs(Omega2)) / 2.0;
+		double lambda = R::rgamma(lambdaPosta,1.0 / lambdaPostb);
+		
+		if(keepLambdas==1){
+			lambdaList(iter) = lambda;
+		}
+		
+		// Mu prime:
+		arma::vec OmegaTemp = abs(upperTri(Omega));
+		// arma::vec OmegaTemp = abs(Omega.elem(find(trimatu(Omega,1))));
+		arma::vec mup = lambda/OmegaTemp;
+		/* double mupThresh = pow(10.0,12.0);
+		arma::uvec mupReplace = find(mup > mupThresh);
+		mup.elem(mupReplace).fill(mupThresh); */
+		
+		// Sample tau:
+		arma::vec rIG(p*(p-1)/2);
+		for(unsigned int i = 0; i < mup.n_elem; i++){
+			rIG(i) = rInvG(mup[i],lambda*lambda);
+		}
+		arma::vec tauVec = 1.0 / rIG;
+		arma::mat tau(Omega.n_rows,Omega.n_cols,arma::fill::zeros);
+		int k = 0;
+		for(unsigned int j = 0; j < tau.n_cols; j++){
+			for(unsigned int i = 0; i < j; i++){
+				tau(i,j) = tauVec(k);
+				tau(j,i) = tauVec(k);
+				k++;
+			}
+		}
+		
+		IntegerVector tauIPerms(p);
+		arma::uvec tauIPerms2(p), tauII(1);
+		arma::vec Sigma12(p-1), rnorm1(p-1), beta(p-1);
+		arma::mat tauI(p-1,1), Sigma11(p-1,p-1), Omega11inv(p-1,p-1), Ci(p-1,p-1), CiChol(p-1,p-1), mui(p-1,1);
+		arma::mat OmegaInvTemp(p-1,1);
+		double gamm;
+		arma::mat gamm2;
+		for(int i = 0; i < p; i++){
+			tauIPerms = idk(_,i);
+			tauIPerms2 = as<arma::uvec>(tauIPerms);
+			tauII(0) = i;
+			tauI = tau.submat(tauIPerms2, tauII);
+			Sigma11 = Sigma.submat(tauIPerms2, tauIPerms2);
+			Sigma12 = Sigma.submat(tauIPerms2, tauII);
+			Omega11inv = Sigma11 - ((Sigma12 * Sigma12.t()) / Sigma(i,i));
+			Ci = (S(i,i) + lambda) * Omega11inv + diagmat(1 / tauI);
+			CiChol = arma::chol(Ci);
+			mui = arma::solve(-Ci, S.submat(tauIPerms2, tauII));
+			rnorm1 = rnorm(p-1);
+			beta = mui + arma::solve(CiChol, rnorm1);
+			Omega.submat(tauIPerms2, tauII) = beta;
+			Omega.submat(tauII, tauIPerms2) = beta.t();
+			gamm = rgamma(1,n/2+1,2/(S(i,i) + lambda))[0];
+			gamm2 = gamm + beta.t() * Omega11inv * beta;
+			Omega(i,i) = gamm2(0,0);
+			OmegaInvTemp = Omega11inv * beta;
+			Sigma.submat(tauIPerms2, tauIPerms2) = Omega11inv + (OmegaInvTemp * OmegaInvTemp.t())/gamm;
+			Sigma.submat(tauIPerms2, tauII) = -OmegaInvTemp/gamm;
+			Sigma.submat(tauII,tauIPerms2) = -OmegaInvTemp.t()/gamm;
+			Sigma(i,i) = 1/gamm;
+		}
+		OmegaList(iter) = Omega;
+		Rcpp::Rcout << "iter = " << iter + 1 << std::endl;
+		
+	}
+	// ProfilerStop();
+	
+	return List::create(Named("lambdas") = lambdaList,
+	Named("Omegas") = OmegaList);
+}
+\end{lstlisting}
 
-     <script id="starvertexShader" type="x-shader/x-vertex">
-      varying float intensity;
-      void main() 
-      {
-                                                              
-        intensity = 1.;
-        // Pass the 2D position for this vertex to the shader
-        gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-      }
-    </script>
-
-    <script id="starfragmentShader" type="x-shader/x-vertex"> 
-      uniform vec3 starglowColor;
-      varying float intensity;
-      void main() 
-      {
-        vec3 glow = starglowColor * intensity;
-        gl_FragColor = vec4( glow, 1.0 );
-      }
-    </script>
-    
-
-
-     <script id="clustervertexShader" type="x-shader/x-vertex">
-      void main() 
-      {
-        // Pass the 2D position for this vertex to the shader
-        gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-      }
-    </script>
-
-    <script id="clusterfragmentShader" type="x-shader/x-vertex"> 
-      uniform vec3 clusterglowColor;
-      void main() 
-      {
-        vec3 glow = clusterglowColor * 1.0;
-        gl_FragColor = vec4( glow, 1.0 );
-      }
-    </script>
-
-  </body>
-</html>
-
+\section{Adaptive Bayesian Graphical Lasso C++ code}
+\begin{lstlisting}{}
+// [[Rcpp::export]]
+List bAdgl(int n, int iters, double gammaPriors, double gammaPriort,
+double lambdaii, arma::mat S, arma::mat Sigma,
+arma::mat Omega, bool priorLogical, arma::mat priorHyper,
+int keepLambdas){
+	// ProfilerStart("myprof.log");
+	
+	int p = Omega.n_cols;
+	IntegerMatrix idk = permFun(p);
+	
+	List OmegaList(iters);
+	
+	List LambdaList;
+	if(keepLambdas==1){
+		LambdaList = List(iters);
+	}
+	else{
+		LambdaList = List(1);
+	}
+	
+	for(int iter=0; iter < iters; ++iter){
+		// Sample lambdas:
+		arma::vec Omega2 = vectorise(Omega);
+		arma::vec OmegaTemp = abs(upperTri(Omega));
+		// arma::vec OmegaTemp = abs(Omega.elem(find(trimatu(Omega,1))));
+		
+		// Gamma distirbution conditional parameters:
+		arma::vec tt = OmegaTemp + gammaPriort;
+		
+		// If informative prior:
+		if(priorLogical){
+			arma::vec priorHyperVec = vectorise(priorHyper);
+			priorHyperVec = upperTri(priorHyper);
+			// priorHyperVec = priorHyperVec.elem(find(trimatu(priorHyper,1)));
+			tt = tt + priorHyperVec;
+		}
+		
+		arma::vec s(tt.n_elem);
+		s.fill(gammaPriors + 1);
+		
+		// Sample lambda:
+		arma::vec lambda(tt.n_elem);
+		for(unsigned int ii = 0; ii<tt.n_elem; ++ii){
+			lambda(ii) = R::rgamma(s(ii), 1.0/tt(ii)); // Change to Rcpp sugar version
+		}
+		
+		// Mu prime:
+		arma::vec mup = lambda/OmegaTemp;
+		double mupThresh = pow(10.0,12.0);
+		arma::uvec mupReplace = find(mup > mupThresh);
+		mup.elem(mupReplace).fill(mupThresh);
+		
+		// Sample tau:
+		arma::vec rIG(p*(p-1)/2);
+		for(unsigned int i = 0; i < mup.n_elem; i++){
+			rIG(i) = rInvG(mup(i),pow(lambda(i),2));
+		}
+		arma::vec tauVec = 1.0 / rIG;
+		arma::mat tau(Omega.n_rows,Omega.n_cols,arma::fill::zeros);
+		int k = 0;
+		for(unsigned int j = 0; j < tau.n_cols; j++){
+			for(unsigned int i = 0; i < j; i++){
+				tau(i,j) = tauVec(k);
+				tau(j,i) = tauVec(k);
+				k++;
+			}
+		}
+		
+		IntegerVector tauIPerms(p);
+		arma::uvec tauIPerms2(p), tauII(1);
+		arma::vec Sigma12(p-1), rnorm1(p-1), beta(p-1);
+		arma::mat tauI(p-1,1), Sigma11(p-1,p-1), Omega11inv(p-1,p-1), Ci(p-1,p-1), CiChol(p-1,p-1), mui(p-1,1);
+		arma::mat OmegaInvTemp(p-1,1);
+		double gamm;
+		arma::mat gamm2;
+		for(int i = 0; i < p; i++){
+			tauIPerms = idk(_,i);
+			tauIPerms2 = as<arma::uvec>(tauIPerms);
+			tauII(0) = i;
+			tauI = tau.submat(tauIPerms2, tauII);
+			Sigma11 = Sigma.submat(tauIPerms2, tauIPerms2);
+			Sigma12 = Sigma.submat(tauIPerms2, tauII);
+			Omega11inv = Sigma11 - ((Sigma12 * Sigma12.t()) / Sigma(i,i));
+			Ci = (S(i,i) + lambdaii) * Omega11inv + diagmat(1 / tauI);
+			
+			CiChol = arma::chol(Ci);
+			mui = arma::solve(-Ci, S.submat(tauIPerms2, tauII));
+			rnorm1 = rnorm(p-1);
+			beta = mui + arma::solve(CiChol, rnorm1);
+			Omega.submat(tauIPerms2, tauII) = beta;
+			Omega.submat(tauII, tauIPerms2) = beta.t();
+			gamm = rgamma(1,n/2+1,2/(S(i,i) + lambdaii))[0];
+			gamm2 = gamm + beta.t() * Omega11inv * beta;
+			Omega(i,i) = gamm2(0,0);
+			OmegaInvTemp = Omega11inv * beta;
+			Sigma.submat(tauIPerms2, tauIPerms2) = Omega11inv + (OmegaInvTemp * OmegaInvTemp.t())/gamm;
+			Sigma.submat(tauIPerms2, tauII) = -OmegaInvTemp/gamm;
+			Sigma.submat(tauII,tauIPerms2) = -OmegaInvTemp.t()/gamm;
+			Sigma(i,i) = 1/gamm;
+		}
+		OmegaList(iter) = Omega;
+		
+		arma::mat lambdaMat(Omega.n_rows,Omega.n_cols,arma::fill::zeros);
+		int kk = 0;
+		for(unsigned int j = 0; j < lambdaMat.n_cols; j++){
+			for(unsigned int i = 0; i < j; i++){
+				lambdaMat(i,j) = lambda(kk);
+				kk++;
+			}
+		}
+		if(keepLambdas==1){
+			LambdaList(iter) = lambdaMat;
+		}
+		
+		double detOmega = arma::det(Omega);
+		Rcpp::Rcout << "iter = " << iter + 1 << " det(Omega) = " << detOmega << std::endl;
+	}
+	
+	return List::create(Named("lambdas") = LambdaList,
+	Named("Omegas") = OmegaList);
+}
 \end{lstlisting}
