@@ -1,0 +1,64 @@
+Higher-order inference in metabolomics corresponds to the testing of hypotheses that are more complex than single metabolite hypothesis tests. For example, an experimenter might want to determine if a specific biological process (e.g. cholesterol biosynthesis) differs between two or more sample phenotypes. The central question of higher order inference is how to formally test a hypothesis such as:
+\begin{itemize}
+	\item $H_0$: cholesterol biosynthesis does not differ between two (or more) phenotypes 
+	\item $H_A$: cholesterol biosynthesis does differ between two (or more) phenotypes
+\end{itemize} 
+Or formulated as an equivalence test:
+\begin{itemize}
+	\item $H_0$: cholesterol biosynthesis is the same between two (or more) phenotypes 
+	\item $H_A$: cholesterol biosynthesis is not the same between two (or more) phenotypes
+\end{itemize}
+
+Other forms of higher-order inference are not explicitly hypothesis driven. Many metabolomics experiments are motivated to address open-ended questions such as ``What are the metabolic consequences of a specific disease or disease state?'' or ``What is the impact on cellular metabolism of the up or down-regulation of a specific gene''. An example of the first type can be found in Trainor et al. \cite{trainor2017}, who sought to determine the metabolic consequence of thrombotic MI using blood plasma across a disease state transition. An example of the second type can be found in Carlisle et al. \cite{carlisle2016}. Previous methods to make such higher order inferences generally fit one of the following categories: (1) statistical tests for pathway enrichment, (2) metabolite set enrichment analyses, or (3) correlation based analyses. 
+
+\section{Statistical tests for pathway enrichment}
+Pathway enrichment analyses seek to determine if specific pathways are represented more than expected by chance alone in a list of differentially abundant metabolites (or other biomolecules such as mRNA transcripts). These analyses take the results of univariate statistical tests that first identify sets of metabolite features for which significant evidence of differences between experimental conditions or phenotypes are observed. After identifying interesting metabolite features, these sets can be tested for enrichment of specific metabolic pathways or biological processes greater than that expected by chance \cite{goeman2007,xia2010}. 
+
+\section{Exact tests of pathway enrichment}
+\begin{table}
+		\caption[$2 \times 2 $ table]{Example $2 \times 2$ table for two random variables $X$ and $Y$ \label{tab:twoByTwo} }
+	\centering
+	\begin{tabular}{l  | c  c}
+		& & \\
+		 &	$X$ & \\
+		\hline
+		$Y$ & $n_{x_1 y_1}$ & $n_{x_2 y_1}$ \\
+		& $n_{x_1 y_2}$ & $n_{x_2 y_2}$ \\
+	\end{tabular}
+\end{table}
+To discuss the use of Fisher's exact for determining pathway over-representation we first introduce the computation of the probabilities of $2 \times 2$ contingency tables. The probability of a specific $2\times 2$ contingency table (as shown in Table~\ref{tab:twoByTwo})can be computed using the hypergeometric distribution as follows \cite{agresti2013}:
+\begin{align}
+	p = \frac{{n_{x_1 y_1}+n_{x_2 y_1}\choose n_{x_1 y_1}} {n_{x_1 y_2}+n_{x_2 y_2}\choose n_{x_1 y_2}} }{{n\choose n_{x_1 y_1}+n_{x_1 y_2}}},
+\end{align}
+where $n=n_{x_1 y_1}+  n_{x_2 y_1} +n_{x_1 y_2}+n_{x_2 y_2}$. Fisher's exact test is a test of the independence of rows and columns. In other words the test evaluates whether the random variables $X$ and $Y$ are independent. In order to determine the statistical significance of the test, the probability of the observed table can be compared to the probability of tables with the same marginal totals. In the case of evaluating whether a specific metabolic pathway is over-represented within a list of differentially abundant metabolites, we can represent pathway membership as the first random variable and differential abundances indicator as the second random variable. 
+\begin{table}[h!]
+	\caption[Exact test]{Example Fisher's exact test for determining if a pathway is over-represented in a list of significant metabolites \label{tab:pathExact} }
+	\begin{center}
+		\begin{tabular}{ l c c c }
+			\hline
+			& Differentially abundant (DA) & Not DA & Total \\
+			\hline
+			Pathway A & 10 & 20 & 30 \\
+			Not in Pathway A & 40 & 350 &  390 \\
+			Total & 50 & 370 & 420\\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+A hypothetical exact test for determining if a pathway is over-represented in a list of significant metabolites is presented in Table~\ref{tab:pathExact}. In this example, it is assumed that a total of 420 metabolites were observed. Of these metabolites, 30 were in Pathway A, while 390 were not in Pathway A. Of the metabolites in Pathway A, 10 were observed to be differentially abundant, while of the metabolites not in Pathway A, 40 were observed to be differentially abundant. 
+
+\section{MSEA}
+
+\section{Barupal Chem}
+A promising alternative to pathway analyses discussed in \cite{barupal2017} is to use structural similarity and chemical ontology as a priori knowledge to generate study-specific metabolite sets for contextualizing empirical results. 
+
+\section{The need for interactomes in metabolomics}
+Untargeted profiling of the metabolome of an organism provides a view into the small molecule determinants of phenotype. While the genome of an organism may be conceptualized as a blueprint for the composition and organization of an organism that is largely immutable (barring epigenetic modifications, DNA damage, and genetic mutations) \cite{gao2015,keating2015,martincorena2015}, the metabolome of an organism is dynamic and variable \cite{dallmann2012,krycer2017}. Sources of variation within the metabolome of a single organism include tissue-, cell-, and organelle-specific localization of metabolic processes \cite{shlomi2008,voet2013}; environmental exposures \cite{southam2014}; and host-microbe interactions and metabolite exchange \cite{moriya2017}. While the generation of reference human genomes has facilitated the interrogation of gene-phenome associations (including human disease associations), the intrinsic variability and dynamic nature of the metabolome of an organism likely precludes the generation of such a reference model. While a single reference model of the metabolome of an organism may not be sensible, significant efforts such as the HUSERMET project \cite{dunn2014} have been undertaken to quantify the repertoire of metabolites in specific biofluids for examining metabolite-metabolite and metabolite-phenotype associations. In order to make systems-level comparisons of the differences in the metabolome across phenotypes, models of the conditional relationships between metabolites are necessary. By the determination of sample media and analytical platform-specific probabilistic interaction models, henceforth called ``interactomes'', systems-level comparisons of phenotypes that can be made. A specific use case for such an interactome model is the generation of a plasma interactome for stable heart disease.
+
+\section{A specific biomedical science use case}
+Heart disease is the most prevalent cause of death globally \cite{benjamin2017}. As a disease, heart disease does not represent a uniform condition, but rather a collection of diseases of varying etiologies \cite{kasper2015}. Of particular interest in the study of coronary artery disease (CAD) is the elucidation of the precipitants of acute disease events such as myocardial infarction \cite{arbab2015} or unstable angina, metabolic pathways associated with disease phenotypes \cite{fan2016}, and determining the metabolic consequences of acute events \cite{trainor2017}. To date, an interactome describing the conditional relationships between blood plasma metabolites in humans with heart disease does not exist. If such a reference model were determined, it would facilitate making systems-level inferences regarding metabolic perturbations that accompany acute disease events such as unstable angina or acute myocardial infarction (MI).
+
+\section{The challenge of inferring high-dimensional interactomes}
+A significant challenge in evaluating the relationships between metabolites in an untargeted metabolomics experiment is that the dimension of metabolites may be greater than the number of samples. Even given a relatively high ratio of samples to metabolites detected, in the evaluation of pairwise conditional relationships between metabolites, the number of parameters to be estimated can be prohibitive. For example, if $p=500$ metabolites are detected, an evaluation of all pairwise conditional relationships would require the simultaneous estimation of 124,750 parameters. The use of regularization is a well-established approach for guaranteeing the existence of Gaussian Graphical Model parameters, amenable to the case that the sample size $n$ is less than $p$ \cite{banerjee2008,fan2009,friedman2007,meinshausen2006, yuan2007}.
+
+Penalized estimation of GGM parameters provides a natural mechanism for integrating a priori knowledge regarding the molecular structure of metabolites with experimental metabolomics data. The integration of empirical data and scientific knowledge regarding metabolism is common in metabolomics studies. The current work is of a similar paradigm and predicated on the assumption that the individual biochemical reactions that result in statistical dependence between metabolic intermediates also generate statistical dependence in structural similarity between the same intermediates. In our application, structural similarity is determined by an approach that considers overlap in shared local structure between metabolites. Rather than considering fixed sets of metabolites such as pathways, sets, or modules and subsequently quantifying enrichment of these sets in empirical results, we consider a priori knowledge of the relationships between metabolites as probabilistic statements about the relatedness of compounds. Thus, the a priori scientific knowledge is used to generate prior probability distributions that influence GGM model selection, so that posterior inference probabilistically combines empirical data and prior scientific knowledge to yield an updated model of the probabilistic interactions between metabolites. In the present work, we introduce a methodology for using molecular structure similarity to generate prior distributions that control the degree of penalization in parameter estimation for learning a GGM metabolite interactome from metabolomics data. 
