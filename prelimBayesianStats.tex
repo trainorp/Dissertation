@@ -71,6 +71,26 @@ As can be observed, the center (mode or mean) of the posterior probability distr
 
 In addition to point-wise summaries (such as the mode of the posterior distribution), interval summaries can be provided utilizing the posterior distribution of a parameter. In this case, a Bayesian credible interval \cite{gelman2004} can be analytically computed using a quantile function as the analytical form of the posterior distribution is known. Specifically, a two-sided 95\% Bayesian credible interval (CI) can be determined by finding the unique solution to $(l,u)$, such that $F(l|\alpha+ \sum_{i=1}^n x_i -1,\beta+n)=0.025$ and $F(u|\alpha+ \sum_{i=1}^n x_i -1,\beta+n)=.975$ where $F(x)$ is the cumulative distribution function for the Gamma distribution. In the current example, this yields a 95\% CI of $(97.600, 107.218)$.
  
-\section{Selection of prior distribution}
+\section{Specification of prior distribution}
 
 \section{MCMC methods for inference}
+
+\subsection{Gibbs Sampling}
+In addition to not having an analytical form of the joint posterior distribution of model parameters (which justifies the use of posterior simulation) it may be the case that it is straightforward to sample from conditional distributions of parameters but not for sampling from the joint distribution. In such cases, Gibbs sampling may be employed \cite{gelman2004,hoff2009}. The idea of Gibbs sampling is straightforward. First, parameters estimates are initialized to some initial values. Next, one parameter is fixed as the target parameter. A sample is then drawn from the conditional distribution of this target parameter (conditioned on both the non-target parameter estimates and the observed sample). Gibbs sampling can be extended to using target sets of parameters without loss of generality. A more precise definition of a Gibbs sampler is as follows and pseudocode is presented as Alg.~\ref{alg:gibbs}. Let $\boldsymbol{\theta}=\{\theta_1, \theta_2, \hdots,  \theta_p \}$ be a vector of parameters and let $\boldsymbol{\theta}_j$ be a vector defined by a subset of the parameters with the subsets indexed by $j=1, 2, \hdots, J$. Let $\tilde{\boldsymbol{\theta}}_j^{(t)}$ denote the estimate of the subset of parameters at time $t$. 
+
+\begin{algorithm}
+	\caption{Gibbs sampler
+		\label{alg:gibbs}}
+\begin{algorithmic}[1]
+	\STATE Set $\boldsymbol{\theta}^{(0)}$ to some initial values
+	\WHILE{$t\leq t_{max}$ or convergence criteria not met}
+		\STATE Set $\tilde{\boldsymbol{\theta}} \leftarrow \tilde{\boldsymbol{\theta}}^{(t-1)}$
+		\FOR{$j=1$ to $J$}
+			\STATE Sample $\tilde{\boldsymbol{\theta}}_j^{*}\sim p \left(\boldsymbol{\theta}_j|\tilde{\boldsymbol{\theta}}_{-j}, \textbf{x} \right)$
+			\STATE Update $\tilde{\boldsymbol{\theta}}_j \leftarrow \tilde{\boldsymbol{\theta}}_j^{*}$
+		\ENDFOR
+		\STATE Set $\tilde{\boldsymbol{\theta}}^{(t)} \leftarrow \tilde{\boldsymbol{\theta}}$ and return $\tilde{\boldsymbol{\theta}}^{(t)} $
+		\STATE $t \leftarrow t+1$
+	\ENDWHILE
+\end{algorithmic}
+\end{algorithm} 
