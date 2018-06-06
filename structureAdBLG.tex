@@ -37,15 +37,21 @@ To evaluate the efficacy of the proposed method, we employed simulation studies.
 \section{Results of the simulation studies}
 Results from the simulation studies given an autoregressive covariance structure are shown in Table 1 and Figures~\ref{fig:ar1}-\ref{fig:ar1res}. In Figure~\ref{fig:ar1} a graphical model representation of the underlying covariance structure is shown along with the graphical model representations of the sample covariance matrix and the concentration matrices estimated by the multiple techniques evaluated in this study. These figures were generated from a randomly sampled simulation study. 
 
+\newpage
+\KOMAoptions{paper=landscape}
+\recalctypearea
 \begin{figure}[h!]
-	\resizebox{\textwidth}{!}{\includegraphics*{../Aim2/Plots/AR1}}
+\includegraphics[scale=.6]{../Aim2/Plots/AR1}
 	\caption[AR(1) Simulation]{True and estimated concentration matrix graphs for a randomly selected AR(1) simulation study with $p=20$ simulated random variates (metabolites) and a simulated sample size of $n=10$. Graphs represent the: (a) true concentration structure given an AR(1) covariance structure with $\rho=0.95$, (b) sample covariance matrix, (c) concentration matrix estimated by the non-adaptive BGL, (d) concentration matrix estimated by the adaptive BGL with non-informative priors, (e) concentration matrix estimated by the adaptive BGL with chemical structure informative priors.  \label{fig:ar1} }
 \end{figure}
+\newpage
+\KOMAoptions{paper=portrait,pagesize}
+\recalctypearea
 
-Results of the simulation studies for the autoregressive case are shown in Figure~\ref{fig:ar1res} with numerical summaries provided in Table 1. GGM estimation by the Bayesian Graphical Lasso (BGL) and Adaptive BGL exhibited similar performance characteristics with respect to sensitivity, specificity, AUC, and $F_1$ measure. The performance of the chemical structure informative adaptive BGL varied significantly based on the suitability of the informative prior distribution for shrinkage parameters. In the “good prior” case in which it is assumed that the structural similarity and data generating process were deterministically linked, the structure adaptive BGL demonstrated significantly higher sensitivity, specificity, AUC, and $F_1$ measure than the other techniques. Conversely, in the “poor prior” case in which the relationship between the simulated structural similarity and the data generating process was masked by gaussian noise, average AUC and $F_1$ measure were significantly lower for the structure adaptive BGL than the remaining techniques. 
+Results of the simulation studies for the autoregressive case are shown in Figure~\ref{fig:ar1res} with numerical summaries provided in Table~\ref{tab:ar1resTab}. GGM estimation by the Bayesian Graphical Lasso (BGL) and Adaptive BGL exhibited similar performance characteristics with respect to sensitivity, specificity, AUC, and $F_1$ measure. The performance of the chemical structure informative adaptive BGL varied significantly based on the suitability of the informative prior distribution for shrinkage parameters. In the “good prior” case in which it is assumed that the structural similarity and data generating process were deterministically linked, the structure adaptive BGL demonstrated significantly higher sensitivity, specificity, AUC, and $F_1$ measure than the other techniques. Conversely, in the “poor prior” case in which the relationship between the simulated structural similarity and the data generating process was masked by gaussian noise, average AUC and $F_1$ measure were significantly lower for the structure adaptive BGL than the remaining techniques. 
 
 \begin{table}[h!]
-	\caption[Exact test]{Example Fisher's exact test for determining if a pathway is over-represented in a list of significant metabolites \label{tab:pathExact} }
+	\caption[AR(1) Results Table]{Results of the AR(1) simulation studies. For each of the compared techniques, sensitivity, specificity, area under the receiver operating characteristic curve (AUC), and F1 measure are reported. Reported values represent the sample mean and standard deviation over the simulation study replicates\label{tab:ar1resTab} }
 	\begin{center}
 		\begin{tabular}{| p{4cm}|c c c c |}
 			\hline
@@ -63,7 +69,13 @@ Chemical Structure Adaptive BGL (Poor prior)	&$0.8175 \pm 0.068$	& $0.8763 \pm 0
 	\end{center}
 \end{table}
 
+\newpage
+\KOMAoptions{paper=landscape}
+\recalctypearea
 \begin{figure}[h!]
 	\resizebox{\textwidth}{!}{\includegraphics*{../Aim2/Plots/AR1Result}}
 	\caption[AR(1) Results]{Results of the AR(1) simulation studies. The comparative performance of the techniques (as the ability to detect an edge, given an edge is truly present) is presented. Subfigure (a) shows a histogram of the observed area under the receiver operating characteristic curve (AUC) values, while (b) shows the F1 measure.  \label{fig:ar1res} }
 \end{figure}
+\newpage
+\KOMAoptions{paper=portrait,pagesize}
+\recalctypearea
