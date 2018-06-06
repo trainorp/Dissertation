@@ -33,3 +33,42 @@ The block Gibb’s sampler cycles through column-wise partitions of $\boldsymbol
 
 \section{Efficacy analysis via simulation studies}
 To evaluate the efficacy of the proposed method, we employed simulation studies. We sought to evaluate the relative performance of the adaptive Bayesian Graphical Lasso (BGL) using informative priors versus (1) the adaptive Bayesian Graphical Lasso using non-informative priors, and (2) the Bayesian Graphical Lasso (non-adaptive). For the informative prior case, we further manipulated the degree to which the priors were accurate relative to the partial correlation structure utilized to generate the data. We evaluated the methods by simulating both simple partial correlation structures as well as more complex structures utilizing two simulation schemas. Under the first schema, a simple autoregressive (AR) process of order 1 was simulated for representing a linear biological process with decreasing structural similarity with increasing process distance. Simulated structural similarity was taken to be deterministically known, that is a structural similarity matrix was defined as: $\boldsymbol{\Sigma} = \left[\sigma_{ij}\right]$ where $\sigma_{ij}=\rho^{|i-j|}$ . To simulate metabolite abundances, a random matrix was sampled from the multivariate normal distribution $N(\textbf{0},\boldsymbol{\Sigma})$. In the “accurate” informative prior case, the shrinkage hyperprior $s_{ij}$ was defined as $s_{ij}$=$\omega_{ij}^{-1}$, where $\omega_{ij}^{-1}$ are the elements of $\boldsymbol{\Omega}=\boldsymbol{\Sigma}^{-1}$. After generating simulated datasets, the adaptive BGL (with informative and non-informative priors) as well as the non-adaptive BGL were utilized for estimating the concentration matrix and corresponding graph topology. Given the simple dependence structure in the AR(1) case, a measure of ground truth was available as the existence of edges between simulated metabolites was known a priori. We evaluated the sensitivity, specificity, and $F_1$ measure of each method for detecting the presence of edges by utilizing the magnitude of the estimated concentration matrix entries: $|\omega_{ij}|$. In addition, we report the area under the receiver operating characteristic curve for assessing each technique, which considers the range of possible fixed cutoff values of $|\omega_{ij}|$ for estimating the presence or absence of edges. While each technique draws shrinkage parameters from a Gamma distribution, the shape and scale of each distribution depends both on empirical data and hyperparameters. We conducted shape and scale hyperparameter optimization separately for each technique via a grid search over simulated datasets prior to the evaluation of performance.
+
+\section{Results of the simulation studies}
+Results from the simulation studies given an autoregressive covariance structure are shown in Table 1 and Figures~\ref{fig:ar1}-\ref{fig:ar1res}. In Figure~\ref{fig:ar1} a graphical model representation of the underlying covariance structure is shown along with the graphical model representations of the sample covariance matrix and the concentration matrices estimated by the multiple techniques evaluated in this study. These figures were generated from a randomly sampled simulation study. 
+
+\begin{figure}[h!]
+	\resizebox{\textwidth}{!}{\includegraphics*{../Aim2/Plots/AR1}}
+	\caption[AR(1) Simulation]{True and estimated concentration matrix graphs for a randomly selected AR(1) simulation study with $p=20$ simulated random variates (metabolites) and a simulated sample size of $n=10$. Graphs represent the: (a) true concentration structure given an AR(1) covariance structure with $\rho=0.95$, (b) sample covariance matrix, (c) concentration matrix estimated by the non-adaptive BGL, (d) concentration matrix estimated by the adaptive BGL with non-informative priors, (e) concentration matrix estimated by the adaptive BGL with chemical structure informative priors.  \label{fig:ar1} }
+\end{figure}
+
+Results of the simulation studies for the autoregressive case are shown in Figure~\ref{fig:ar1res} with numerical summaries provided in Table 1. GGM estimation by the Bayesian Graphical Lasso (BGL) and Adaptive BGL exhibited similar performance characteristics with respect to sensitivity, specificity, AUC, and $F_1$ measure. The performance of the chemical structure informative adaptive BGL varied significantly based on the suitability of the informative prior distribution for shrinkage parameters. In the “good prior” case in which it is assumed that the structural similarity and data generating process were deterministically linked, the structure adaptive BGL demonstrated significantly higher sensitivity, specificity, AUC, and $F_1$ measure than the other techniques. Conversely, in the “poor prior” case in which the relationship between the simulated structural similarity and the data generating process was masked by gaussian noise, average AUC and $F_1$ measure were significantly lower for the structure adaptive BGL than the remaining techniques. 
+
+\begin{table}[h!]
+	\caption[Exact test]{Example Fisher's exact test for determining if a pathway is over-represented in a list of significant metabolites \label{tab:pathExact} }
+	\begin{center}
+		\begin{tabular}{ p{3cm} c c c c }
+			\hline
+			Technique &	Sensitivity	& Specificity &	AUC &	$F_1$ Measure \\
+			\hline 
+			Bayesian Graphical Lasso (BGL)	& $0.6792 \pm 0.073$ & $0.9896 \pm 0.007$	& $0.9740 \pm 0.014$	& $0.7786 \pm 0.054$ \\
+			Adaptive BGL &	$0.6702  \pm 0.079$	& $0.9936  \pm 0.006$ &	$0.9793  \pm 0.014$ &	$0.7827  \pm 0.062$\\
+			\hline
+			Not in Pathway A & 40 & 350 &  390 \\
+			Total & 50 & 370 & 420\\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+
+
+
+Chemical Structure Adaptive BGL (Good prior)	0.9894 ± 0.019	0.9997 ± 0.001	1.000 ± 0.000	0.9938 ± 0.011
+Chemical Structure Adaptive BGL (Poor prior)	0.8175 ± 0.068	0.8763 ± 0.033	0.9148 ± 0.036	0.6448 ± 0.066
+
+
+\begin{figure}[h!]
+	\resizebox{\textwidth}{!}{\includegraphics*{../Aim2/Plots/AR1Result}}
+	\caption[AR(1) Results]{Results of the AR(1) simulation studies. The comparative performance of the techniques (as the ability to detect an edge, given an edge is truly present) is presented. Subfigure (a) shows a histogram of the observed area under the receiver operating characteristic curve (AUC) values, while (b) shows the F1 measure.  \label{fig:ar1res} }
+\end{figure}
