@@ -47,26 +47,21 @@ Results of the simulation studies for the autoregressive case are shown in Figur
 \begin{table}[h!]
 	\caption[Exact test]{Example Fisher's exact test for determining if a pathway is over-represented in a list of significant metabolites \label{tab:pathExact} }
 	\begin{center}
-		\begin{tabular}{ p{3cm} c c c c }
+		\begin{tabular}{| p{4cm}|c c c c |}
 			\hline
-			Technique &	Sensitivity	& Specificity &	AUC &	$F_1$ Measure \\
-			\hline 
+			\textbf{Technique} &	\textbf{Sensitivity}	& \textbf{Specificity} &	\textbf{AUC} &	$\textbf{F}_1$ \textbf{Measure} \\
+			\hline  \hline
 			Bayesian Graphical Lasso (BGL)	& $0.6792 \pm 0.073$ & $0.9896 \pm 0.007$	& $0.9740 \pm 0.014$	& $0.7786 \pm 0.054$ \\
+			\hline
 			Adaptive BGL &	$0.6702  \pm 0.079$	& $0.9936  \pm 0.006$ &	$0.9793  \pm 0.014$ &	$0.7827  \pm 0.062$\\
 			\hline
-			Not in Pathway A & 40 & 350 &  390 \\
-			Total & 50 & 370 & 420\\
+Chemical Structure Adaptive BGL (Good prior) &	$0.9894 \pm 0.019$ &	$0.9997 \pm 0.001$ &	$1.000 \pm 0.000$ &	$0.9938 \pm 0.011$ \\
+\hline
+Chemical Structure Adaptive BGL (Poor prior)	&$0.8175 \pm 0.068$	& $0.8763 \pm 0.033$ &	$0.9148 \pm 0.036$ & 	$0.6448 \pm 0.066$ \\
 			\hline
 		\end{tabular}
 	\end{center}
 \end{table}
-
-
-
-
-Chemical Structure Adaptive BGL (Good prior)	0.9894 ± 0.019	0.9997 ± 0.001	1.000 ± 0.000	0.9938 ± 0.011
-Chemical Structure Adaptive BGL (Poor prior)	0.8175 ± 0.068	0.8763 ± 0.033	0.9148 ± 0.036	0.6448 ± 0.066
-
 
 \begin{figure}[h!]
 	\resizebox{\textwidth}{!}{\includegraphics*{../Aim2/Plots/AR1Result}}
