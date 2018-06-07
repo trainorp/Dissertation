@@ -72,6 +72,12 @@ As can be observed, the center (mode or mean) of the posterior probability distr
 In addition to point-wise summaries (such as the mode of the posterior distribution), interval summaries can be provided utilizing the posterior distribution of a parameter. In this case, a Bayesian credible interval \cite{gelman2004} can be analytically computed using a quantile function as the analytical form of the posterior distribution is known. Specifically, a two-sided 95\% Bayesian credible interval (CI) can be determined by finding the unique solution to $(l,u)$, such that $F(l|\alpha+ \sum_{i=1}^n x_i -1,\beta+n)=0.025$ and $F(u|\alpha+ \sum_{i=1}^n x_i -1,\beta+n)=.975$ where $F(x)$ is the cumulative distribution function for the Gamma distribution. In the current example, this yields a 95\% CI of $(97.600, 107.218)$.
  
 \section{Specification of prior distribution}
+Conjugate distributions \\
+
+Given the form of the data-augmented posterior distribution, $p(\lambda|\textbf{x})\sim Gamma(\alpha+ \sum_{i=1}^n x_i, \beta+n)$,  the posterior Gamma distribution parameters can be noted as $\alpha'=\alpha+ \sum_{i=1}^n x_i$ and $\beta'=\beta+n$, where $\alpha$ and $\beta$ are the prior parameters. This provides a natural way to encapsulate prior empirical evidence. Noting that prior expectation for $\lambda$ is $\EE(\lambda)=\frac{\alpha}{\beta}$, while the posterior expectation conditional expectation is:
+\begin{align}
+	\EE(\lambda|\textbf{x})=\frac{\alpha+ \sum_{i=1}^n x_i}{\beta+n} =\frac{\alpha}{\beta+n}+\frac{\sum_{i=1}^n x_i}{\beta+n},
+\end{align} it can be seen that if the sum of counts observed in $\beta$ previous experiments (where $\beta$ is a natural number) was $\alpha$, then the conditional expectation of $\lambda$ is a weighted average of the prior observed counts and the current observed counts (weighted by the respective number of observations). 
 
 \section{MCMC methods for inference}
 
@@ -94,3 +100,6 @@ In addition to not having an analytical form of the joint posterior distribution
 	\ENDWHILE
 \end{algorithmic}
 \end{algorithm} 
+
+\subsection{Example application of Gibb's sampling}
+Continuing with the example of a mass spectrometer with a counting detector, we illustrate the use of Gibb's sampling for simulating the posterior distribution of a set of model parameters. In the previous example, we assumed that there was only one population rate parameter. In the current example, we consider the fact that over a fixed m/z window, counts may be observed or not observed based on whether an ion is present. If the ion is not present, we expect to observe zero counts, if 
