@@ -102,4 +102,12 @@ In addition to not having an analytical form of the joint posterior distribution
 \end{algorithm} 
 
 \subsection{Example application of Gibb's sampling}
-Continuing with the example of a mass spectrometer with a counting detector, we illustrate the use of Gibb's sampling for simulating the posterior distribution of a set of model parameters. In the previous example, we assumed that there was only one population rate parameter. In the current example, we consider the fact that over a fixed m/z window, counts may be observed or not observed based on whether an ion is present. If the ion is not present, we expect to observe zero counts, if 
+Continuing with the example of a mass spectrometer with a counting detector, we illustrate the use of Gibb's sampling for simulating the posterior distribution of a set of model parameters. In the previous example, we assumed that there was only one population rate parameter. In the current example, we consider the fact that over a fixed m/z window, counts may be observed or not observed based on whether an ion is present. If the ion is not present, we expect to observe a count of zero; if the ion is present we expect the counts to follow a Poisson distribution. This can be formulated as the following hierarchical model:
+\begin{align}
+	Z|p,\lambda \sim Bernoulli(p) \\
+	X|p,\lambda,z \sim F(x|z,\lambda)
+\end{align}
+where
+\begin{align}
+f(x; z, \lambda) =\frac{\lambda^x e^{-\lambda}}{\lambda!} I_{\{z=1\}}(z)+ I_{\{z=0\}}
+\end{align}
