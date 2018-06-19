@@ -170,7 +170,7 @@ Abstract goes here
 % The layout changes for the last part and you need this command
 
 \backmatter
-
+\begin{DoubleSpace*}
 % You can change the style of the bibliography for whatever would be
 % accepted by your discipline and the University format checkers.
 % There are several bibliography managers that may be used with LaTeX.
@@ -193,7 +193,7 @@ Abstract goes here
 \bibliographystyle{osajnl}
 \bibliography{dissertation}
 
-
+\end{DoubleSpace*}
 % Appendices and the Vita are treated as chapters in the back matter
 
 \chapter{Appendix A: Commonly Used Acronyms}
@@ -203,7 +203,8 @@ Abstract goes here
 \input{code.tex}
 
 \chapter{Vita}
+\begin{DoubleSpace*}
 \input{vita.tex}
-
+\end{DoubleSpace*}
 
 \end{document}
