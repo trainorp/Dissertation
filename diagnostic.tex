@@ -13,12 +13,29 @@ A significant analytical challenge in developing a blood-based diagnostic test f
 
 \end{DoubleSpace*}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\resizebox{1.1\textwidth}{!}{\includegraphics*{../../AthroMetab/WoAC/corrplot333}}
 	\caption[Feature selection]{Metabolites with the highest variable importance score given the feature selection method we employed in a previous work \cite{trainor2018}. The Pearson correlation coefficients between metabolite transformed and scaled abundances are shown. \label{fig:include}}
 \end{figure}
 
+\begin{DoubleSpace*}
 \section{Model}
 A MCMC sampler known as the ``No-U-Turn'' sampler was utilized to simulate the posterior distribution of model parameters \cite{hoffman2014}. This algorithm is regarded as an extension to the Hamiltonian Monte Carlo algorithm. The Hamiltonian Monte Carlo algorithm is designed to mimic a Hamiltonian system in which a parameter $\theta$ is viewed as a particle in a $D$-dimensional space \cite{neal2011}. The logarithm of the joint density of parameters, $\mathcal{L}$ is then conceptualized as the negative potential energy function. Finally $r_d$ is the momentum of the particle, with $d$ representing the specific dimension. 
 
 Stan \cite{carpenter2017}
+\end{DoubleSpace*}
+
+\newpage
+\KOMAoptions{paper=landscape}
+\recalctypearea
+\begin{figure}[H]
+\includegraphics[scale=1.15]{../Aim3/brm1Coef}
+	%\resizebox{\textwidth}{!}{\includegraphics*{../Aim2/Plots/StructHeatmaps}}
+	\caption[Add caption]{Add caption \label{fig:brm1Coef} }
+\end{figure}
+\newpage
+\KOMAoptions{paper=portrait,pagesize}
+\recalctypearea
+
+
+Blah
