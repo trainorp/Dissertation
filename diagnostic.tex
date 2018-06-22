@@ -31,6 +31,35 @@ where $i$ indexes individual samples, $j$ is the index of study groups, $\boldsy
 
 A MCMC sampler known as the ``No-U-Turn'' sampler was utilized to simulate the posterior distribution of model parameters \cite{hoffman2014}. This algorithm is regarded as an extension to the Hamiltonian Monte Carlo algorithm. The Hamiltonian Monte Carlo algorithm is designed to mimic a Hamiltonian system in which a parameter $\theta$ is viewed as a particle in a $D$-dimensional space \cite{neal2011}. The logarithm of the joint density of parameters, $\mathcal{L}$ is then conceptualized as the negative potential energy function. Finally $r_d$ is the momentum of the particle, with $d$ representing the specific dimension. 
 
+\section{Results}
+Blah blah blah MCMC.
+
+ \begin{figure}[H]
+ 	\resizebox{1.15\textwidth}{!}{\includegraphics*{../Aim3/ptid2010MCMC}}
+ 	\caption[Add caption]{Add caption \label{fig:ptid2010MCMC} }
+ \end{figure}
+ 
+  \begin{figure}[H]
+  	\resizebox{1.15\textwidth}{!}{\includegraphics*{../Aim3/ptid2010Hist}}
+  	\caption[Add caption]{Add caption \label{fig:ptid2010Hist} }
+  \end{figure}
+ 
+  Leave-one-out cross validation estimates of study group membership for each clinical sample. Group membership was determined by maximum a posteriori estimates, and the class with maximum estimated probability of membership is reported.
+ 
+\begin{table}[H]
+	\caption{text}
+	\label{tab:modelRes}
+	\centering
+	\begin{tabular}{l|ccc}
+		           & Predicted & & \\
+		           group  &     sCAD & Thrombotic MI & Non-Thrombotic MI \\
+		           \hline
+		           sCAD   &     13    &     0    &     2\\
+		           Thrombotic MI  &  0    &    10    &     1\\
+		           Non-Thrombotic MI &   1    &     1   &     10
+	\end{tabular}
+\end{table}
+
 Stan \cite{carpenter2017}
 \end{DoubleSpace*}
 
@@ -38,8 +67,7 @@ Stan \cite{carpenter2017}
 \KOMAoptions{paper=landscape}
 \recalctypearea
 \begin{figure}[H]
-\includegraphics[scale=1.15]{../Aim3/brm1Coef}
-
+	\includegraphics[scale=1.15]{../Aim3/brm1Coef}
 	\caption[Add caption]{Add caption \label{fig:brm1Coef} }
 \end{figure}
 \newpage
