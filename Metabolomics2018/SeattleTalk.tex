@@ -1,0 +1,63 @@
+\documentclass[xcolor=dvipsnames]{beamer} 
+\usetheme{AnnArbor}
+\usecolortheme{beaver}
+
+\usepackage{amsmath,graphicx,booktabs,tikz,subfig,color}
+\definecolor{mycol}{rgb}{.4,.85,1}
+\setbeamercolor{title}{bg=mycol,fg=black} 
+\setbeamercolor{palette primary}{use=structure,fg=white,bg=red}
+\setbeamercolor{block title}{fg=white,bg=red!50!black}
+%\setbeamercolor{block title}{fg=white,bg=blue!75!black}
+
+\DeclareMathOperator{\PP}{P}
+\DeclareMathOperator{\EE}{E}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\ent}{H}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\DE}{DE}
+\DeclareMathOperator{\EXP}{EXP}
+\DeclareMathOperator{\GA}{GA}
+\DeclareMathAlphabet\mathbfcal{OMS}{cmsy}{b}{n}
+
+\begin{document}
+	
+\title[Bayesian Interactome Modeling]{Inferring metabolite interactomes via Bayesian graphical model selection utilizing molecular structure informative priors}
+\author[P.J. Trainor]{Patrick J. Trainor}
+\institute[U of L]
+{
+	
+	\includegraphics[scale=.4]{/home/patrick/gdrive//MetabClass/Old/RL2015/IMClogo}\\
+	Division of Cardiovascular Medicine \& \\
+	Interdisciplinary Ph.D. Program in Bioinformatics \\
+	University of Louisville %\\[2ex]
+}
+\date[June 2018]{June 26, 2018}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}{Bias in pathway enrichment analysis}{The reference set}
+	\vspace{-15.5pt}
+	\begin{figure}
+		\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_1}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Bias in pathway enrichment analysis}{The reference set}
+	\vspace{-15.5pt}
+	\begin{figure}
+		\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_2}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{align}
+	L(\boldsymbol{\Omega}|\textbf{X})&=(2 \pi)^{-np/2}|\boldsymbol{\Omega}|^{n/2} \exp \left(-\frac{1}{2}\sum_{i=1}^{n} (\textbf{x}_i-\boldsymbol{\mu})^T \boldsymbol{\Omega} (\textbf{x}_i-\boldsymbol{\mu})\right) \\
+	&=(2 \pi)^{-np/2}|\boldsymbol{\Omega}|^{n/2} \exp \left(-\frac{1}{2} \langle \textbf{K}, \boldsymbol{\Omega}\rangle\right)
+	\end{align}
+\end{frame}
+
+\end{document}
