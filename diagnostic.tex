@@ -29,7 +29,20 @@ where $i$ indexes individual samples, $j$ is the index of study groups, $\boldsy
 \hat{\pi}_{ij} = \frac{\exp \hat{\eta}_{ij}}{\sum_{k=1}^{J}\exp \hat{\eta}_{ik}}.
 \end{align}
 
-A MCMC sampler known as the ``No-U-Turn'' sampler was utilized to simulate the posterior distribution of model parameters \cite{hoffman2014}. This algorithm is regarded as an extension to the Hamiltonian Monte Carlo algorithm. The Hamiltonian Monte Carlo algorithm is designed to mimic a Hamiltonian system in which a parameter $\theta$ is viewed as a particle in a $D$-dimensional space \cite{neal2011}. The logarithm of the joint density of parameters, $\mathcal{L}$ is then conceptualized as the negative potential energy function. Finally $r_d$ is the momentum of the particle, with $d$ representing the specific dimension. 
+The model can be stated as a Bayesian model with the following priors and deterministic component:
+\begin{align}
+\begin{split}
+	\alpha_j \sim N(0,4) \\
+	\beta_j \sim N(0,1) \\
+	\log \frac{\pi_{ij}}{\pi_{iJ}} = \alpha_j + \textbf{x}_i^T \boldsymbol{\beta}_j \\
+	Y \sim Multinom(\boldsymbol{\pi})
+\end{split}
+\end{align}
+
+\section{MCMC sampling of the posterior distribution}
+A MCMC sampler known as the ``No-U-Turn'' sampler was utilized to simulate the posterior distribution of model parameters \cite{hoffman2014}. This algorithm is an extension of the Hamiltonian Monte Carlo algorithm. The Hamiltonian Monte Carlo algorithm is designed to model a target probability distribution as a Hamiltonian system \cite{betancourt2017}. In such a system, a parameter vector $\boldsymbol{\theta}$ is viewed as a particle in a $D$-dimensional space \cite{neal2011} by defining a vector field that is aligned with the typical set (the region of a parameter space with both significant volume and desnity) \cite{betancourt2017}. Defining such a vector field is a complex task. While a vector field could be defined using the gradient of the target probability distribution, this vector field would pull a particle towards the mode of the distribution. By adding a momentum term, the vector field can be defined so as to restrict a particle to maintaining the Hamiltonian at a fixed value. The Hamiltonian Monte Carlo algorithm utilizes Metropolis-Hastings proposals for updating both the momentum and position variables \cite{neal2011,betancourt2017}. A critical aspect of Hamiltonian Monte Carlo sampling is determining the optimal integration time for a particle to travel along a Hamiltonian path. One approach to dynamically determining this parameter is the ``No-U-Turn'' termination criteria \cite{hoffman2014,betancourt2017}. Conceptually, this criteria ensures that expansion of a trajectory continues to visit previously unexplored neighborhoods while terminating the trajectory when it returns to previously explored neighborhoods.
+
+The ``No-U-Turn'' Hamiltonian MCMC sampler was implemented by others in \emph{Stan}, a probabilistic programming language \cite{carpenter2017}. Stan is written in C++ and provides the ``No-U-Turn'' sampler, a Hamiltonian Monte Carlo Sampler, a variational inference algorithm, and multiple optimizers. Stan provides grammar and syntax for succinctly specifying Bayesian models; can design a sampler for the posterior distribution of model parameters; and using a C++ compiler, Stan compiles the sampler to byte code. Additionally, Stan provides data structures for storing MCMC chains and model output. An R to Stan interface, \emph{rstan} \cite{stan2018}, has been developed allowing an end user to pass datasets between Stan and to return MCMC chains and model results. 
 
 \section{Results}
 Blah blah blah MCMC.
@@ -60,7 +73,6 @@ Blah blah blah MCMC.
 	\end{tabular}
 \end{table}
 
-Stan \cite{carpenter2017}
 \end{DoubleSpace*}
 
 \newpage
