@@ -259,10 +259,22 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\begin{align*}
-	p(\boldsymbol{\omega}| \boldsymbol{\tau},\lambda)=\frac{1}{C_{\boldsymbol{\tau}}} \prod_{i<j} \left[ \frac{1}{\sqrt{2\pi \tau_{ij}}} \exp \left(- \frac{\omega_{ij}^2}{2\tau_{ij}}\right) \right] \prod_{i=1}^{p} \left[\frac{\lambda}{2} \exp \left(-\frac{\lambda}{2}\omega_{ii} \right)\right] \cdot 1_{\boldsymbol{\Omega}\in M^+}
-	\end{align*}
+\begin{frame}{GGM estimation}
+	\vspace{-5.5pt}
+\begin{itemize}
+	\item A hierarchical Bayesian model for the graphical Lasso (Wang, H. [2012]. \emph{Bayesian Analysis, 7}. doi: 10.1214/12-ba729): 
+	
+		\begin{align*}
+		p(\textbf{x}_i|\boldsymbol{\Omega}) =& \mathcal{N}(\textbf{0},\boldsymbol{\Omega}^{-1}) \quad \text{for} \; i=1,2,\hdots,n\\
+		p(\boldsymbol{\Omega}|\lambda) =& \frac{1}{C} \prod_{i<j} \DE(\omega_{ij}|\lambda) \prod_{i=1}^{p} \EXP (\omega_{ii} | \lambda / 2) \cdot 1_{\boldsymbol{\Omega}\in M^+},
+		\end{align*}
+	\item[]
+	\item As a scale mixture of Gaussian distributions:
+\end{itemize}
+		\begin{align*}
+		p(\boldsymbol{\omega}| \boldsymbol{\tau},\lambda)=\frac{1}{C_{\boldsymbol{\tau}}} \prod_{i<j} \left[ \frac{1}{\sqrt{2\pi \tau_{ij}}} \exp \left(- \frac{\omega_{ij}^2}{2\tau_{ij}}\right) \right] 
+		\prod_{i=1}^{p}  \left[\frac{\lambda}{2} \exp \left(-\frac{\lambda}{2}\omega_{ii} \right)\right] \cdot 1_{\boldsymbol{\Omega}\in M^+}
+		\end{align*}
 \end{frame}
 
 \begin{frame}{Acknowledgments}
