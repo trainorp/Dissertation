@@ -109,8 +109,40 @@
 
 \begin{frame}{Motivation}{Higher order inference}
 	\vspace{-10pt}
+	{\Large Higher-order inference: the testing of hypotheses that are more complex than single metabolite hypothesis tests} \vspace{7pt}
+	
 	\begin{itemize}
-		\item Higher-order inference in metabolomics corresponds to the testing of hypotheses that are more complex than single metabolite hypothesis tests
+		\item \textbf{``Data dependent'' / ``Unbiased'' Approaches:} 
+		\begin{itemize}
+		\item Analyses of correlation networks
+		\item Module analyses (WGCNA)
+		\item Multivariate statistical approaches (Clustering; Latent component modeling such as PCA, PLS-R, PLS-DA)
+		\end{itemize}
+		\item[]
+		\item \textbf{\emph{A priori approaches}--Pathway (or other ontology) enrichment analyses:} 
+		\begin{itemize}
+			\item Discrete statistical tests (e.g. hypergeometric)
+			\item KS statistic-based set enrichments (e.g. GSEA/MSEA)
+		\end{itemize}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Pathway enrichment analysis}
+	\vspace{-10pt}
+{\Large Test for pathway enrichment: Does a pathway have more ``significant'' differences in metabolite abundances than expected?} \vspace{10pt}
+
+	\begin{itemize}
+		\item pmf for the hypergeometric distribution: 
+		\begin{itemize}
+			\item $N=$ total metabolites,
+			\item $K=$ number of differentially abundant metabolites, 
+			\item $n=$ metabolites in the pathway of interest, 
+			\item $k=$ number of differentially abundant metabolites in the pathway of interest 
+		\end{itemize}
+		\begin{align*}
+		\PP(X=k) = \frac{  {{K}\choose{k}} {{N-K}\choose{n-k}}  }{ {{N}\choose{n}} } 
+		\end{align*}
 	\end{itemize}
 \end{frame}
 
@@ -126,6 +158,59 @@
 	\begin{figure}
 		\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_2}
 	\end{figure}
+\end{frame}
+
+\begin{frame}{Correlation networks}{What do they tell you?}
+	{I simulated this...}
+	\begin{center}
+		\includegraphics[scale=.5]{../../Aim2/Plots/AR1_Om}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Correlation networks}{What do they tell you?}
+	{And fit a correlation network...}
+	\begin{center}
+		\includegraphics[scale=.5]{../../Aim2/Plots/AR1_Cor}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Partial correlation}{A better approach}
+	\vspace{-15.5pt}
+	{\Large \textbf{Gaussian Graphical Models (GGM)}: from correlation to partial correlation...}
+	
+	\begin{center}
+		\includegraphics[scale=.75]{ggmPrev} \\
+		Krumsiek et al. (2011). \emph{BMC Syst Bio, 5}(21) doi: 10.1186/1752-0509-5-21
+	\end{center}
+\end{frame}
+
+\begin{frame}{Partial correlation}{A better approach}
+	\vspace{-15.5pt}
+	\begin{center}
+		\includegraphics[scale=.75]{ggmPrev} \\
+		Krumsiek et al. (2011). \emph{BMC Syst Bio, 5}(21) doi: 10.1186/1752-0509-5-21
+	\end{center}
+	\begin{itemize}
+		\item Problem: requires estimating $\frac{p*(p-1)}{2}$ coefficients
+		\item[]
+		\item Not feasible for most metabolomics studies 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Motivation}
+	\begin{itemize}
+		\item Succinct problem statement: 
+		\begin{itemize}
+			\item To make higher-order inference a model of how metabolites are related is required
+			\item[]
+			\item Unbiased approach (using a GGM to estimate partial correlation coefficients) is often unfeasible 
+			\item[]
+			\item Pathway-based approach may be inappropriate (given the experimental system, sample media, etc.)
+		\end{itemize}
+		\item[]
+		\item A Bayesian call to action!
+	\end{itemize}
+
 \end{frame}
 
 \begin{frame}
