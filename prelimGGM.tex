@@ -105,8 +105,8 @@ p(\boldsymbol{\omega}| \boldsymbol{\tau},\lambda)=\frac{1}{C_{\boldsymbol{\tau}}
 \end{align}
 The Gibbs sampler then samples from the conditional distribution of the last column, $(\boldsymbol{\omega}_{12}, \omega_{22})^T$ of $\Omega$:
 \begin{align}
-p(\boldsymbol{\omega}_{12}, \omega_{22}|\boldsymbol{\Omega}_{11},\mathbfcal{T},\textbf{X},\lambda) \propto \left(\omega_{22}-\boldsymbol{\omega}_{12}^T \boldsymbol{\Omega}_{11}^{-1}\boldsymbol{\omega}_{12} \right)^{n/2} \exp \{ - \frac{1}{2}\left[ \boldsymbol{\omega}_{12}^T \textbf{D}_{\boldsymbol{\tau}} \boldsymbol{\omega}_{12}+ 2 
-\textbf{s}_{12}^T \boldsymbol{\omega}_{12} + (s_{22}+\lambda)\omega_{22}\right] \}
+p(\boldsymbol{\omega}_{12}, \omega_{22}|\boldsymbol{\Omega}_{11},\mathbfcal{T},\textbf{X},\lambda) \propto \left(\omega_{22}-\boldsymbol{\omega}_{12}^T \boldsymbol{\Omega}_{11}^{-1}\boldsymbol{\omega}_{12} \right)^{n/2} \exp \left( - \frac{1}{2}\left[ \boldsymbol{\omega}_{12}^T \textbf{D}_{\boldsymbol{\tau}} \boldsymbol{\omega}_{12}+ 2 
+\textbf{s}_{12}^T \boldsymbol{\omega}_{12} + (s_{22}+\lambda)\omega_{22}\right] \right)
 \end{align}
 
 In the same work, \cite{wang2012} proposed a Bayesian approach to the adaptive graphical lasso developed by \cite{fan2009}. The hierarchical model proposed by for the adaptive lasso is:
