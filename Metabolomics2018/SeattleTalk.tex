@@ -160,6 +160,19 @@
 	\end{figure}
 \end{frame}
 
+\begin{frame}{Bias in pathway enrichment analysis}{The reference set}
+	\vspace{-15.5pt}
+	\begin{figure}
+		\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_2}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Bias in pathway enrichment analysis}{Metabolic footprint vs. cellular metabolism}	\vspace{-10.5pt}
+	\begin{center}
+		\includegraphics[scale=.3]{512px-Circulatory_System_en}
+	\end{center}
+\end{frame}
+
 \begin{frame}{Correlation networks}{What do they tell you?}
 	{I simulated this...}
 	\begin{center}
@@ -210,6 +223,26 @@
 		\end{itemize}
 		\item[]
 		\item A Bayesian call to action!
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Bayesian call to action}
+	
+	{\LARGE Frameworks}
+	\begin{itemize}
+		\item Today:
+		\begin{enumerate}[{1)}]
+			\item Collect experimental data
+			\item Do frequentist analysis
+			\item Use your expert knowledge of metabolism to interpret what the results mean ``I knocked out DHCR7 which explains why there are changes in 7-Dehydrocholesterol and Cholesterol''
+		\end{enumerate}
+		\item[]
+		\item Hopefully the future:
+		\begin{enumerate}[{1)}]
+			\item Use knowledge of metabolism to formulate informative (or weakly informative) priors
+			\item Collect experimental data
+			\item Evaluate posterior distributions to make inference
+		\end{enumerate}
 	\end{itemize}
 \end{frame}
 
@@ -339,32 +372,90 @@
 \end{frame}
 
 \begin{frame}{Heart Disease Interactome}
+	\vspace{-15.5pt}
 	\begin{itemize}
+		\item Goal: We sought to construct a stable heart disease plasma metabolite interactome
+		\item[]
+		\item Long term motivation:  to serve as a reference for analyzing metabolic changes to an acute state (MI)
+		\item[]
 		\item 47 plasma samples from human subjects with heart disease
 		\item[]
 		\item 522 compounds identified from and quantified by UPLC-MS/MS and GC-MS
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Heart Disease Interactome}
+		\vspace{-15.5pt}
+	\begin{center}
+		\includegraphics[scale=.35]{../../Aim2/Plots/StructHeatmaps}
+		
+		Local substructure similarity measure adapted from Mitchell, J. (2014). doi: 10.3389/fgene.2014.00237 (collaboration)
+	\end{center}
+\end{frame}
+
+\begin{frame}{Heart Disease Interactome}{MCMC sampling}
+	\vspace{-10.5pt}
+	\begin{center}
+		\includegraphics[scale=.52]{../../Aim2/Plots/MCMC}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Heart Disease Interactome}
+	\vspace{-10.5pt}
+	\begin{center}
+		\includegraphics[scale=.52]{../../Aim2/Plots/aiBGL1CorBigGraph}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Heart Disease Interactome}
+	\vspace{-10.5pt}
+	\begin{center}
+		\includegraphics[scale=.175]{../../Aim2/Plots/aiBGL1Cor(2)}
+	\end{center}
+\end{frame}
+
+\begin{frame}{The future}
+	\vspace{-15pt}
+	\begin{center}
+		\includegraphics[scale=.225]{FlowChart2}
+		
+		Trainor, P. (2018), \emph{J Biomed Info, 81}. doi: 10.1016/j.jbi.2018.03.007 
+	\end{center}
+	\begin{itemize}
+		\item Use the stable disease interactome to determine systems-levels changes that occur in the relationships between metabolites in plasma following acute disease events (e.g. heart attacks)
 		\item[]
-		\item We sought to construct a stable-state plasma interactome to serve as a reference for analyzing metabolic changes to an acute state (MI)
+		\item Prior distributions 
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Acknowledgments}
-	\vspace{-15.5pt}
-	\textbf{Doctoral supervision}:
-	\begin{itemize}
-		\item Shesh Rai, PhD (co-chair)
-		\item Andrew DeFilippis, MD, MSc (co-chair)
-		\item[]
-	\end{itemize}
-	
-	\textbf{Funding support}:
-	\begin{itemize}
-		\item NIH NIGMS 2P20GM103492-06 (Metabolomic Analysis of Atherothrombosis)
-		\item PI Aruni Bhatnagar, PhD; Project PI Andrew DeFilippis, MD, MSc
-		\item[]
-	\end{itemize}
-	
-	\textbf{Lab}: Atherosclerosis/Atherothrombosis Research Laboratory (Twitter: @AtheroLab)
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+				\textbf{Doctoral supervision}:
+				\begin{itemize}
+					\item Andrew DeFilippis, MD, MSc
+					\item Shesh Rai, PhD
+					\item[]
+				\end{itemize}
+				\textbf{Funding support}:
+				\begin{itemize}
+					\item NIH NIGMS 2P20GM103492-06 (Metabolomic Analysis of Atherothrombosis)
+					\item PI Aruni Bhatnagar, PhD; Project PI Andrew DeFilippis, MD, MSc
+					\item[]
+				\end{itemize}
+		\end{column}
+			\vspace{-25.5pt}
+		\begin{column}{0.5\textwidth}
+			\textbf{Collaborators}:
+			\begin{itemize}
+				\item Joshua Mitchell 
+				\item Hunter N. Moseley, PhD
+				\item Samantha Carlisle, MS
+				\item[]
+			\end{itemize}
+			\textbf{Lab}: Atherosclerosis/Atherothrombosis Research Laboratory (Twitter: @AtheroLab)
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}{Acknowledgments}
