@@ -45,7 +45,7 @@ A MCMC sampler known as the ``No-U-Turn'' sampler was utilized to simulate the p
 The ``No-U-Turn'' Hamiltonian MCMC sampler was implemented by others in \emph{Stan}, a probabilistic programming language \cite{carpenter2017}. Stan is written in C++ and provides the ``No-U-Turn'' sampler, a Hamiltonian Monte Carlo Sampler, a variational inference algorithm, and multiple optimizers. Stan provides grammar and syntax for succinctly specifying Bayesian models; can design a sampler for the posterior distribution of model parameters; and using a C++ compiler, Stan compiles the sampler to byte code. Additionally, Stan provides data structures for storing MCMC chains and model output. An R to Stan interface, \emph{rstan} \cite{stan2018}, has been developed allowing an end user to pass datasets between Stan and to return MCMC chains and model results. 
 
 \section{Results}
-Blah blah blah MCMC. Parameters
+In order to simulate the posterior distribution of model parameters, four MCMC chains were generated utilizing the No-U-Turn algorithm. An example MCMC chain is illustrated in Figure~\ref{fig:brm1Coef}. In this figure 2,000 of the 10,000 iterations of the regression coefficient parameter for 3-hydroxypyridine sulfate from one of the MCMC chains (chain \#1) is shown. 
 
 \end{DoubleSpace*}
 
