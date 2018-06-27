@@ -115,15 +115,36 @@ From the simulated posterior distribution of models, a predictive phenotype dist
 Leave-one-out cross validation estimates of study group membership for each clinical sample. Group membership was determined by maximum a posteriori estimates, and the class with maximum estimated probability of membership is reported.
  
  \begin{table}[H]
+	\centering
  	\caption{text}
  	\label{tab:modelRes}
- 	\centering
  	\begin{tabular}{l|ccc}
  		& Predicted & & \\
- 		group  &     sCAD & Thrombotic MI & Non-Thrombotic MI \\
+ 		Group  &     sCAD & Thrombotic MI & Non-Thrombotic MI \\
  		\hline
  		sCAD   &     13    &     0    &     2\\
  		Thrombotic MI  &  0    &    10    &     1\\
  		Non-Thrombotic MI &   1    &     1   &     10
  	\end{tabular}
  \end{table}
+ 
+  \begin{table}[H]
+  	\centering
+  	\caption{text}
+  	\label{tab:modelRes2}
+  	\begin{tabular}{l|ccc}
+  		& Predicted & & \\
+  		Group  &     sCAD & Thrombotic MI & Non-Thrombotic MI \\
+  		\hline
+  		sCAD   &     13    &     0    &     2\\
+  		Thrombotic MI  &  0    &    10    &     1\\
+  		Non-Thrombotic MI &   2  &   0 &    10
+  	\end{tabular}
+  \end{table}
+  
+  \begin{figure}[H]
+	  	\centering
+  	  	\caption{text}
+ 	  	\label{tab:modelRes3}
+  	\includegraphics[scale=.85]{../Aim3/PatientPred}
+  \end{figure}
