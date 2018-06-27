@@ -15,7 +15,7 @@ A significant analytical challenge in developing a blood-based diagnostic test f
 
 \begin{figure}[H]
 	\resizebox{1.1\textwidth}{!}{\includegraphics*{../../AthroMetab/WoAC/corrplot333}}
-	\caption[Feature selection]{Metabolites with the highest variable importance score given the feature selection method we employed in a previous work \cite{trainor2018}. The Pearson correlation coefficients between metabolite transformed and scaled abundances are shown. \label{fig:include}}
+	\caption[Metabolites considered in Bayesian multinomial logistic regression model]{Metabolites with the highest variable importance score given the feature selection method we employed in a previous work \cite{trainor2018}. The Pearson correlation coefficients between metabolite transformed and scaled abundances are shown. \label{fig:include}}
 \end{figure}
 
 \begin{DoubleSpace*}
@@ -51,7 +51,7 @@ As the objective of the present analysis was to develop a model capable of discr
 
 \begin{table}[H]
 	\centering
-	 	\caption{Evaluation of goodness of model fit with or without clinical troponin values. Inclusion of troponin did not result in a statistically meaningful improvement in goodness of fit. WAIC: Widely applicable information criteria. SE: Standard error.}
+	 	\caption[Bayesian multinomial logistic regression model goodness of fit]{Evaluation of goodness of model fit with or without clinical troponin values. Inclusion of troponin did not result in a statistically meaningful improvement in goodness of fit. WAIC: Widely applicable information criteria. SE: Standard error.}
 	 	\label{tab:modelComp}
 	\begin{tabular}{lcc}
 		\hline
@@ -71,17 +71,17 @@ As the objective of the present analysis was to develop a model capable of discr
 \recalctypearea
 \begin{figure}[H]
 	\includegraphics[scale=1.1]{../Aim3/MCMCEx.png}
-	\caption[3-hydroxypyridine sulfate estimate]{(a) MCMC chains for the by-group multinomial logit model parameters corresponding to 3-hydroxypyridine sulfate. (b) Histogram showing the simulated posterior probability distribution for the same parameters. \label{fig:brm1Coef} }
+	\caption[MCMC chain for 3-hydroxypyridine sulfate multinomial logistic regression coefficient]{(a) MCMC chains for the by-group multinomial logit model parameters corresponding to 3-hydroxypyridine sulfate. (b) Histogram showing the simulated posterior probability distribution for the same parameters. \label{fig:brm1Coef} }
 \end{figure}
 \newpage
 \begin{figure}[H]
 	\includegraphics[scale=1.15]{../Aim3/brm1Coef}
-	\caption[Add caption]{Add caption \label{fig:brm1Coef} }
+	\caption[Bayesian credible intervals for multinomial logit model parameters without troponin]{50\% Bayesian credible intervals for the by-group multinomial logistic regression coefficients. The multinomial models did not include clinical troponin assay values. \label{fig:brm1Coef} }
 \end{figure}
 \newpage
 \begin{figure}[H]
 	\includegraphics[scale=1.15]{../Aim3/brm2Coef}
-	\caption[Add caption]{Add caption \label{fig:brm2Coef} }
+	\caption[Bayesian credible intervals for multinomial logit model parameters with troponin]{50\% Bayesian credible intervals for the by-group multinomial logistic regression coefficients. The multinomial models did include clinical troponin assay values. \label{fig:brm2Coef} }
 \end{figure}
 \newpage
 \KOMAoptions{paper=portrait,pagesize}
@@ -89,34 +89,34 @@ As the objective of the present analysis was to develop a model capable of discr
 
 \begin{DoubleSpace*}
 Given that the MCMC chains provide the joint posterior distribution of model parameters, the correlation between parameter estimates can be evaluated. Two parameter estimates were significantly correlated, both of which were for monoacylglycerols [1-linoleoylglycerol (18:2)] and [2-linoleoylglycerol (18:2)]. This relationship was further explored. Figure~\ref{fig:coefPost} shows a 3-dimensional scatterplot of samples from the simulated posterior distribution. In the first plane, the parameter estimates for both monoacylglycerols are shown, while the remaining axis shows the log-posterior probability of the model with these parameterizations.  Similarly, Figure~\ref{fig:coefPost2} shows the same slice of the posterior distribution with the log-posterior probability axis removed and represented as a color instead. The relatively strong negative correlation between the parameter estimates, without a systemic change in the log-posterior probability suggests that these two monoacylglycerols modulate the probability of the phenotypes in a similar way. 
-\end{DoubleSpace*}
+
 \begin{figure}[H]
-	\resizebox{.8\textwidth}{!}{\includegraphics*{../Aim3/coefPost}}
-	\caption[Add caption]{Add caption \label{fig:coefPost} }
+	\resizebox{1.0\textwidth}{!}{\includegraphics*{../Aim3/coefPost}}
+	\caption[3-dimensional scatterplot of MCMC samples for both linoleoylglycerols (18:2) with the acyl side chain in different positions and the log-posterior probability of each sampled model]{3-dimensional scatterplot of MCMC samples for both linoleoylglycerols (18:2) with the acyl side chain in different positions (in the same plane), as well as the log-posterior probability of each sampled model. \label{fig:coefPost} }
 \end{figure}
 
 \begin{figure}[H]
 	\resizebox{1.1\textwidth}{!}{\includegraphics*{../Aim3/coefPost2}}
-	\caption[Add caption]{Add caption \label{fig:coefPost2} }
+	\caption[Scatterplot of MCMC samples for both linoleoylglycerols (18:2) with the acyl side chain in different positions colored by log-posterior probability]{Scatterplot of MCMC samples for both linoleoylglycerols (18:2) with the acyl side chain in different positions colored by log-posterior probability. MCMC sampled models with the greatest log-posterior probability are shown in red, while models with lesser log-posterior probability are shown in blue. \label{fig:coefPost2} }
 \end{figure}
 
-From the simulated posterior distribution of models, a predictive phenotype distribution can be generated for each human subject. The MCMC chain for the phenotype probabilities of a selected clinical subject is presented in Figure~\ref{fig:ptid2010MCMC}.
+From the simulated posterior distribution of models, a predictive phenotype probability distribution can be generated for each human subject. The MCMC chain for the phenotype probabilities of a selected clinical subject (\#14) is presented in Figure~\ref{fig:ptid2010MCMC}. The maximum \emph{a posteriori}) group label from both models evaluated properly classified this subject as a stable CAD subject, however in the leave-one-out cross-validation estimation, this subject misclassified as a Thrombotic MI subject. In the models (not-LOOCV estimates), a substantial probability mass was also placed on the posterior probability that this subject was a Non-Thrombotic MI.  
 
 \begin{figure}[H]
 	\resizebox{1.15\textwidth}{!}{\includegraphics*{../Aim3/ptid2010MCMC}}
-	\caption[Add caption]{Add caption \label{fig:ptid2010MCMC} }
+	\caption{A segment of the first MCMC chain for simulating the posterior distribution of group membership probability estimates for a specific human subject.  \label{fig:ptid2010MCMC} }
 \end{figure}
 
 \begin{figure}[H]
 	\resizebox{1.15\textwidth}{!}{\includegraphics*{../Aim3/ptid2010Hist}}
-	\caption[Add caption]{Add caption \label{fig:ptid2010Hist} }
+	\caption{Histograms showing the simulated posterior distribution of group membership probability estimates for a specific human subject. \label{fig:ptid2010Hist} }
 \end{figure}
  
 Leave-one-out cross validation estimates of study group membership for each clinical sample. Group membership was determined by maximum a posteriori estimates, and the class with maximum estimated probability of membership is reported.
- 
+
  \begin{table}[H]
 	\centering
- 	\caption{text}
+ 	\caption[Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model without clinical troponin values]{Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model without clinical troponin values. The leftmost column shows the true group membership of the human subjects, while the remaining columns show the predicted probabilities (maximum \emph{a posteriori}).}
  	\label{tab:modelRes}
  	\begin{tabular}{l|ccc}
  		& Predicted & & \\
@@ -130,7 +130,7 @@ Leave-one-out cross validation estimates of study group membership for each clin
  
   \begin{table}[H]
   	\centering
-  	\caption{text}
+  	\caption[Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model with clinical troponin values]{Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model with clinical troponin values. The leftmost column shows the true group membership of the human subjects, while the remaining columns show the predicted probabilities (maximum \emph{a posteriori}).}
   	\label{tab:modelRes2}
   	\begin{tabular}{l|ccc}
   		& Predicted & & \\
@@ -142,9 +142,11 @@ Leave-one-out cross validation estimates of study group membership for each clin
   	\end{tabular}
   \end{table}
   
-  \begin{figure}[H]
-	  	\centering
-  	  	\caption{text}
- 	  	\label{tab:modelRes3}
-  	\includegraphics[scale=.85]{../Aim3/PatientPred}
-  \end{figure}
+\begin{table}[H]
+  	\centering
+ 	  	\caption[Leave-one-out cross-validation (LOOCV) estimated group probabilities from the Bayesian multinomial logistic regression models for each of human subject in the cohort.]{Leave-one-out cross-validation (LOOCV) estimated group probabilities from the Bayesian multinomial logistic regression models for each of human subject in the cohort. M1: Model without clinical troponin values. M2: Model with clinical troponin values. Blue-to-red continuous scale ranks estimated probabilities from low-to-high.}
+	  	\label{tab:modelRes3}
+ 	\includegraphics[scale=.9]{../Aim3/PatientPred}
+\end{table}
+
+\end{DoubleSpace*}
