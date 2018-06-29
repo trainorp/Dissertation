@@ -7,4 +7,18 @@ A system for representing the level of confidence in a compound annotation has b
 \section{Prior approaches for ID}
 Rogers, et al. \cite{rogers2009} introduce the use of prior information for peak annotation in terms of conditional probabilities (although they do not explicitly label it as such). They note that an intense monoisotopic peak for a specific compound should be accompanied by isotopic peaks at specific m/z shifts and with specific intensity ratios. For example the natural abundance ratios of \textsuperscript{12}C and \textsuperscript{13}C may be known in advance. Consequently, the annotation of a compound label to a m/z peak is more likely if the isotopic peaks are also present and at predictable abundance ratios, than a compound label assignment to a m/z peak that would be ``missing'' relevant isotopic peaks. In addition, Rogers et al. invoke previous work \cite{breitling2006} that argues that there is only a small set of possible chemical reactions with a specific compound as an intermediate; consequently the presence of a specific intermediate in a sample should alter the prior (conditional) belief of the likelihood of a limited number of products that could be generated with that intermediate as a substrate being present in the sample.
 
+Rogers et al. introduce an mass measurement likelihood using the following formulation:
+\begin{align}
+	p(x_m|z_{cm}=1,y_c,\gamma)=N\left(\frac{x_m}{y_c}|1,\gamma^{-1} \right).
+\end{align}
+In this model, the authors use $x_m$ to represent the observed mass of the $m^{th}$ m/z peak, $z_{cm}$ is a random variable for the assignment of the $c^{th}$ molecular formula to the $m^{th}$ peak, $y_c$ to represent a theoretical mass of the $c^{th}$ molecular formula, and $\gamma$ for the precision of the mass spectrometer. We streamline the notation by introducing the following notation:
+\begin{align*}
+m_i &:=\text{a mass feature indexed by integer}\; i, \; i \in \{1,2,\hdots,n \} \\
+x_{m_i} &:= \text{measured m/z for mass feature}\; m_i \\
+t_{m_i} &:= \text{retention time for mass feature}\; m_i \\
+\ell_j &:= \text{a possible compound label for a mass feature}\; j\in\{1, 2, \hdots, J\} \\
+x_{\ell_j} &:= \text{monoisotopic mass of a compound with label}\; \ell_j \\
+A_k &:= \text{a possible adduct } \; k\in\{1, 2, \hdots, K\}
+\end{align*} 
+
 \end{DoubleSpace*}
