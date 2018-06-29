@@ -112,34 +112,47 @@ From the simulated posterior distribution of models, a predictive phenotype prob
 	\caption{Histograms showing the simulated posterior distribution of group membership probability estimates for a specific human subject. \label{fig:ptid2010Hist} }
 \end{figure}
  
-The LOOCV-estimated confusion matrix is shown in Table~\ref{tab:modelRes} for the model without clinical troponin values and Table ~\ref{tab:modelRes2} for the model with clinical troponin values. Group membership was determined by maximum \emph{a posteriori} estimates. Finally, the raw probability estimates for each human subject are shown in Table~\ref{tab:modelRes3}. The LOOCV-estimated sensitivity for detecting and discriminating thrombotic MI was 90.9\% for the model with and without clinical troponin values. Without clinical troponin values, the estimated specificity was 96.3\%, while with clinical troponin values included the estimated specificity improved to 100.0\%. In terms of the detection and discrimination of non-thrombotic MI, the LOOCV-estimated sensitivity was 83.3\% for both models, and the estimated specificity was 88.5\% for both models. Two stable CAD subjects were classified by both models as non-thrombotic MI subjects. Both of these subjects had relatively small estimated probabilities for thrombotic MI. Two non-thrombotic MI subjects were misclassified by both models. The first (subject \#26) was classified as stable CAD by both models. The second subject (\#27) was first classified as thrombotic MI (model without clinical troponin values), and then classified as stable CAD (model with clinical troponin values). This subject appeared to have nearly equal ($\approx 30\%$) probability mass placed over all three study groups. Finally, one thrombotic MI subject was classified as non-thrombotic MI by both models, however the difference between probability mass for thrombotic MI and non-thrombotic MI was slight ($46.3\%$ vs $39.0\%$ in the model without clinical troponin values; $44.8\%$ vs $36.0\%$ for the model with clinical troponin values).
+The LOOCV-estimated confusion matrix is shown in Table~\ref{tab:modelRes0} for the model fit by maximum likelihood estimation (MLE), Table~\ref{tab:modelRes} for the Bayesian model without clinical troponin values, and Table ~\ref{tab:modelRes2} for the Bayesian model with clinical troponin values. For the Bayesian models, group membership was determined by maximum \emph{a posteriori} estimates. Finally, the raw probability estimates for each human subject from the Bayesian models are shown in Table~\ref{tab:modelRes3}. The LOOCV-estimated sensitivity for detecting and discriminating thrombotic MI was 90.9\% for the Bayesian models with and without clinical troponin values. The sensitivity for the model fit by MLE was 81.8\%. Without clinical troponin values, the estimated specificity for the Bayesian model was 96.3\%, while with clinical troponin values included the estimated specificity improved to 100.0\%. The model fit by MLE without clinical troponin values had a specificity of 92.6\%. In terms of the detection and discrimination of non-thrombotic MI, the LOOCV-estimated sensitivity was 83.3\% for both Bayesian models, and the estimated specificity was 88.5\% for both. In terms of the misclassification rate the model estimated by MLE had a rate of 21.1\%, while both Bayesian models had a  rate of 13.2\%. Two stable CAD subjects were classified by both Bayesian models as non-thrombotic MI subjects. Both of these subjects had relatively small estimated probabilities for thrombotic MI. Two non-thrombotic MI subjects were misclassified by both models. The first (subject \#26) was classified as stable CAD by both models. The second subject (\#27) was first classified as thrombotic MI (model without clinical troponin values), and then classified as stable CAD (model with clinical troponin values). This subject appeared to have nearly equal ($\approx 30\%$) probability mass placed over all three study groups. Finally, one thrombotic MI subject was classified as non-thrombotic MI by both models, however the difference between probability mass for thrombotic MI and non-thrombotic MI was slight ($46.3\%$ vs $39.0\%$ in the model without clinical troponin values; $44.8\%$ vs $36.0\%$ for the model with clinical troponin values).
+
+\begin{table}[H]
+ 	\caption[Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for the multinomial logistic regression model without clinical troponin values fit by Maximum Likelihood Estimation]{Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for the multinomial logistic regression model without clinical troponin values fit by Maximum Likelihood Estimation (MLE). The leftmost column shows the true group membership of the human subjects, while the remaining columns show the predicted probabilities (maximum \emph{a posteriori}).}
+\label{tab:modelRes0}
+\begin{tabular}{l|ccc}
+& Predicted & & \\
+Group  &     sCAD & Thrombotic MI & Non-Thrombotic MI \\
+\hline
+sCAD & 13 &  0 & 2\\
+Thrombotic MI &   1 & 9 &  1\\
+Non-Thrombotic MI  & 2  & 2 & 8 
+\end{tabular}
+\end{table}
 
  \begin{table}[H]
-	\centering
- 	\caption[Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model without clinical troponin values]{Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model without clinical troponin values. The leftmost column shows the true group membership of the human subjects, while the remaining columns show the predicted probabilities (maximum \emph{a posteriori}).}
- 	\label{tab:modelRes}
- 	\begin{tabular}{l|ccc}
- 		& Predicted & & \\
- 		Group  &     sCAD & Thrombotic MI & Non-Thrombotic MI \\
- 		\hline
- 		sCAD   &     13    &     0    &     2\\
- 		Thrombotic MI  &  0    &    10    &     1\\
- 		Non-Thrombotic MI &   1    &     1   &     10
- 	\end{tabular}
+\centering
+\caption[Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model without clinical troponin values]{Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model without clinical troponin values. The leftmost column shows the true group membership of the human subjects, while the remaining columns show the predicted probabilities (maximum \emph{a posteriori}).}
+\label{tab:modelRes}
+\begin{tabular}{l|ccc}
+& Predicted & & \\
+Group  &     sCAD & Thrombotic MI & Non-Thrombotic MI \\
+\hline
+sCAD   &     13    &     0    &     2\\
+Thrombotic MI  &  0    &    10    &     1\\
+Non-Thrombotic MI &   1    &     1   &     10
+\end{tabular}
  \end{table}
  
   \begin{table}[H]
   	\centering
   	\caption[Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model with clinical troponin values]{Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model with clinical troponin values. The leftmost column shows the true group membership of the human subjects, while the remaining columns show the predicted probabilities (maximum \emph{a posteriori}).}
   	\label{tab:modelRes2}
-  	\begin{tabular}{l|ccc}
-  		& Predicted & & \\
-  		Group  &     sCAD & Thrombotic MI & Non-Thrombotic MI \\
-  		\hline
-  		sCAD   &     13    &     0    &     2\\
-  		Thrombotic MI  &  0    &    10    &     1\\
-  		Non-Thrombotic MI &   2  &   0 &    10
-  	\end{tabular}
+\begin{tabular}{l|ccc}
+& Predicted & & \\
+Group  &     sCAD & Thrombotic MI & Non-Thrombotic MI \\
+\hline
+sCAD   &     13    &     0    &     2\\
+Thrombotic MI  &  0    &    10    &     1\\
+Non-Thrombotic MI &   2  &   0 &    10
+\end{tabular}
   \end{table}
   
 \begin{table}[H]
@@ -150,6 +163,10 @@ The LOOCV-estimated confusion matrix is shown in Table~\ref{tab:modelRes} for th
 \end{table}
 
 \section{Discussion}
-The most notable conclusion from the construction of a Bayesian multinomial logistic regression model is that there is evidence that thrombotic MI, non-thrombotic MI, and stable CAD can be discriminated with 
+The most notable conclusion from the construction of a Bayesian multinomial logistic regression model is that there is strong evidence that thrombotic MI, non-thrombotic MI, and stable CAD can be discriminated by a non-invasive method using a small set of circulating metabolites. High estimated sensitivity and specificity was observed for detecting and discriminating thrombotic MI from both non-thrombotic MI and stable CAD. The estimated sensitivity and specificity for detecting and discriminating non-thrombotic MI was lower for non-thrombotic MI. Given the heterogeneity of this etiology of acute MI, this observation is not surprising. 
+
+There are many advantages from utilizing a Bayesian model estimation as in this context. First, given a relatively small sample size, maximum likelihood estimation for the multinomial logistic model may not allow for convex optimization. The specification of prior distributions with significant probability mass near zero for regression coefficients allows for the encouragement of sparsity. In addition, complete or quasi-complete separation of classes can occur utilizing maximum likelihood estimation, leading to unstable estimates for regression coefficients. As before, by specifying prior distributions for regression parameters that place significant probability mass near zero, the problem of complete or quasi-separation can be avoided. In general, a Bayesian model with appropriate priors will ensure that the resulting model has not overfit the training data with poor generalizability. A benefit of the Bayesian regression paradigm is the treatment of regression coefficients as random variables. In the Bayesian paradigm, variables that may contribute to the separation of groups, but for which there is much uncertainty can be retained in the model without adversely impacting model performance. Variables with correlated parameter estimates can be determined via the interrogation of samples from the posterior distribution of model coefficients. In our case, the regression coefficients for 1-linoleoylglycerol (18:2) and 2-linoleoylglycerol (18:2) were observed to be highly correlated in MCMC samples. This is not surprising given that these metabolites have the same glycerol moiety, and the same acyl side chain (although it is in different positions). Not surprisingly, the high degree of structural similarity is accompanied by a high degree of correlation in the abundance of each metabolite, and in the estimates of multinomial logistic regression parameters for each.
+
+The frequentist model estimated by MLE exhibited inferior performance than either Bayesian model with respect to misclassification rate / accuracy, sensitivity, and specificity. 
 
 \end{DoubleSpace*}
