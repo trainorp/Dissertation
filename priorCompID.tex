@@ -18,11 +18,20 @@ x_{m_i} &:= \text{measured m/z for mass feature}\; m_i \\
 t_{m_i} &:= \text{retention time for mass feature}\; m_i \\
 \ell_j &:= \text{a possible compound label for a mass feature}\; j\in\{1, 2, \hdots, J\} \\
 x_{\ell_j} &:= \text{monoisotopic mass of a compound with label}\; \ell_j \\
-A_k &:= \text{a possible adduct } \; k\in\{1, 2, \hdots, K\}
+A_k &:= \text{a possible adduct } \; k\in\{1, 2, \hdots, K\} \\
+\mathbfcal{I} &:= \text{Indicator matrix with mass features as rows and labels as columns}
 \end{align*} 
 The mass error model described by Rogers et al. is then:
 \begin{align}
-	\left. \frac{x_{m_i}}{x_{\ell_j}} \right| I(m_i=\ell_j )=1 \sim N\left(1, \gamma^{-1}\right) 
+	\left. \frac{x_{m_i}}{x_{\ell_j}} \right| \{ I(m_i=\ell_j )=1 \} \sim N\left(1, \gamma^{-1}\right).
+\end{align}
+Rogers et al. argue that the conditional probabilities of formula assignments should be predicated on current assignments, and how pairs of molecules can be related by biotransformations. They present the following form for the conditional probability (we have rewritten using our notation):
+\begin{align}
+p( I(m_i=\ell_j )=1|\mathbfcal{I},\delta) =  \frac{\beta_{ji}+\delta}{C\delta+\sum_{j'i}}
+\end{align}
+where:
+\begin{align}
+	\beta_{ji}=\textbf{W}_{j \cdot} \mathbfcal{I} \textbf{1} - \textbf{W}_{j \cdot} \mathbfcal{I}_{\cdot i}
 \end{align}
 
 \end{DoubleSpace*}
