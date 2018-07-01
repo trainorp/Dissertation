@@ -43,7 +43,10 @@ Rogers et al. in their supplemental material specify a Dirichlet-categorical pri
 \end{align}
 Although not explicitly stated, the posterior probability distribution of assignment in the form $\text{Posterior} \propto \text{Likelihood} \times \text{Prior}$ described in Rogers et al. is:
 \begin{align}
-	\propto p\left(\frac{x_{m_i}}{x_{\ell_j}}\right) p(\boldsymbol{\beta}|\boldsymbol{\delta})
+\begin{split}
+p( \mathbfcal{I}|\textbf{X}) &\propto p(\textbf{X}| \mathbfcal{I}) p( \mathbfcal{I}) \\
+p( \mathbfcal{I}|\textbf{X}) &\propto p(\textbf{X}| \mathbfcal{I}) p(\boldsymbol{\beta}|\boldsymbol{\delta})
+\end{split}
 \end{align}
 From this a Gibbs sampler was formulated for simulating the posterior distribution of compound labels for each mass feature. 
 
@@ -55,9 +58,12 @@ p( I(m_i=\ell_j )=1|\omega_{ji},\delta) = \frac{\omega_{j'i}+\delta}{N \delta + 
 In this equation, $\omega_{j'i}$ is said to represent the number of possible mass features (already assigned a compound label) that generate an isotopic peak $m_i$, or possible isotopic peaks that could be associated with a monoisotopic peak. Roger's et al. describe using heuristic rules such as a relative tolerance for matching a hypothetical isotope-to-monoisotope intensity ratio versus theoretical expectation.
 
 \section{``ProbMetab'': Formalization and integration of pathway databases}
-Blah 
+Silva et al. \cite{silva2014} built on the ideas elaborated in \cite{rogers2009}. First, Silva et al. restate the posterior probability of compound label to mass feature assignment in the following more general form (which we have further modified and presented in our notation):
 \begin{align}
-	p(x_m|\mathbfcal{I},x^{(-m)},\boldsymbol{\theta}) \propto p_N(x_m|\mathbfcal{I},\theta_N) \cdot p_{rt}(x_m|\mathbfcal{I},\theta_{rt}) p_{iso}(x_m|Z,\theta_{iso})
+\begin{split}
+p( \mathbfcal{I}|\textbf{X}) &\propto p(\textbf{X}| \mathbfcal{I}) p( \mathbfcal{I}) \\
+p(\mathbfcal{I}|\textbf{X}) \propto p(\textbf{X}|\mathbfcal{I}) \cdot p_{rt}(x_m|\mathbfcal{I},\theta_{rt}) p_{iso}(x_m|Z,\theta_{iso})
+\end{split}
 \end{align}
 
 \end{DoubleSpace*}
