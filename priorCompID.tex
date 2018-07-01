@@ -4,7 +4,7 @@ The identification of compounds from chromatography-coupled mass spectrometry ex
 
 A system for representing the level of confidence in a compound annotation has been proposed previously as part of the Metabolomics Standards Initiative (MSI) \cite{sumner2007}. The first level (Level 1) represents the most confident type of identification and requires matching two ``orthogonal'' properties of an observed feature with the properties observed from the analysis of an authentic standard under identical analytical conditions. An example of two orthogonal properties for an LC-MS analysis would be observed m/z and retention time or retention index. In an LC-MS/MS experiment observed m/z and MS/MS fragmentation pattern compared to an authentic standard analyzed under identical analytical condition would constitute a Level 1 identification.  A Level 2 identification also requires matching on ``orthogonal'' properties, but in comparison to previously archived data (e.g. databases such as the NIST libraries) as opposed to authentic standards analyzed under identical conditions). A Level 3 identification is more general and requires association of the properties of an observed feature to those of classes of biochemicals as opposed to specific compounds. This framework asserts in a general way that metabolite annotation is a probabilistic process, in which the likelihood of a match from mass feature to compound label depends on both \emph{a priori} knowledge and empirical data. Consequently, a Bayesian approach to compound identification is sensible. In this chapter we describe previous Bayesian approaches for compound identification utilizing LC-MS data. We do not detail Bayesian approaches for compound ID for MS(n) data, as we are unaware of such efforts to date. Given LC-MS data we describe the assignment of compound labels to m/z features as peak annotation. 
 
-\section{Prior approaches for ID}
+\section{Utilizing feasible metabolic reactions to generate conditional distributions}
 Rogers, et al. \cite{rogers2009} introduce the use of prior information for peak annotation in terms of conditional probabilities (although they do not explicitly label it as such). They note that an intense monoisotopic peak for a specific compound should be accompanied by isotopic peaks at specific m/z shifts and with specific intensity ratios. For example the natural abundance ratios of \textsuperscript{12}C and \textsuperscript{13}C may be known in advance. Consequently, the annotation of a compound label to a m/z peak is more likely if the isotopic peaks are also present and at predictable abundance ratios, than a compound label assignment to a m/z peak that would be ``missing'' relevant isotopic peaks. In addition, Rogers et al. invoke previous work \cite{breitling2006} that argues that there is only a small set of possible chemical reactions with a specific compound as an intermediate; consequently the presence of a specific intermediate in a sample should alter the prior (conditional) belief of the likelihood of a limited number of products that could be generated with that intermediate as a substrate being present in the sample.
 
 Rogers et al. introduce an mass measurement likelihood using the following formulation:
@@ -25,13 +25,39 @@ The mass error model described by Rogers et al. is then:
 \begin{align}
 	\left. \frac{x_{m_i}}{x_{\ell_j}} \right| \{ I(m_i=\ell_j )=1 \} \sim N\left(1, \gamma^{-1}\right).
 \end{align}
-Rogers et al. argue that the conditional probabilities of formula assignments should be predicated on current assignments, and how pairs of molecules can be related by biotransformations. They present the following form for the conditional probability (we have rewritten using our notation):
+Rogers et al. argue that the conditional probabilities of formula assignments should be predicated on current assignments, and how pairs of molecules can be related by chemical reactions. They present the following form for the conditional probability (rewritten using our notation):
 \begin{align}
-p( I(m_i=\ell_j )=1|\mathbfcal{I},\delta) =  \frac{\beta_{ji}+\delta}{C\delta+\sum_{j'i}}
+p( I(m_i=\ell_j )=1|\mathbfcal{I},\delta) =  \frac{\beta_{ji}+\delta}{N\delta+\sum_{j'i} \beta_{j'i}}
 \end{align}
 where:
 \begin{align}
-	\beta_{ji}=\textbf{W}_{j \cdot} \mathbfcal{I} \textbf{1} - \textbf{W}_{j \cdot} \mathbfcal{I}_{\cdot i}
+	\beta_{ji}=\textbf{W}_{j \cdot} \mathbfcal{I} \textbf{1} - \textbf{W}_{j \cdot} \mathbfcal{I}_{\cdot i}, 
+\end{align}
+with $\textbf{W}$ as an indicator matrix that represents possible biochemical reactions, with $\dim(\textbf{W})=N\times N$, and $\delta$ is a hyperparameter. Given this formulation $\beta_{ji}$ represents a count of the number of biochemical transformations from compound labels currently assigned to result in a new annotation. Rogers et al. then state the discrete conditional distribution of possible compound labels for a mass feature as:
+\begin{align}
+	p\left(\frac{x_{m_i}}{x_{\ell_j}}\right) \propto N(1, \gamma^{-1})  \frac{\beta_{ji}+\delta}{N\delta+\sum_{j'i} \beta_{j'i}}.
+\end{align}
+Rogers et al. in their supplemental material specify a Dirichlet-categorical prior for each set of compounds that could be generated by chemical reactions:
+\begin{align}
+	p(\boldsymbol{\beta}|\boldsymbol{\delta})=\frac{\Gamma(\sum_j \delta_j) \prod_j \Gamma(\beta_{ji}+\delta_j)}{\Gamma(\sum_j \beta_{ji}+\delta_j) \prod_j \Gamma(\delta_j)}.
+\end{align}
+Although not explicitly stated, the posterior probability distribution of assignment in the form $\text{Posterior} \propto \text{Likelihood} \times \text{Prior}$ described in Rogers et al. is:
+\begin{align}
+	\propto p\left(\frac{x_{m_i}}{x_{\ell_j}}\right) p(\boldsymbol{\beta}|\boldsymbol{\delta})
+\end{align}
+From this a Gibbs sampler was formulated for simulating the posterior distribution of compound labels for each mass feature. 
+
+\section{Utilizing isotope patterns in conditional distributions}
+Rogers et al. \cite{rogers2009} additionally discuss a method for incorporating prior information regarding monoisotopic-isotopic peak presence and intensity information. The additional likelihood term described is presented here (in our notation), although this formulation does not provide sufficient detail for understanding the process of incorporating this likelihood term:
+\begin{align*}
+p( I(m_i=\ell_j )=1|\omega_{ji},\delta) = \frac{\omega_{j'i}+\delta}{N \delta + \sum_{j'}\omega_{j'i}}.
+\end{align*}
+In this equation, $\omega_{j'i}$ is said to represent the number of possible mass features (already assigned a compound label) that generate an isotopic peak $m_i$, or possible isotopic peaks that could be associated with a monoisotopic peak. Roger's et al. describe using heuristic rules such as a relative tolerance for matching a hypothetical isotope-to-monoisotope intensity ratio versus theoretical expectation.
+
+\section{``ProbMetab'': Formalization and integration of pathway databases}
+Blah 
+\begin{align}
+	p(x_m|\mathbfcal{I},x^{(-m)},\boldsymbol{\theta}) \propto p_N(x_m|\mathbfcal{I},\theta_N) \cdot p_{rt}(x_m|\mathbfcal{I},\theta_{rt}) p_{iso}(x_m|Z,\theta_{iso})
 \end{align}
 
 \end{DoubleSpace*}
