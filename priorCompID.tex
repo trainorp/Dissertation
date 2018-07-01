@@ -41,6 +41,10 @@ Rogers et al. in their supplemental material specify a Dirichlet-categorical pri
 \begin{align}
 	p(\boldsymbol{\beta}|\boldsymbol{\delta})=\frac{\Gamma(\sum_j \delta_j) \prod_j \Gamma(\beta_{ji}+\delta_j)}{\Gamma(\sum_j \beta_{ji}+\delta_j) \prod_j \Gamma(\delta_j)}.
 \end{align}
+Although not explicitly stated, the posterior probability distribution of assignment in the form $\text{Posterior} \propto \text{Likelihood} \times \text{Prior}$ described in Rogers et al. is:
+\begin{align}
+	\propto p\left(\frac{x_{m_i}}{x_{\ell_j}}\right) p(\boldsymbol{\beta}|\boldsymbol{\delta})
+\end{align}
 From this a Gibbs sampler was formulated for simulating the posterior distribution of compound labels for each mass feature. 
 
 \section{Utilizing isotope patterns in conditional distributions}
