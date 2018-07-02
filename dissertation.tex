@@ -23,6 +23,7 @@
 \usepackage{algorithm,algorithmic}
 \usepackage[paper=portrait,pagesize]{typearea}
 \usepackage{setspace}
+% \usepackage{breakcites}
 
 \DeclareMathOperator{\PP}{P}
 \DeclareMathOperator{\EE}{E}
@@ -171,26 +172,10 @@ Abstract goes here
 
 \backmatter
 \begin{DoubleSpace*}
-% You can change the style of the bibliography for whatever would be
-% accepted by your discipline and the University format checkers.
-% There are several bibliography managers that may be used with LaTeX.
-% Here we have defaulted to bibtex, but if this does not work for you
-%  try others.
 
-% Style "apalike" is similar to the Harvard style.  
-% If you prefer numbered references, try "plain".
-
-% The ulthesis package includes a copy of the Optical Society of America's
-%   bibliography style which retains titles and provides a clean looking
-%   bibliography in order of citation in the body. It is used here by default.
-
-% If you want a true Harvard style you can use "biblatex" or "natbib" instead
-%   of bibtex, which requires some other modifications.  There is help for this
-%   on Sharelatex and on Overleaf, as well as through Google searches.
-
-%\bibliographystyle{apalike}
+\bibliographystyle{apalike}
 %\bibliographystyle{plain}
-\bibliographystyle{osajnl}
+%\bibliographystyle{osajnl}
 \bibliography{dissertation}
 
 \end{DoubleSpace*}
@@ -202,7 +187,7 @@ Abstract goes here
 \chapter{Appendix B: Software developed for the Bayesian Graphical Lasso}
 \input{code.tex}
 
-\chapter{Vita}
+\chapter{Curriculum Vitae}
 \begin{DoubleSpace*}
 \input{vita.tex}
 \end{DoubleSpace*}
