@@ -81,9 +81,18 @@ Before introducing an advancement in Bayesian approaches for LC-MS feature annot
 \begin{align}
 p(y|\mu_1,\mu_2, \hdots, \mu_k, s_1, s_2, \hdots, s_k, \pi_1, \pi_2, \hdots, \pi_k) = \sum_{j=1}^{k} \pi_j N(\mu_j,s_j^{-1}).
 \end{align}
-In this model, mixture components are indexed by $j=\{1,2, \hdots,k\}$, with component means, $\mu_j$ and precisions $s_j$. Finally the mixing proportions are $\pi_j$. The priors for the component means can be specified as $p(\mu_j|\lambda) \sim N(\lambda, r^{-1}$, where in the classically described Dirichlet process mixture model, the priors for the component means are weakly informative, with $p(\lambda)\sim N(\mu_y,\sigma_y^2)$ and $p(r)\sim Gamma(1,\sigma_y^{-2})$.
-
-\cite{rasmussen1999}
+In this model, mixture components are indexed by $j=\{1,2, \hdots,k\}$, with component means, $\mu_j$ and precisions $s_j$. Finally the mixing proportions are $\pi_j$. The priors for the component means can be specified as $p(\mu_j|\lambda) \sim N(\lambda, r^{-1}$, where in the classically described Dirichlet process mixture model, the priors for the component means are relatively diffuse, with $p(\lambda)\sim N(\mu_y,\sigma_y^2)$ and $p(r)\sim Gamma(1,\sigma_y^{-2})$.  As for the precision parameters, Gamma priors are also specified, that is: $p(s_j|\beta,w) \sim Gamma(\beta,w^{-1})$, with hyperpriors $p(\beta^{-1}) \sim Gamma(1,1)$ and $p(w)\sim Gamma(1,\sigma_y^2)$. While the previous parameters are involved in modeling cluster attibutes (means, precisions), priors are also required for the mixing proportions and ``ocupation numbers'' (number of observations in each cluster). The mixing proportions are assumed to follow a Dirichlet distribution, that is $p(\pi_1,\pi_2,\hdots, \pi_k|\alpha)\sim Dirichlet(\alpha/k,\alpha/k,\hdots, \alpha/k)$ where $\alpha/k$ represents a concentration parameter. Through integration and algebraeic manipulation, \cite{rasmussen1999} showed that the prior probability of cluster indicators, conditioned on the concentration parameters is:
+\begin{align}
+p(c_1,c_2, \hdots, c_k|\alpha)=\frac{\Gamma(\alpha)}{\Gamma(n+\alpha)} \prod_{j=1}^{k} \frac{\Gamma(n_j+\alpha/k)}{\Gamma(\alpha/k)}.
+\end{align} 
+From this, a conditional probability for a fixed cluster indicator is: 
+\begin{align}
+p(c_i=j|\textbf{c}_{(-i)},\alpha) = \frac{n_{(-i),j}+\alpha/k}{n-1+\alpha}.
+\end{align}
+By taking the limit as the number of classes goes to infinity, that is $k\rightarrow \infty$, \cite{rasmussen1999} derived the posterior probabilities for indicators, conditioned on the remaining indicators:
+\begin{align}
+p(c_i=j|\textbf{c}_{(-i)},\alpha) p(y_i|\mu_j,s_j,\textbf{c}_{(-i)})\propto \frac{n_{(-i),j}}{n-1+\alpha} \sqrt{s_j} \exp(-s_j(y_i-\mu_j)^2/2)
+\end{align}
 
 \section{Bayesian clustering of mass features}
 The work of Daly \cite{daly2014}, et al. from the same group as \cite{rogers2009}, represents a significant paradigm shift in Bayesian approaches for LC-MS mass feature annotation. The novel idea described in that work is to consider both monoisotopic peaks, isotopic peaks, and adduct peaks as being members of a cluster. Daly et al. \cite{daly2014}, use the notation $\textbf{d}_n = (x_n,w_n,r_n)$ to refer to the experimental attributes of a single mass feature, where $x_n$ corresponds to the m/z value, $w_n$ corresponds to the intensity of the peak at that m/z value, and $r_n$ refers to the retention time of the feature. They then index the clusters by $k$ and define an indicator variable, $v_{nkai}$ for cluster membership. The subscripts of this indicator variable represent the index of the mass feature, $n$; the cluster, $k$; the adduct, $a$; and the isotope $i$. 
