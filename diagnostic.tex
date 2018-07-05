@@ -1,8 +1,7 @@
 \label{diagnostic}
 \begin{DoubleSpace*}
 \section{Acute Myocardial Infarction}
-Acute Myocardial Infarction (AMI), which is an acute manifestation of coronary heart disease, is defined by
-myocardial ischemia (exposure of cardiac myocytes to oxygen deprivation) and necrosis (a form of cell death) \cite{trainor2018}. AMI may occur following atherosclerotic plaque disruption or other conditions which cause demand ischemia \cite{thygesen2012,arbab2012}. Irrespective of underlying cause, ischemia and necrosis are the common pathological characteristics of all AMI. Thrombotic MI (MI results from spontaneous atherosclerotic plaque disruption with the formation of an occluding coronary thrombus) versus non-thrombotic MI represents an important etiological distinction \cite{defilippis2017}, as both types necessitate different treatment approaches \cite{thygesen2012}. A diagnosis of AMI can be substantiated by blood-based diagnostic tests that measure isoforms of the protein troponin which is released into the circulation following necrosis \cite{newby2012}. To date a blood-based diagnostic test capable of discriminating between thrombotic and non-thrombotic MI has not been developed, although it has been previously shown that a metabolic signature may differentiate between the types \cite{defilippis2017,trainor2018}. In the present work, we set out to develop a Bayesian model for differentiating thrombotic MI from both non-thrombotic MI and stable coronary artery disease (CAD) using metabolites detected in blood plasma. We regard plasma as a promising media for developing a non-invasive test as plasma contains hormones, enzymes, lipoproteins, and other metabolic intermediates found in circulation. As metabolite concentrations are a product of genetic factors, environmental exposures, and the interaction between the two, sampling metabolites may provide a more robust characterization of the state of an organism than other approaches such as genomics. 
+Acute Myocardial Infarction (AMI), which is an acute manifestation of coronary heart disease, is defined by myocardial ischemia (exposure of cardiac myocytes to oxygen deprivation) and necrosis (a form of cell death) \cite{trainor2018}. AMI may occur following atherosclerotic plaque disruption or other conditions which cause demand ischemia \cite{thygesen2012,arbab2012}. Irrespective of underlying cause, ischemia and necrosis are the common pathological characteristics of all AMI. Thrombotic MI (MI results from spontaneous atherosclerotic plaque disruption with the formation of an occluding coronary thrombus) versus non-thrombotic MI represents an important etiological distinction \cite{defilippis2017}, as both types necessitate different treatment approaches \cite{thygesen2012}. A diagnosis of AMI can be substantiated by blood-based diagnostic tests that measure isoforms of the protein troponin which is released into the circulation following necrosis \cite{newby2012}. To date a blood-based diagnostic test capable of discriminating between thrombotic and non-thrombotic MI has not been developed, although it has been previously shown that a metabolic signature may differentiate between the types \cite{defilippis2017,trainor2018}. In the present work, we set out to develop a Bayesian model for differentiating thrombotic MI from both non-thrombotic MI and stable coronary artery disease (CAD) using metabolites detected in blood plasma. We regard plasma as a promising media for developing a non-invasive test as plasma contains hormones, enzymes, lipoproteins, and other metabolic intermediates found in circulation. As metabolite concentrations are a product of genetic factors, environmental exposures, and the interaction between the two, sampling metabolites may provide a more robust characterization of the state of an organism than other approaches such as genomics. 
 
 \section{Clinical cohort and samples}
 Towards the effort of developing a Bayesian diagnostic model, we utilized previously collected samples from a patient cohort that was recruited specifically for contrasting thrombotic MI from multiple control phenotypes \cite{defilippis2015,defilippis2017}. This cohort was comprised of three phenotypic groups of human subjects: thrombotic MI, non-thrombotic MI, and stable CAD. In reference to the  thrombotic MI group, both control groups (non-thrombotic MI and stable CAD) served as procedural controls as all groups underwent a cardiac catheterization procedure. The stable CAD group provides a stable disease control as both thrombotic MI subjects and stable CAD subjects have underlying coronary artery disease. Non-thrombotic MI subjects presented with myocardial necrosis and thus the non-thrombotic MI group serves as an acute disease event control. 
@@ -16,7 +15,7 @@ A significant analytical challenge in developing a blood-based diagnostic test f
 
 \begin{figure}[H]
 	\resizebox{1.1\textwidth}{!}{\includegraphics*{../../AthroMetab/WoAC/corrplot333}}
-	\caption[Metabolites considered in Bayesian multinomial logistic regression model]{Metabolites with the highest variable importance score given the feature selection method we employed in a previous work \cite{trainor2018}. The Pearson correlation coefficients between metabolite transformed and scaled abundances are shown. \label{fig:include}}
+	\caption[Correlation plot showing the metabolites that were considered in Bayesian multinomial logistic regression models]{\DoubleSpacing Metabolites with the highest variable importance score given the feature selection method we employed in a previous work \cite{trainor2018}. The Pearson correlation coefficients between metabolite transformed and scaled abundances are shown. \label{fig:include}}
 \end{figure}
 
 \begin{DoubleSpace*}
@@ -52,7 +51,7 @@ As the objective of the present analysis was to develop a model capable of discr
 
 \begin{table}[H]
 	\centering
-	 	\caption[Bayesian multinomial logistic regression model goodness of fit]{Evaluation of goodness of model fit with or without clinical troponin values. Inclusion of troponin did not result in a statistically meaningful improvement in goodness of fit. WAIC: Widely applicable information criteria. SE: Standard error.}
+	 	\caption[Bayesian multinomial logistic regression model goodness of fit showing the model, the Widely Applicable Information Criteria (WAIC), and the Standard Error (SE)]{\DoubleSpacing Evaluation of goodness of model fit with or without clinical troponin values. Inclusion of troponin did not result in a statistically meaningful improvement in goodness of fit. WAIC: Widely applicable information criteria. SE: Standard error.}
 	 	\label{tab:modelComp}
 	\begin{tabular}{lcc}
 		\hline
@@ -72,17 +71,17 @@ As the objective of the present analysis was to develop a model capable of discr
 \recalctypearea
 \begin{figure}[H]
 	\includegraphics[scale=1.1]{../Aim3/MCMCEx.png}
-	\caption[MCMC chain for 3-hydroxypyridine sulfate multinomial logistic regression coefficient]{(a) MCMC chains for the by-group multinomial logit model parameters corresponding to 3-hydroxypyridine sulfate. (b) Histogram showing the simulated posterior probability distribution for the same parameters. \label{fig:brm1Coef} }
+	\caption[Time series plot of the MCMC chain for 3-hydroxypyridine sulfate multinomial logistic regression coefficient and resulting histogram showing the posterior distribution]{(a) MCMC chains for the by-group multinomial logit model parameters corresponding to 3-hydroxypyridine sulfate. (b) Histogram showing the simulated posterior probability distribution for the same parameters. \label{fig:brm1Coef} }
 \end{figure}
 \newpage
 \begin{figure}[H]
 	\includegraphics[scale=1.15]{../Aim3/brm1Coef}
-	\caption[Bayesian credible intervals for multinomial logit model parameters without troponin]{50\% Bayesian credible intervals for the by-group multinomial logistic regression coefficients. The multinomial models did not include clinical troponin assay values. \label{fig:brm1Coef} }
+	\caption[Bayesian credible intervals for multinomial logit model parameters without troponin]{\DoubleSpacing 50\% Bayesian credible intervals for the by-group multinomial logistic regression coefficients. The multinomial models did not include clinical troponin assay values. \label{fig:brm1Coef} }
 \end{figure}
 \newpage
 \begin{figure}[H]
 	\includegraphics[scale=1.15]{../Aim3/brm2Coef}
-	\caption[Bayesian credible intervals for multinomial logit model parameters with troponin]{50\% Bayesian credible intervals for the by-group multinomial logistic regression coefficients. The multinomial models did include clinical troponin assay values. \label{fig:brm2Coef} }
+	\caption[Bayesian credible intervals for multinomial logit model parameters with troponin]{\DoubleSpacing 50\% Bayesian credible intervals for the by-group multinomial logistic regression coefficients. The multinomial models did include clinical troponin assay values. \label{fig:brm2Coef} }
 \end{figure}
 \newpage
 \KOMAoptions{paper=portrait,pagesize}
@@ -93,30 +92,30 @@ Given that the MCMC chains provide the joint posterior distribution of model par
 
 \begin{figure}[H]
 	\resizebox{1.0\textwidth}{!}{\includegraphics*{../Aim3/coefPost}}
-	\caption[3-dimensional scatterplot of MCMC samples for both linoleoylglycerols (18:2) with the acyl side chain in different positions and the log-posterior probability of each sampled model]{3-dimensional scatterplot of MCMC samples for both linoleoylglycerols (18:2) with the acyl side chain in different positions (in the same plane), as well as the log-posterior probability of each sampled model. \label{fig:coefPost} }
+	\caption[3-dimensional scatterplot of MCMC samples for both linoleoylglycerols (18:2) with the acyl side chain in different positions and the log-posterior probability of each sampled model]{\DoubleSpacing 3-dimensional scatterplot of MCMC samples for both linoleoylglycerols (18:2) with the acyl side chain in different positions (in the same plane), as well as the log-posterior probability of each sampled model. \label{fig:coefPost} }
 \end{figure}
 
 \begin{figure}[H]
 	\resizebox{1.1\textwidth}{!}{\includegraphics*{../Aim3/coefPost2}}
-	\caption[Scatterplot of MCMC samples for both linoleoylglycerols (18:2) with the acyl side chain in different positions colored by log-posterior probability]{Scatterplot of MCMC samples for both linoleoylglycerols (18:2) with the acyl side chain in different positions colored by log-posterior probability. MCMC sampled models with the greatest log-posterior probability are shown in red, while models with lesser log-posterior probability are shown in blue. \label{fig:coefPost2} }
+	\caption[Scatterplot of MCMC samples for both linoleoylglycerols (18:2) with the acyl side chain in different positions colored by log-posterior probability]{\DoubleSpacing Scatterplot of MCMC samples for both linoleoylglycerols (18:2) with the acyl side chain in different positions colored by log-posterior probability. MCMC sampled models with the greatest log-posterior probability are shown in red, while models with lesser log-posterior probability are shown in blue. \label{fig:coefPost2} }
 \end{figure}
 
 From the simulated posterior distribution of models, a predictive phenotype probability distribution can be generated for each human subject. The MCMC chain for the phenotype probabilities of a selected clinical subject (\#14) is presented in Figure~\ref{fig:ptid2010MCMC}. The maximum \emph{a posteriori}) group label from both models evaluated properly classified this subject as a stable CAD subject, however in the leave-one-out cross-validation estimation, this subject misclassified as a Thrombotic MI subject. In the models (not-LOOCV estimates), a substantial probability mass was also placed on the posterior probability that this subject was a Non-Thrombotic MI.  
 
 \begin{figure}[H]
 	\resizebox{1.15\textwidth}{!}{\includegraphics*{../Aim3/ptid2010MCMC}}
-	\caption{A segment of the first MCMC chain for simulating the posterior distribution of group membership probability estimates for a specific human subject.  \label{fig:ptid2010MCMC} }
+	\caption[A segment of the first MCMC chain for simulating the posterior distribution of group membership probability estimates for a specific human subject. ]{\DoubleSpacing A segment of the first MCMC chain for simulating the posterior distribution of group membership probability estimates for a specific human subject.  \label{fig:ptid2010MCMC} }
 \end{figure}
 
 \begin{figure}[H]
 	\resizebox{1.15\textwidth}{!}{\includegraphics*{../Aim3/ptid2010Hist}}
-	\caption{Histograms showing the simulated posterior distribution of group membership probability estimates for a specific human subject. \label{fig:ptid2010Hist} }
+	\caption[Histograms showing the simulated posterior distribution of group membership probability estimates for a specific human subject]{\DoubleSpacing Histograms showing the simulated posterior distribution of group membership probability estimates for a specific human subject. \label{fig:ptid2010Hist} }
 \end{figure}
  
 The LOOCV-estimated confusion matrix is shown in Table~\ref{tab:modelRes0} for the model fit by maximum likelihood estimation (MLE), Table~\ref{tab:modelRes} for the Bayesian model without clinical troponin values, and Table ~\ref{tab:modelRes2} for the Bayesian model with clinical troponin values. For the Bayesian models, group membership was determined by maximum \emph{a posteriori} estimates. Finally, the raw probability estimates for each human subject from the Bayesian models are shown in Table~\ref{tab:modelRes3}. The LOOCV-estimated sensitivity for detecting and discriminating thrombotic MI was 90.9\% for the Bayesian models with and without clinical troponin values. The sensitivity for the model fit by MLE was 81.8\%. Without clinical troponin values, the estimated specificity for the Bayesian model was 96.3\%, while with clinical troponin values included the estimated specificity improved to 100.0\%. The model fit by MLE without clinical troponin values had a specificity of 92.6\%. In terms of the detection and discrimination of non-thrombotic MI, the LOOCV-estimated sensitivity was 83.3\% for both Bayesian models, and the estimated specificity was 88.5\% for both. In terms of the misclassification rate the model estimated by MLE had a rate of 21.1\%, while both Bayesian models had a  rate of 13.2\%. Two stable CAD subjects were classified by both Bayesian models as non-thrombotic MI subjects. Both of these subjects had relatively small estimated probabilities for thrombotic MI. Two non-thrombotic MI subjects were misclassified by both models. The first (subject \#26) was classified as stable CAD by both models. The second subject (\#27) was first classified as thrombotic MI (model without clinical troponin values), and then classified as stable CAD (model with clinical troponin values). This subject appeared to have nearly equal ($\approx 30\%$) probability mass placed over all three study groups. Finally, one thrombotic MI subject was classified as non-thrombotic MI by both models, however the difference between probability mass for thrombotic MI and non-thrombotic MI was slight ($46.3\%$ vs $39.0\%$ in the model without clinical troponin values; $44.8\%$ vs $36.0\%$ for the model with clinical troponin values).
 
 \begin{table}[H]
- 	\caption[Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for the multinomial logistic regression model without clinical troponin values fit by Maximum Likelihood Estimation]{Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for the multinomial logistic regression model without clinical troponin values fit by Maximum Likelihood Estimation (MLE). The leftmost column shows the true group membership of the human subjects, while the remaining columns show the predicted probabilities (maximum \emph{a posteriori}).}
+ 	\caption[Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for the multinomial logistic regression model without clinical troponin values fit by Maximum Likelihood Estimation]{\DoubleSpacing Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for the multinomial logistic regression model without clinical troponin values fit by Maximum Likelihood Estimation (MLE). The leftmost column shows the true group membership of the human subjects, while the remaining columns show the predicted probabilities (maximum \emph{a posteriori}).}
 \label{tab:modelRes0}
 \begin{tabular}{l|ccc}
 & Predicted & & \\
@@ -130,7 +129,7 @@ Non-Thrombotic MI  & 2  & 2 & 8
 
  \begin{table}[H]
 \centering
-\caption[Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model without clinical troponin values]{Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model without clinical troponin values. The leftmost column shows the true group membership of the human subjects, while the remaining columns show the predicted probabilities (maximum \emph{a posteriori}).}
+\caption[Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model without clinical troponin values]{\DoubleSpacing Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model without clinical troponin values. The leftmost column shows the true group membership of the human subjects, while the remaining columns show the predicted probabilities (maximum \emph{a posteriori}).}
 \label{tab:modelRes}
 \begin{tabular}{l|ccc}
 & Predicted & & \\
@@ -144,7 +143,7 @@ Non-Thrombotic MI &   1    &     1   &     10
  
   \begin{table}[H]
   	\centering
-  	\caption[Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model with clinical troponin values]{Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model with clinical troponin values. The leftmost column shows the true group membership of the human subjects, while the remaining columns show the predicted probabilities (maximum \emph{a posteriori}).}
+  	\caption[Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model with clinical troponin values]{\DoubleSpacing Leave-one-out Cross-validation (LOOCV) estimated confusion matrix for Bayesian multinomial logistic regression model with clinical troponin values. The leftmost column shows the true group membership of the human subjects, while the remaining columns show the predicted probabilities (maximum \emph{a posteriori}).}
   	\label{tab:modelRes2}
 \begin{tabular}{l|ccc}
 & Predicted & & \\
@@ -158,7 +157,7 @@ Non-Thrombotic MI &   2  &   0 &    10
   
 \begin{table}[H]
   	\centering
- 	  	\caption[Leave-one-out cross-validation (LOOCV) estimated group probabilities from the Bayesian multinomial logistic regression models for each of human subject in the cohort.]{Leave-one-out cross-validation (LOOCV) estimated group probabilities from the Bayesian multinomial logistic regression models for each of human subject in the cohort. M1: Model without clinical troponin values. M2: Model with clinical troponin values. Blue-to-red continuous scale ranks estimated probabilities from low-to-high.}
+ 	  	\caption[Leave-one-out cross-validation (LOOCV) estimated group probabilities from the Bayesian multinomial logistic regression models for each of human subject in the cohort.]{\DoubleSpacing  Leave-one-out cross-validation (LOOCV) estimated group probabilities from the Bayesian multinomial logistic regression models for each of human subject in the cohort. M1: Model without clinical troponin values. M2: Model with clinical troponin values. Blue-to-red continuous scale ranks estimated probabilities from low-to-high.}
 	  	\label{tab:modelRes3}
  	\includegraphics[scale=.9]{../Aim3/PatientPred}
 \end{table}

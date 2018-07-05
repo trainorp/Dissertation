@@ -17,8 +17,8 @@ Other forms of higher-order inference are not explicitly hypothesis driven. Many
 Pathway enrichment analyses seek to determine if specific pathways are represented more than expected by chance alone in a list of differentially abundant metabolites (or other biomolecules such as mRNA transcripts). These analyses take the results of univariate statistical tests that first identify sets of metabolite features for which significant evidence of differences between experimental conditions or phenotypes are observed. After identifying interesting metabolite features, these sets can be tested for enrichment of specific metabolic pathways or biological processes greater than that expected by chance \cite{goeman2007,xia2010}. 
 
 \section{Exact tests of pathway enrichment}
-\begin{table}
-		\caption[$2 \times 2 $ table]{Example $2 \times 2$ table for two random variables $X$ and $Y$ \label{tab:twoByTwo} }
+\begin{table}[H]
+		\caption[Example $2 \times 2$ table for two random variables $X$ and $Y$]{\DoubleSpacing Example $2 \times 2$ table for two random variables $X$ and $Y$. \label{tab:twoByTwo} }
 	\centering
 	\begin{tabular}{l  | c  c}
 		& & \\
@@ -33,8 +33,9 @@ To discuss the use of Fisher's exact for determining pathway over-representation
 	p = \frac{{n_{x_1 y_1}+n_{x_2 y_1}\choose n_{x_1 y_1}} {n_{x_1 y_2}+n_{x_2 y_2}\choose n_{x_1 y_2}} }{{n\choose n_{x_1 y_1}+n_{x_1 y_2}}},
 \end{align}
 where $n=n_{x_1 y_1}+  n_{x_2 y_1} +n_{x_1 y_2}+n_{x_2 y_2}$. Fisher's exact test is a test of the independence of rows and columns. In other words the test evaluates whether the random variables $X$ and $Y$ are independent. In order to determine the statistical significance of the test, the probability of the observed table can be compared to the probability of tables with the same marginal totals. In the case of evaluating whether a specific metabolic pathway is over-represented within a list of differentially abundant metabolites, we can represent pathway membership as the first random variable and differential abundances indicator as the second random variable. 
-\begin{table}[h!]
-	\caption[Exact test]{Example Fisher's exact test for determining if a pathway is over-represented in a list of significant metabolites \label{tab:pathExact} }
+
+\begin{table}[H]
+	\caption[Example Fisher's exact test for determining if a pathway is over-represented in a list of significant metabolites]{\DoubleSpacing Example Fisher's exact test for determining if a pathway is over-represented in a list of significant metabolites. \label{tab:pathExact} }
 	\begin{center}
 		\begin{tabular}{ l c c c }
 			\hline
@@ -49,15 +50,18 @@ where $n=n_{x_1 y_1}+  n_{x_2 y_1} +n_{x_1 y_2}+n_{x_2 y_2}$. Fisher's exact tes
 \end{table}
 A hypothetical exact test for determining if a pathway is over-represented in a list of significant metabolites is presented in Table~\ref{tab:pathExact}. In this example, it is assumed that a total of 420 metabolites were observed. Of these metabolites, 30 were in Pathway A, while 390 were not in Pathway A. Of the metabolites in Pathway A, 10 were observed to be differentially abundant, while of the metabolites not in Pathway A, 40 were observed to be differentially abundant. A two-sided Fisher's test given the observed contingency table yields a p-value of 0.001, indicating that there is evidence of an association between the differential abundance indicator and the pathway membership indicator. 
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\resizebox{\textwidth}{!}{\includegraphics*{../Proposal/vennHell2_2}}
-	\caption[Graphical representation of the source of bias in discrete pathway enrichment analyses]{Graphical representation of the source of bias in discrete pathway enrichment analyses. A single metabolic pathway is shown as a bordered rectangle. The blue circle represents cases in which a metabolite that is in a metabolic pathway is annotated as being a member of that pathway in pathway databases. The red circle represents cases in which a metabolite that is a member of a metabolic pathway is quantifiable given the sample medium utilized in the analysis. For example, a metabolite localized to the mitochondria may not be detectable in plasma samples. The orange circle represents cases in which a metabolite is detectable from a sample given the analytical technology and platform utilized. For example, a metabolite may be not detectable given the sensitivity of NMR. \label{fig:vennHell} }
+	\caption[Graphical representation of the source of bias in discrete pathway enrichment analyses]{\DoubleSpacing Graphical representation of the source of bias in discrete pathway enrichment analyses. A single metabolic pathway is shown as a bordered rectangle. The blue circle represents cases in which a metabolite that is in a metabolic pathway is annotated as being a member of that pathway in pathway databases. The red circle represents cases in which a metabolite that is a member of a metabolic pathway is quantifiable given the sample medium utilized in the analysis. For example, a metabolite localized to the mitochondria may not be detectable in plasma samples. The orange circle represents cases in which a metabolite is detectable from a sample given the analytical technology and platform utilized. For example, a metabolite may be not detectable given the sensitivity of NMR. \label{fig:vennHell} }
 \end{figure}
 
-\section{MSEA}
+\section{Metabolite set enrichment analysis}
+[To do: Add description of MSEA Here]
 
 \section{Barupal Chem}
 A promising alternative to pathway analyses discussed in \cite{barupal2017} is to use structural similarity and chemical ontology as a priori knowledge to generate study-specific metabolite sets for contextualizing empirical results. 
+
+[To do: add more about Barupal paper]
 
 \section{The need for interactomes in metabolomics}
 Untargeted profiling of the metabolome of an organism provides a view into the small molecule determinants of phenotype. While the genome of an organism may be conceptualized as a blueprint for the composition and organization of an organism that is largely immutable (barring epigenetic modifications, DNA damage, and genetic mutations) \cite{gao2015,keating2015,martincorena2015}, the metabolome of an organism is dynamic and variable \cite{dallmann2012,krycer2017}. Sources of variation within the metabolome of a single organism include tissue-, cell-, and organelle-specific localization of metabolic processes \cite{shlomi2008,voet2013}; environmental exposures \cite{southam2014}; and host-microbe interactions and metabolite exchange \cite{moriya2017}. While the generation of reference human genomes has facilitated the interrogation of gene-phenome associations (including human disease associations), the intrinsic variability and dynamic nature of the metabolome of an organism likely precludes the generation of such a reference model. While a single reference model of the metabolome of an organism may not be sensible, significant efforts such as the HUSERMET project \cite{dunn2014} have been undertaken to quantify the repertoire of metabolites in specific biofluids for examining metabolite-metabolite and metabolite-phenotype associations. In order to make systems-level comparisons of the differences in the metabolome across phenotypes, models of the conditional relationships between metabolites are necessary. By the determination of sample media and analytical platform-specific probabilistic interaction models, henceforth called ``interactomes'', systems-level comparisons of phenotypes that can be made. A specific use case for such an interactome model is the generation of a plasma interactome for stable heart disease.
