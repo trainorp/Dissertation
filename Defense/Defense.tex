@@ -27,7 +27,7 @@
 \author[P.J. Trainor]{Patrick J. Trainor}
 \institute[U of L]
 {
-	% %\includegraphics[scale=.4]{/home/patrick/gdrive//MetabClass/Old/RL2015/IMClogo}\\
+	% \includegraphics[scale=.4]{/home/patrick/gdrive//MetabClass/Old/RL2015/IMClogo}\\
 	Interdisciplinary Ph.D. Program in Bioinformatics \& \\
 	Division of Cardiovascular Medicine  \\
 	University of Louisville %\\[2ex]
@@ -476,6 +476,49 @@
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
 \end{frame}
 
+\begin{frame}{Acute Myocardial Infarction}
+	\vspace{-5pt}
+	\begin{itemize}
+		\item Characterized by myocardial ischemia (exposure of cardiac myocytes to oxygen deprivation) and necrosis (a form of cell death)
+	\end{itemize}
+	\begin{center}
+		\includegraphics[scale=.7]{miType}
+		
+		Thygesen, et al. (2012). doi: 10.1016/j.jacc.2012.08.001
+	\end{center}
+\end{frame}
+
+\begin{frame}{Acute Myocardial Infarction}
+		\vspace{-5pt}
+		\begin{itemize}
+			\item Criteria utilized for diagnosing MI (EKG, Troponin, symptoms) do not definitively rule in or out presence of a thrombus 
+			\item Troponin elevation is not sufficient for determining the cause of an MI 
+		\end{itemize}
+		\begin{center}
+			\includegraphics[scale=.4]{elevTrop}
+			
+			Newby, et al. (2012). doi: 10.1016/j.jacc.2012.08.969
+		\end{center}
+\end{frame}
+
+\begin{frame}{Objective}
+	\vspace{-10pt}
+	\begin{itemize}
+		\item Metabolite concentrations are a product of genetic factors, environmental exposures, and gene $\times$ environment 
+		\item[]
+		\item Metabolite concentrations are dynamic (especially in blood)
+		\item[]
+		\item \textbf{Implicit hypothesis:} If we quantify metabolites in plasma will observe evidence of:
+		\begin{itemize}
+			\item Myocardial ischemia and necrosis (all MI types)
+			\item Metabolic processes specific to thrombotic MI (platelet activation, platelet aggregation, fibrinolysis)
+			\item[]
+		\end{itemize}
+		\item \textbf{Goal:} Utilize this to construct a non-invasive diagnostic test capable of discriminating between thrombotic and non-thrombotic MI
+	\end{itemize}
+\end{frame}
+%In the present work, we set out to develop a Bayesian model for differentiating thrombotic MI from both non-thrombotic MI and stable coronary artery disease (CAD) using metabolites detected in blood plasma. We regard plasma as a promising media for developing a non-invasive test as plasma contains hormones, enzymes, lipoproteins, and other metabolic intermediates found in circulation. As metabolite concentrations are a product of genetic factors, environmental exposures, and the interaction between the two, sampling metabolites may provide a more robust characterization of the state of an organism than other approaches such as genomics. 
+
 \subsection{Clinical cohort \& samples}
 \begin{frame}{Outline}
 	\vspace{-10.5pt}
@@ -488,6 +531,81 @@
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
 \end{frame}
 
+\begin{frame}{Feature selection}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.095]{../../../AthroMetab/WoAC/corrplot333}
+	\end{center}
+\end{frame}
+
+\subsection{Computational nuances}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\subsection{Model estimation}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{Hamiltonian MCMC}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.5]{../../Aim3/MCMCEx.png}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Model coefficients}{No troponin}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.575]{../../Aim3/brm1Coef}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Model coefficients}{With troponin}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.575]{../../Aim3/brm2Coef}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Model coefficients}{Posterior distribution}
+		\vspace{-5pt}
+		\begin{center}
+			\includegraphics[scale=.15]{../../Aim3/coefPost}
+		\end{center}
+\end{frame}
+
+\begin{frame}{Model coefficients}{Posterior distribution}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.6]{../../Aim3/coefPost2}
+	\end{center}
+\end{frame}
+
+\subsection{Model predictions}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{MCMC chain for an observation}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.6]{../../Aim3/ptid2010MCMC}
+	\end{center}
+\end{frame}
+
+\begin{frame}{MCMC chain for an observation}
+	\vspace{-7pt}
+	\begin{center}
+		\includegraphics[scale=.65]{../../Aim3/ptid2010Hist}
+	\end{center}
+\end{frame}
+
 \section{Acknowledgments}
 \begin{frame}{Outline}
 	\vspace{-10.5pt}
@@ -497,28 +615,28 @@
 \begin{frame}{Acknowledgments}
 	\vspace{-5.5pt}
 	\begin{center}
-		%\includegraphics[scale=.95]{../../../TempPics/Lab/Edits/DSC_0278-2}
+		\includegraphics[scale=.95]{../../../TempPics/Lab/Edits/DSC_0278-2}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Acknowledgments}
 	\vspace{-5.5pt}
 	\begin{center}
-		%\includegraphics[scale=.25]{fam}
+		\includegraphics[scale=.25]{fam}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Acknowledgments}
 	\vspace{-5.5pt}
 	\begin{center}
-		%\includegraphics[scale=.25]{sam}
+		\includegraphics[scale=.25]{sam}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Acknowledgments}
 	\vspace{-15.5pt}
 	\begin{center}
-		%\includegraphics[scale=.5]{../Metabolomics2018/SUSignatureHorizontal-2color}
+		\includegraphics[scale=.5]{../Metabolomics2018/SUSignatureHorizontal-2color}
 	\end{center}
 \end{frame}
 
