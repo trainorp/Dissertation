@@ -23,27 +23,28 @@
 
 \begin{document}
 	
-\title[Bayesian Interactome Modeling]{Inferring metabolite interactomes via Bayesian graphical model selection utilizing molecular structure informative priors}
+\title[Bayesian Methods for Metabolomics]{{\bf Bayesian analytical approaches for metabolomics:}\\ {\small A novel method for molecular structure-informed probabilistic metabolite interaction modeling, a novel diagnostic model for differentiating Myocardial Infarction type, and approaches for compound identification}}
 \author[P.J. Trainor]{Patrick J. Trainor}
 \institute[U of L]
 {
-	
-	\includegraphics[scale=.4]{/home/patrick/gdrive//MetabClass/Old/RL2015/IMClogo}\\
-	Division of Cardiovascular Medicine \& \\
-	Interdisciplinary Ph.D. Program in Bioinformatics \\
+	% %\includegraphics[scale=.4]{/home/patrick/gdrive//MetabClass/Old/RL2015/IMClogo}\\
+	Interdisciplinary Ph.D. Program in Bioinformatics \& \\
+	Division of Cardiovascular Medicine  \\
 	University of Louisville %\\[2ex]
 }
-\date[June 2018]{June 26, 2018}
+\date[July 2018]{June 19, 2018}
 
 \begin{frame}
 	\titlepage
 \end{frame}
 
+\section{Interactome modeling}
+\subsection{Motivation}
 \begin{frame}{Motivation}
 	\vspace{-15.5pt}
 	{\LARGE In someone else's words...}
 	\begin{center}
-		\includegraphics[scale=.5]{../Metabolomics2018/JohnsonNatureReview}
+		%\includegraphics[scale=.5]{../Metabolomics2018/JohnsonNatureReview}
 	\end{center}
 	(2016). \emph{Nature Rev Mol Cell Bio, 17}. doi: 10.1038/nrm.2016.25
 \end{frame}
@@ -77,7 +78,7 @@
 
 \begin{frame}
 	\begin{center}
-			\includegraphics[scale=.4]{../Plots/cholesterol.png}
+			%\includegraphics[scale=.4]{../Plots/cholesterol.png}
 			
 			Lieberman, M., Ahles, P., et al. \emph{Wikipathways}: WP197
 	\end{center}
@@ -101,7 +102,7 @@
 
 \begin{frame}
 	\begin{center}
-		\includegraphics[scale=.4]{../Plots/cholesterol.png}
+		%\includegraphics[scale=.4]{../Plots/cholesterol.png}
 		
 		Lieberman, M., Ahles, P., et al. \emph{Wikipathways}: WP197
 	\end{center}
@@ -149,41 +150,34 @@
 \begin{frame}{Bias in pathway enrichment analysis}{The reference set}
 	\vspace{-15.5pt}
 	\begin{figure}
-		\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_1}
+		%\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_1}
 	\end{figure}
 \end{frame}
 
 \begin{frame}{Bias in pathway enrichment analysis}{The reference set}
 	\vspace{-15.5pt}
 	\begin{figure}
-		\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_2}
-	\end{figure}
-\end{frame}
-
-\begin{frame}{Bias in pathway enrichment analysis}{The reference set}
-	\vspace{-15.5pt}
-	\begin{figure}
-		\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_2}
+		%\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_2}
 	\end{figure}
 \end{frame}
 
 \begin{frame}{Bias in pathway enrichment analysis}{Metabolic footprint vs. cellular metabolism}	\vspace{-10.5pt}
 	\begin{center}
-		\includegraphics[scale=.3]{../Metabolomics2018/512px-Circulatory_System_en}
+		%\includegraphics[scale=.3]{../Metabolomics2018/512px-Circulatory_System_en}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Correlation networks}{What do they tell you?}
 	{I simulated this...}
 	\begin{center}
-		\includegraphics[scale=.5]{../../Aim2/Plots/AR1_Om}
+		%\includegraphics[scale=.5]{../../Aim2/Plots/AR1_Om}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Correlation networks}{What do they tell you?}
 	{And fit a correlation network...}
 	\begin{center}
-		\includegraphics[scale=.5]{../../Aim2/Plots/AR1_Cor}
+		%\includegraphics[scale=.5]{../../Aim2/Plots/AR1_Cor}
 	\end{center}
 \end{frame}
 
@@ -192,7 +186,7 @@
 	{\Large \textbf{Gaussian Graphical Models (GGM)}: from correlation to partial correlation...}
 	
 	\begin{center}
-		\includegraphics[scale=.75]{../Metabolomics2018/ggmPrev} \\
+		%\includegraphics[scale=.75]{../Metabolomics2018/ggmPrev} \\
 		Krumsiek et al. (2011). \emph{BMC Syst Bio, 5}(21) doi: 10.1186/1752-0509-5-21
 	\end{center}
 \end{frame}
@@ -200,7 +194,7 @@
 \begin{frame}{Partial correlation}{A better approach}
 	\vspace{-15.5pt}
 	\begin{center}
-		\includegraphics[scale=.75]{../Metabolomics2018/ggmPrev} \\
+		%\includegraphics[scale=.75]{../Metabolomics2018/ggmPrev} \\
 		Krumsiek et al. (2011). \emph{BMC Syst Bio, 5}(21) doi: 10.1186/1752-0509-5-21
 	\end{center}
 	\begin{itemize}
@@ -246,6 +240,7 @@
 	\end{itemize}
 \end{frame}
 
+\subsection{Methods}
 \begin{frame}{Gaussian Graphical Models (GGMs)}
 	\vspace{-5.5pt}
 	\begin{itemize}
@@ -335,7 +330,7 @@
 
 \begin{frame}{Informative Bayeisan estimation}{The current work}
 	\begin{center}
-			\includegraphics[scale=.7]{../../Aim2/Plots/lambdasVsSim}
+			%\includegraphics[scale=.7]{../../Aim2/Plots/lambdasVsSim}
 	\end{center}
 \end{frame}
 
@@ -367,7 +362,7 @@
 
 \begin{frame}{Simulated experiment}
 	\begin{center}
-		\includegraphics[scale=.33]{../../Aim2/Plots/AR1}
+		%\includegraphics[scale=.33]{../../Aim2/Plots/AR1}
 	\end{center}
 \end{frame}
 
@@ -387,37 +382,38 @@
 \begin{frame}{Heart Disease Interactome}
 		\vspace{-15.5pt}
 	\begin{center}
-		\includegraphics[scale=.35]{../../Aim2/Plots/StructHeatmaps}
+		%\includegraphics[scale=.35]{../../Aim2/Plots/StructHeatmaps}
 		
 		Local substructure similarity measure adapted from Mitchell, J. (2014). doi: 10.3389/fgene.2014.00237 (collaboration)
 	\end{center}
 \end{frame}
 
+\subsection{Results}
 \begin{frame}{Heart Disease Interactome}{MCMC sampling}
 	\vspace{-10.5pt}
 	\begin{center}
-		\includegraphics[scale=.52]{../../Aim2/Plots/MCMC}
+		%\includegraphics[scale=.52]{../../Aim2/Plots/MCMC}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Heart Disease Interactome}
 	\vspace{-10.5pt}
 	\begin{center}
-		\includegraphics[scale=.52]{../../Aim2/Plots/aiBGL1CorBigGraph}
+		%\includegraphics[scale=.52]{../../Aim2/Plots/aiBGL1CorBigGraph}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Heart Disease Interactome}
 	\vspace{-10.5pt}
 	\begin{center}
-		\includegraphics[scale=.175]{../../Aim2/Plots/aiBGL1Cor(2)}
+		%\includegraphics[scale=.175]{../../Aim2/Plots/aiBGL1Cor(2)}
 	\end{center}
 \end{frame}
 
 \begin{frame}{The future}
 	\vspace{-15pt}
 	\begin{center}
-		\includegraphics[scale=.225]{../Metabolomics2018/FlowChart2}
+		%\includegraphics[scale=.225]{../Metabolomics2018/FlowChart2}
 		
 		Trainor, P. (2018), \emph{J Biomed Info, 81}. doi: 10.1016/j.jbi.2018.03.007 
 	\end{center}
@@ -459,11 +455,30 @@
 \end{frame}
 
 \begin{frame}{Acknowledgments}
-	\vspace{-15.5pt}
-	My undergraduate alma mater is just a few blocks away! It is a wonderful place.\\
-	
+	\vspace{-5.5pt}
 	\begin{center}
-		\includegraphics[scale=.5]{../Metabolomics2018/SUSignatureHorizontal-2color}
+		%\includegraphics[scale=.95]{../../../TempPics/Lab/Edits/DSC_0278-2}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Acknowledgments}
+	\vspace{-5.5pt}
+	\begin{center}
+		%\includegraphics[scale=.25]{fam}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Acknowledgments}
+	\vspace{-5.5pt}
+	\begin{center}
+		%\includegraphics[scale=.25]{sam}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Acknowledgments}
+	\vspace{-15.5pt}
+	\begin{center}
+		%\includegraphics[scale=.5]{../Metabolomics2018/SUSignatureHorizontal-2color}
 	\end{center}
 \end{frame}
 
