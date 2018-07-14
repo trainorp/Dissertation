@@ -158,4 +158,12 @@ It can thus be seen that the conditional distribution for $\lambda_1$ (condition
 		f(\lambda_1|\boldsymbol{\lambda}^{(-1)},\textbf{p},\textbf{z},\textbf{x})&\propto Gamma \left( r_1+\sum_{i=1}^n x_i z_{i1}, s_1+\sum_{i=1}^n z_{i1} \right). 
 \end{align}
 
+Finally, for the latent indicator variables:
+\begin{align}
+	\begin{split}
+f(z_{ij}=1|x_i,\boldsymbol{\lambda},\textbf{p})=
+\frac{f(x_i|\boldsymbol{\lambda},\textbf{p},z_{ij}=1)f(z_{ij}=1|\boldsymbol{\lambda},\textbf{p},x_i)}{}
+	\end{split}
+\end{align}
+
 \end{DoubleSpace*}
