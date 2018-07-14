@@ -38,8 +38,23 @@
 	\titlepage
 \end{frame}
 
-\section{Interactome modeling}
-\subsection{Motivation}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Probabilistic interaction modeling (Interactome)}
+\subsection{Motivation: Higher order inference in metabolomics}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=hide]
+\end{frame}
+
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
 \begin{frame}{Motivation}
 	\vspace{-15.5pt}
 	{\LARGE In someone else's words...}
@@ -240,7 +255,18 @@
 	\end{itemize}
 \end{frame}
 
-\subsection{Methods}
+\subsection{Bayesian reasoning}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\subsection{The current model}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
 \begin{frame}{Gaussian Graphical Models (GGMs)}
 	\vspace{-5.5pt}
 	\begin{itemize}
@@ -316,6 +342,11 @@
 	\end{align*}
 \end{frame}
 
+\subsection{Using molecular similarity for estimation}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
 \begin{frame}{An informative Bayeisan estimation}{The current work}
 	\vspace{-15.5pt}
 	\begin{itemize}
@@ -349,6 +380,11 @@
 	\end{align*}
 \end{frame}
 
+\subsection{Computational nuances}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
 \begin{frame}{Informative Bayeisan estimation}{Block Gibbs Sampler}
 	\vspace{-15.5pt}
 	\begin{itemize}
@@ -366,6 +402,11 @@
 	\end{center}
 \end{frame}
 
+\subsection{A Heart Disease interactome}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
 \begin{frame}{Heart Disease Interactome}
 	\vspace{-15.5pt}
 	\begin{itemize}
@@ -388,7 +429,6 @@
 	\end{center}
 \end{frame}
 
-\subsection{Results}
 \begin{frame}{Heart Disease Interactome}{MCMC sampling}
 	\vspace{-10.5pt}
 	\begin{center}
@@ -424,34 +464,34 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Acknowledgments}
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-				\textbf{Doctoral supervision}:
-				\begin{itemize}
-					\item Andrew DeFilippis, MD, MSc
-					\item Shesh Rai, PhD
-					\item[]
-				\end{itemize}
-				\textbf{Funding support}:
-				\begin{itemize}
-					\item NIH NIGMS 2P20GM103492-06 (Metabolomic Analysis of Atherothrombosis)
-					\item PI Aruni Bhatnagar, PhD; Project PI Andrew DeFilippis, MD, MSc
-					\item[]
-				\end{itemize}
-		\end{column}
-			\vspace{-25.5pt}
-		\begin{column}{0.5\textwidth}
-			\textbf{Collaborators}:
-			\begin{itemize}
-				\item Joshua Mitchell 
-				\item Hunter N. Moseley, PhD
-				\item Samantha Carlisle, MS
-				\item[]
-			\end{itemize}
-			\textbf{Lab}: Atherosclerosis/Atherothrombosis Research Laboratory (Twitter: @AtheroLab)
-		\end{column}
-	\end{columns}
+\section{Diagnostic model for Acute MI}
+\subsection{Acute Myocardial Infarction}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=hide]
+\end{frame}
+
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\subsection{Clinical cohort \& samples}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\subsection{Statistical model for discriminating MI type}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\section{Acknowledgments}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=hide]
 \end{frame}
 
 \begin{frame}{Acknowledgments}
@@ -480,6 +520,43 @@
 	\begin{center}
 		%\includegraphics[scale=.5]{../Metabolomics2018/SUSignatureHorizontal-2color}
 	\end{center}
+\end{frame}
+
+\begin{frame}{Acknowledgments}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\textbf{Doctoral supervision}:
+			\begin{itemize}
+				\item Andrew DeFilippis, MD, MSc
+				\item Shesh Rai, PhD
+				\item[]
+			\end{itemize}
+			\textbf{Funding support}:
+			\begin{itemize}
+				\item NIH NIGMS 2P20GM103492-06 (Metabolomic Analysis of Atherothrombosis)
+				\item Alpha Phi Foundation Heart-to-Heart Award
+				\item NIH 1U24DK097154 (PI: Oliver Fiehn) Subproject Award
+				\item[]
+			\end{itemize}
+		\end{column}
+		\vspace{-25.5pt}
+		\begin{column}{0.5\textwidth}
+			\textbf{Doctoral committee }
+			\begin{itemize}
+				\item Eric Rouchka, DSc
+				\item Juw Won Park, PhD
+				\item[]
+			\end{itemize}
+			\textbf{Collaborators}:
+			\begin{itemize}
+				\item Joshua Mitchell 
+				\item Hunter Moseley, PhD
+				\item Samantha Carlisle, MS
+				\item[]
+			\end{itemize}
+			\textbf{Lab}: Atherosclerosis/Atherothrombosis Research Laboratory (Twitter: @AtheroLab)
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \end{document}
