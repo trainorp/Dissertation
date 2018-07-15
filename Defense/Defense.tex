@@ -629,7 +629,7 @@
 	\end{center}
 \end{frame}
 
-\subsection{Model estimation}
+\subsection{Model parameters}
 \begin{frame}{Outline}
 	\vspace{-10.5pt}
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
@@ -671,23 +671,100 @@
 	\end{center}
 \end{frame}
 
-\subsection{Model predictions}
+\subsection{Model goodness of fit \& predictions}
 \begin{frame}{Outline}
 	\vspace{-10.5pt}
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
 \end{frame}
 
-\begin{frame}{MCMC chain for an observation}
+\begin{frame}{To include troponin?}
+	\vspace{-10.5pt}
+	\begin{center}
+		\begin{tabular}{lcc}
+			\hline
+			Model & WAIC  & SE \\
+			\hline
+			Without troponin & 15.43 & 4.05 \\ 
+			With troponin & 14.60 & 3.72 \\
+			Difference & 0.83 & 0.87 \\
+			\hline
+		\end{tabular}
+		
+		$\chi^2$-test $p=0.36$
+	\end{center}
+\end{frame}
+
+\begin{frame}{Markov chain for a human subject}
 	\vspace{-5pt}
 	\begin{center}
 		\includegraphics[scale=.6]{../../Aim3/ptid2010MCMC}
 	\end{center}
 \end{frame}
 
-\begin{frame}{MCMC chain for an observation}
+\begin{frame}{Markov chain for a human subject}
 	\vspace{-7pt}
 	\begin{center}
 		\includegraphics[scale=.65]{../../Aim3/ptid2010Hist}
+	\end{center}
+\end{frame}
+
+\begin{frame}{LOO-CV estimation of error}
+	\vspace{-12pt}
+	Model estimated by Maximum Likelihood Estimation (non-Bayesian):
+	\vspace{4ex}
+	
+	\begin{tabular}{l|ccc}
+		& \emph{Predicted} & & \\
+		\emph{Actual}  & \textbf{sCAD} & \textbf{Thrombotic MI} & \textbf{Non-Thromb. MI} \\
+		\hline
+		\textbf{sCAD} & 13 &  0 & 2\\
+		\textbf{Thrombotic MI} &   1 & 9 &  1\\
+		\textbf{Non-Thromb. MI}  & 2  & 2 & 8 
+	\end{tabular}
+\end{frame}
+
+\begin{frame}{LOO-CV estimation of error}
+	\vspace{-12pt}
+	Bayesian model without troponin:
+	\vspace{4ex}
+
+\begin{tabular}{l|ccc}
+	& \emph{Predicted} & & \\
+	\emph{Actual} &  \textbf{sCAD} & \textbf{Thrombotic MI} & \textbf{Non-Thromb. MI} \\
+	\hline
+	\textbf{sCAD}   &     13    &     0    &     2\\
+	\textbf{Thrombotic MI}  &  0    &    10    &     1\\
+	\textbf{Non-Thromb. MI} &   1    &     1   &     10
+\end{tabular}
+\end{frame}
+
+\begin{frame}{LOO-CV estimation of error}
+	\vspace{-12pt}
+	Bayesian model with troponin:
+	\vspace{4ex}
+	
+\begin{tabular}{l|ccc}
+	& \emph{Predicted} & & \\
+	\emph{Group}  &     \textbf{sCAD} & \textbf{Thrombotic MI} & \textbf{Non-Thromb. MI} \\
+	\hline
+	\textbf{sCAD}   &     13    &     0    &     2\\
+	\textbf{Thrombotic MI}  &  0    &    10    &     1\\
+	\textbf{Non-Thromb. MI} &   2  &   0 &    10
+\end{tabular}
+\end{frame}
+
+\begin{frame}
+	\begin{center}
+		\begin{tabular}{|c|c|cc|cc|}
+			\hline
+			& & \multicolumn{2}{|c|}{Sensitivity} & \multicolumn{2}{|c|}{Specificity} \\
+			Model & Accuracy & Thromb. & Non-Thromb. &  Thromb. & Non-Thromb.  \\
+			\hline \hline
+			M0 & 78.9\% & 81.8\% & 66.7\% & 92.6\% & 88.5\% \\
+			M1 & 86.8\% & 90.9\% & 83.3\% & 96.3\% & 88.5\% \\
+			M2 & 86.8\% & 90.9\% & 83.3\% & 100.0\% & 88.5\% \\
+			\hline
+		\end{tabular}
 	\end{center}
 \end{frame}
 
