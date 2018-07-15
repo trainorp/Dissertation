@@ -347,7 +347,7 @@
 	\vspace{-10.5pt}
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
 \end{frame}
-\begin{frame}{An informative Bayeisan estimation}{The current work}
+\begin{frame}{An informative Bayesian estimation}{The current work}
 	\vspace{-15.5pt}
 	\begin{itemize}
 		\item \textbf{Idea}:  incorporate prior knowledge regarding the substructures that are shared between compounds (molecular similarity). That is:
@@ -359,13 +359,13 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Informative Bayeisan estimation}{The current work}
+\begin{frame}{Informative Bayesian estimation}{The current work}
 	\begin{center}
 			%\includegraphics[scale=.7]{../../Aim2/Plots/lambdasVsSim}
 	\end{center}
 \end{frame}
 
-\begin{frame}{Informative Bayeisan estimation}{Block Gibbs Sampler}
+\begin{frame}{Informative Bayesian estimation}{Block Gibbs Sampler}
 	\vspace{-10.5pt}
 	\begin{itemize}
 		\item Need a way to simulate the posterior distribution 
@@ -385,7 +385,7 @@
 	\vspace{-10.5pt}
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
 \end{frame}
-\begin{frame}{Informative Bayeisan estimation}{Block Gibbs Sampler}
+\begin{frame}{Informative Bayesian estimation}{Block Gibbs Sampler}
 	\vspace{-15.5pt}
 	\begin{itemize}
 		\item Developed an R package for implementing this sampler: \emph{BayesianGLasso}
@@ -525,16 +525,65 @@
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
 \end{frame}
 
+\begin{frame}{Cohort}
+	\vspace{-10pt}
+	\begin{center}
+		\includegraphics[scale=.65]{cohort}
+		
+		DeFilippis, Trainor, et al. (2017). doi: 10.1371/journal.pone.0175591
+	\end{center}
+\end{frame}
+
 \subsection{Statistical model for discriminating MI type}
 \begin{frame}{Outline}
 	\vspace{-10.5pt}
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
 \end{frame}
 
+\begin{frame}{Statistical model}
+	\vspace{-10.5pt}
+	\begin{itemize}
+		\item Multinomial logistic regression model:
+			\begin{align*}
+			\eta_{ij} = \log \frac{\pi_{ij}}{\pi_{iJ}} = \alpha_j + \textbf{x}_i^T \boldsymbol{\beta}_j,
+			\end{align*} 
+		\item Parameters:
+		\begin{itemize}
+			\item $i$ indexes individual samples
+			\item $j$ is the index of study groups
+			\item $\textbf{x}_i$ vector of metabolite abundances for the individual $i$
+			\item $\boldsymbol{\beta}_j$ is a vector of regression coefficients 
+			\item $\alpha_j$ is a group specific intercept term
+			\item $J$ represents the reference group.
+		\end{itemize}
+		\item Membership probability for each group:
+		\begin{align}
+		\hat{\pi}_{ij} = \frac{\exp \hat{\eta}_{ij}}{\sum_{k=1}^{J}\exp \hat{\eta}_{ik}}.
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Statistical model}
+	\vspace{-10.5pt}
+	\begin{itemize}
+		\item As a Bayesian model with the following priors and deterministic component:
+		\begin{align*}
+		\begin{split}
+		\alpha_j &\sim N(0,4) \\
+		\beta_j &\sim N(0,1) \\
+		\log \frac{\pi_{ij}}{\pi_{iJ}} &= \alpha_j + \textbf{x}_i^T \boldsymbol{\beta}_j \\
+		Y &\sim Multinom(\boldsymbol{\pi})
+		\end{split}
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
 \begin{frame}{Feature selection}
-	\vspace{-5pt}
+	\vspace{-10pt}
 	\begin{center}
-		\includegraphics[scale=.095]{../../../AthroMetab/WoAC/corrplot333}
+		\includegraphics[scale=.09]{../../../AthroMetab/WoAC/corrplot333}
+		
+		Trainor, P. (2018). doi: 10.1016/j.jbi.2018.03.007 
 	\end{center}
 \end{frame}
 
@@ -544,13 +593,49 @@
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
 \end{frame}
 
+\begin{frame}{Hamiltonian Systems}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.375]{phase}
+		
+		Lecture notes Physics 3210, Dr. Ethan Neil, CU Boulder
+	\end{center}
+\end{frame}
+
+\begin{frame}{Target distributions as vector fields}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.6]{HMC1}
+		
+	Betancourt. (2017). arXiv:1701.02434
+	\end{center}
+\end{frame}
+
+\begin{frame}{Target distributions as vector fields}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.55]{HMC2}
+		
+		Betancourt. (2017). arXiv:1701.02434
+	\end{center}
+\end{frame}
+
+\begin{frame}{The No-U-Turn sampler}
+	\vspace{-10pt}
+	\begin{center}
+		\includegraphics[scale=.48]{nuts}
+		\vspace{2ex}
+		Hoffman \& Gelman. (2014). \emph{Journal of Machine Learning Research}. dl.acm.org/citation.cfm?id=2638586
+	\end{center}
+\end{frame}
+
 \subsection{Model estimation}
 \begin{frame}{Outline}
 	\vspace{-10.5pt}
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
 \end{frame}
 
-\begin{frame}{Hamiltonian MCMC}
+\begin{frame}{MCMC for a metabolite parameter}
 	\vspace{-5pt}
 	\begin{center}
 		\includegraphics[scale=.5]{../../Aim3/MCMCEx.png}
@@ -615,28 +700,28 @@
 \begin{frame}{Acknowledgments}
 	\vspace{-5.5pt}
 	\begin{center}
-		\includegraphics[scale=.95]{../../../TempPics/Lab/Edits/DSC_0278-2}
+		%\includegraphics[scale=.95]{../../../TempPics/Lab/Edits/DSC_0278-2}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Acknowledgments}
 	\vspace{-5.5pt}
 	\begin{center}
-		\includegraphics[scale=.25]{fam}
+		%\includegraphics[scale=.25]{fam}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Acknowledgments}
 	\vspace{-5.5pt}
 	\begin{center}
-		\includegraphics[scale=.25]{sam}
+		%\includegraphics[scale=.25]{sam}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Acknowledgments}
 	\vspace{-15.5pt}
 	\begin{center}
-		\includegraphics[scale=.5]{../Metabolomics2018/SUSignatureHorizontal-2color}
+		%\includegraphics[scale=.5]{../Metabolomics2018/SUSignatureHorizontal-2color}
 	\end{center}
 \end{frame}
 
