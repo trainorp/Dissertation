@@ -27,7 +27,7 @@
 \author[P.J. Trainor]{Patrick J. Trainor}
 \institute[U of L]
 {
-	% %\includegraphics[scale=.4]{/home/patrick/gdrive//MetabClass/Old/RL2015/IMClogo}\\
+	% \includegraphics[scale=.4]{/home/patrick/gdrive//MetabClass/Old/RL2015/IMClogo}\\
 	Interdisciplinary Ph.D. Program in Bioinformatics \& \\
 	Division of Cardiovascular Medicine  \\
 	University of Louisville %\\[2ex]
@@ -347,7 +347,7 @@
 	\vspace{-10.5pt}
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
 \end{frame}
-\begin{frame}{An informative Bayeisan estimation}{The current work}
+\begin{frame}{An informative Bayesian estimation}{The current work}
 	\vspace{-15.5pt}
 	\begin{itemize}
 		\item \textbf{Idea}:  incorporate prior knowledge regarding the substructures that are shared between compounds (molecular similarity). That is:
@@ -359,13 +359,13 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Informative Bayeisan estimation}{The current work}
+\begin{frame}{Informative Bayesian estimation}{The current work}
 	\begin{center}
 			%\includegraphics[scale=.7]{../../Aim2/Plots/lambdasVsSim}
 	\end{center}
 \end{frame}
 
-\begin{frame}{Informative Bayeisan estimation}{Block Gibbs Sampler}
+\begin{frame}{Informative Bayesian estimation}{Block Gibbs Sampler}
 	\vspace{-10.5pt}
 	\begin{itemize}
 		\item Need a way to simulate the posterior distribution 
@@ -385,7 +385,7 @@
 	\vspace{-10.5pt}
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
 \end{frame}
-\begin{frame}{Informative Bayeisan estimation}{Block Gibbs Sampler}
+\begin{frame}{Informative Bayesian estimation}{Block Gibbs Sampler}
 	\vspace{-15.5pt}
 	\begin{itemize}
 		\item Developed an R package for implementing this sampler: \emph{BayesianGLasso}
@@ -476,16 +476,219 @@
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
 \end{frame}
 
+\begin{frame}{Acute Myocardial Infarction}
+	\vspace{-5pt}
+	\begin{itemize}
+		\item Characterized by myocardial ischemia (exposure of cardiac myocytes to oxygen deprivation) and necrosis (a form of cell death)
+	\end{itemize}
+	\begin{center}
+		\includegraphics[scale=.7]{miType}
+		
+		Thygesen, et al. (2012). doi: 10.1016/j.jacc.2012.08.001
+	\end{center}
+\end{frame}
+
+\begin{frame}{Acute Myocardial Infarction}
+		\vspace{-5pt}
+		\begin{itemize}
+			\item Criteria utilized for diagnosing MI (EKG, Troponin, symptoms) do not definitively rule in or out presence of a thrombus 
+			\item Troponin elevation is not sufficient for determining the cause of an MI 
+		\end{itemize}
+		\begin{center}
+			\includegraphics[scale=.4]{elevTrop}
+			
+			Newby, et al. (2012). doi: 10.1016/j.jacc.2012.08.969
+		\end{center}
+\end{frame}
+
+\begin{frame}{Objective}
+	\vspace{-10pt}
+	\begin{itemize}
+		\item Metabolite concentrations are a product of genetic factors, environmental exposures, and gene $\times$ environment 
+		\item[]
+		\item Metabolite concentrations are dynamic (especially in blood)
+		\item[]
+		\item \textbf{Implicit hypothesis:} If we quantify metabolites in plasma will observe evidence of:
+		\begin{itemize}
+			\item Myocardial ischemia and necrosis (all MI types)
+			\item Metabolic processes specific to thrombotic MI (platelet activation, platelet aggregation, fibrinolysis)
+			\item[]
+		\end{itemize}
+		\item \textbf{Goal:} Utilize this to construct a non-invasive diagnostic test capable of discriminating between thrombotic and non-thrombotic MI
+	\end{itemize}
+\end{frame}
+%In the present work, we set out to develop a Bayesian model for differentiating thrombotic MI from both non-thrombotic MI and stable coronary artery disease (CAD) using metabolites detected in blood plasma. We regard plasma as a promising media for developing a non-invasive test as plasma contains hormones, enzymes, lipoproteins, and other metabolic intermediates found in circulation. As metabolite concentrations are a product of genetic factors, environmental exposures, and the interaction between the two, sampling metabolites may provide a more robust characterization of the state of an organism than other approaches such as genomics. 
+
 \subsection{Clinical cohort \& samples}
 \begin{frame}{Outline}
 	\vspace{-10.5pt}
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
 \end{frame}
 
+\begin{frame}{Cohort}
+	\vspace{-10pt}
+	\begin{center}
+		\includegraphics[scale=.65]{cohort}
+		
+		DeFilippis, Trainor, et al. (2017). doi: 10.1371/journal.pone.0175591
+	\end{center}
+\end{frame}
+
 \subsection{Statistical model for discriminating MI type}
 \begin{frame}{Outline}
 	\vspace{-10.5pt}
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{Statistical model}
+	\vspace{-10.5pt}
+	\begin{itemize}
+		\item Multinomial logistic regression model:
+			\begin{align*}
+			\eta_{ij} = \log \frac{\pi_{ij}}{\pi_{iJ}} = \alpha_j + \textbf{x}_i^T \boldsymbol{\beta}_j,
+			\end{align*} 
+		\item Parameters:
+		\begin{itemize}
+			\item $i$ indexes individual samples
+			\item $j$ is the index of study groups
+			\item $\textbf{x}_i$ vector of metabolite abundances for the individual $i$
+			\item $\boldsymbol{\beta}_j$ is a vector of regression coefficients 
+			\item $\alpha_j$ is a group specific intercept term
+			\item $J$ represents the reference group.
+		\end{itemize}
+		\item Membership probability for each group:
+		\begin{align}
+		\hat{\pi}_{ij} = \frac{\exp \hat{\eta}_{ij}}{\sum_{k=1}^{J}\exp \hat{\eta}_{ik}}.
+		\end{align}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Statistical model}
+	\vspace{-10.5pt}
+	\begin{itemize}
+		\item As a Bayesian model with the following priors and deterministic component:
+		\begin{align*}
+		\begin{split}
+		\alpha_j &\sim N(0,4) \\
+		\beta_j &\sim N(0,1) \\
+		\log \frac{\pi_{ij}}{\pi_{iJ}} &= \alpha_j + \textbf{x}_i^T \boldsymbol{\beta}_j \\
+		Y &\sim Multinom(\boldsymbol{\pi})
+		\end{split}
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Feature selection}
+	\vspace{-10pt}
+	\begin{center}
+		\includegraphics[scale=.09]{../../../AthroMetab/WoAC/corrplot333}
+		
+		Trainor, P. (2018). doi: 10.1016/j.jbi.2018.03.007 
+	\end{center}
+\end{frame}
+
+\subsection{Computational nuances}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{Hamiltonian Systems}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.375]{phase}
+		
+		Lecture notes Physics 3210, Dr. Ethan Neil, CU Boulder
+	\end{center}
+\end{frame}
+
+\begin{frame}{Target distributions as vector fields}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.6]{HMC1}
+		
+	Betancourt. (2017). arXiv:1701.02434
+	\end{center}
+\end{frame}
+
+\begin{frame}{Target distributions as vector fields}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.55]{HMC2}
+		
+		Betancourt. (2017). arXiv:1701.02434
+	\end{center}
+\end{frame}
+
+\begin{frame}{The No-U-Turn sampler}
+	\vspace{-10pt}
+	\begin{center}
+		\includegraphics[scale=.48]{nuts}
+		\vspace{2ex}
+		Hoffman \& Gelman. (2014). \emph{Journal of Machine Learning Research}. dl.acm.org/citation.cfm?id=2638586
+	\end{center}
+\end{frame}
+
+\subsection{Model estimation}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{MCMC for a metabolite parameter}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.5]{../../Aim3/MCMCEx.png}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}{Model coefficients}{No troponin}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.575]{../../Aim3/brm1Coef}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Model coefficients}{With troponin}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.575]{../../Aim3/brm2Coef}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Model coefficients}{Posterior distribution}
+		\vspace{-5pt}
+		\begin{center}
+			\includegraphics[scale=.15]{../../Aim3/coefPost}
+		\end{center}
+\end{frame}
+
+\begin{frame}{Model coefficients}{Posterior distribution}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.6]{../../Aim3/coefPost2}
+	\end{center}
+\end{frame}
+
+\subsection{Model predictions}
+\begin{frame}{Outline}
+	\vspace{-10.5pt}
+	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{MCMC chain for an observation}
+	\vspace{-5pt}
+	\begin{center}
+		\includegraphics[scale=.6]{../../Aim3/ptid2010MCMC}
+	\end{center}
+\end{frame}
+
+\begin{frame}{MCMC chain for an observation}
+	\vspace{-7pt}
+	\begin{center}
+		\includegraphics[scale=.65]{../../Aim3/ptid2010Hist}
+	\end{center}
 \end{frame}
 
 \section{Acknowledgments}
