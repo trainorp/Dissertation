@@ -854,35 +854,51 @@
 \end{frame}
 
 \begin{frame}{Priors from biochemical transformations}{Rogers, et al. (2009).}
-	\vspace{-5pt}
+	\vspace{-12pt}
 	\begin{itemize}
 		\item Noise error model conditioned on an assignment:
 		\begin{align*}
 		\left. \frac{x_{m_i}}{x_{\ell_j}} \right| \{ I(m_i=\ell_j )=1 \} \sim N\left(1, \gamma^{-1}\right).
 		\end{align*}
+		\item[]
 		\item Conditional prior probability of an assignment:
 		\begin{align*}
 		p( I(m_i=\ell_j )=1|\mathbfcal{I},\delta) =  \frac{\beta_{ji}+\delta}{N\delta+\sum_{j'i} \beta_{j'i}}
 		\end{align*}
-		\item The number of ways a compound can be ``made'':
-		\begin{align*}
-		\beta_{ji}=\textbf{W}_{j \cdot} \mathbfcal{I} \textbf{1} - \textbf{W}_{j \cdot} \mathbfcal{I}_{\cdot i}, 
-		\end{align*}
-		\item $\textbf{W}$ as an indicator matrix that represents possible reactions
-		\item $\delta$ is a hyperparameter
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Priors from biochemical transformations}{Rogers, et al. (2009).}
-	\begin{align*}
-	p\left(\frac{x_{m_i}}{x_{\ell_j}}\right) \propto N(1, \gamma^{-1})  \frac{\beta_{ji}+\delta}{N\delta+\sum_{j'i} \beta_{j'i}}.
-	\end{align*}
+	\vspace{-12pt}
+	\begin{itemize}
+		\item The number of ways a compound can be ``made'':
+		\begin{align*}
+		\beta_{ji}=\textbf{W}_{j \cdot} \mathbfcal{I} \textbf{1} - \textbf{W}_{j \cdot} \mathbfcal{I}_{\cdot i} 
+		\end{align*}
+		\begin{itemize}
+					\item $\textbf{W}$ as an indicator matrix that represents possible reactions
+					\item $\delta$ is a hyperparameter
+					\item $\beta_{ji}$ represents a count of the number of biochemical transformations from compound labels currently assigned to result in a new annotation
+					\item[]
+		\end{itemize}
+		\item Rogers et al. propose a Gibbs sampler for sampling from the posterior:
+			\begin{align*}
+				p( I(m_i=\ell_j )=1|\mathbfcal{I},x_m,\delta,\gamma) \propto N \left( \frac{x_{m_i}}{x_{\ell_j}} | 1,\gamma^{-1} \right) \frac{\beta_{ji}+\delta}{N\delta+\sum_{j'i} \beta_{j'i}}
+			\end{align*}
+	\end{itemize}
 \end{frame}
 
 \subsection{Formalization and integration of pathway databases}
 \begin{frame}{Outline}
 	\vspace{-10.5pt}
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{Formalization and Pathway Databases}{Silva, et al. (2014)}
+	\begin{align*}
+	p( \mathbfcal{I}|\textbf{Y}) & \propto p(\textbf{Y}| \mathbfcal{I}) p( \mathbfcal{I}) \\
+	p(\mathbfcal{I}|\textbf{Y}) & \propto p_N(\textbf{Y}|\mathbfcal{I}) \cdot p_{rt}(\textbf{Y}|\mathbfcal{I}) \cdot p_{iso}(\textbf{Y}|\mathbfcal{I}) \cdot p( \mathbfcal{I}),
+	\end{align*}
 \end{frame}
 
 \subsection{Bayesian clustering of mass features}
