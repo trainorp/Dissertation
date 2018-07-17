@@ -96,8 +96,25 @@ p(c_i=j|\textbf{c}_{(-i)},\alpha) p(y_i|\mu_j,s_j,\textbf{c}_{(-i)})\propto \fra
 \end{align}
 
 \section{Bayesian clustering of mass features}
-The work of Daly \cite{daly2014}, et al. from the same group as \cite{rogers2009}, represents a significant paradigm shift in Bayesian approaches for LC-MS mass feature annotation. The novel idea described in that work is to consider both monoisotopic peaks, isotopic peaks, and adduct peaks as being members of a cluster. Daly et al. \cite{daly2014}, use the notation $\textbf{d}_n = (x_n,w_n,r_n)$ to refer to the experimental attributes of a single mass feature, where $x_n$ corresponds to the m/z value, $w_n$ corresponds to the intensity of the peak at that m/z value, and $r_n$ refers to the retention time of the feature. They then index the clusters by $k$ and define an indicator variable, $v_{nkai}$ for cluster membership. The subscripts of this indicator variable represent the index of the mass feature, $n$; the cluster, $k$; the adduct, $a$; and the isotope $i$. 
+The work of Daly \cite{daly2014}, et al. from the same group as \cite{rogers2009}, represents a significant paradigm shift in Bayesian approaches for LC-MS mass feature annotation. The novel idea described in that work is to consider both monoisotopic peaks, isotopic peaks, and adduct peaks as being members of a cluster. Daly et al. \cite{daly2014}, use the notation $\textbf{d}_n = (x_n,w_n,r_n)$ to refer to the experimental attributes of a single mass feature, where $x_n$ corresponds to the m/z value, $w_n$ corresponds to the intensity of the peak at that m/z value, and $r_n$ refers to the retention time of the feature. They then index the clusters by $k$ and define an indicator variable, $v_{nkai}$ for cluster membership. The subscripts of this indicator variable represent the index of the mass feature, $n$; the cluster, $k$; the adduct, $a$; and the isotope $i$. The number of peaks that are in a cluster is then $c_k$ where:
+\begin{align}
+	c_{nk}=\sum_{a=1}^A \sum_{i=1}^I v_{nkai}
+\end{align}
+although in the Daly article \cite{daly2014}, it appears this quantity is mistakenly labeled. In terms of the data likelihood terms, a mass term, an intensity term, and a retention time term are stated. 
 
-[To do: finish description of Daly work]
+The MetAssign algorithm [LOH]
+The mass term supposes the following likelihood:
+\begin{align}
+	p(x_n|v_{nkai}=1) = N(log(x_n)|log(y_{\phi_k ai}),\zeta^{-1}). 
+\end{align}
+This assumes that on a log-scale the difference between the observed m/z and the expected given the compound, adduct, and isotope assignment to the peak is normally distributed with an instrument-specific precision parameter $\zeta$. The intensity likelihood is much more involved and is stated as:  
+\begin{align}
+	p(w_n|v_{nkai}=1)=N(\beta_{\phi_k ai} \lambda_{*},\kappa^{-1}+\beta^2_{\phi_k ai}\kappa^{-1}_{*}).
+\end{align}
+According to the authors \cite{daly2014}, this arises from considering individual peak intensities given assignments as $w_k\sim N(\beta_{\phi_k ai} \lambda_{ka},\kappa^{-1})$, where $\beta_{\phi_k ai}$ represents the expected proportion of the total intensity considering isotope distributions and $\kappa$ is a precision parameter. They then place a prior distribution for the total intensity, that is: $\lambda_{k a} \sim N(\lambda_0, \kappa_0^{-1})$. For the retention time likelihood it is assumed that:
+\begin{align}
+	p(r_n|v_{nkai}=1)=N(r_n|\mu_*,\delta_*^{-1}+\gamma^{-1}).
+\end{align}
+where 
 
 \end{DoubleSpace*}
