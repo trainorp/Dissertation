@@ -1022,6 +1022,22 @@ Silva, et al. formalized a comprehensive model:
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Bayesian clustering of mass features}{Daly, et al. (2014).}
+	\vspace{-12pt}
+	Conceptual overview of sampling routine:
+	
+	\begin{itemize}
+		\item Initialize with random clustering
+		\begin{itemize}
+					\item Compute cluster posterior probabilities as well as new proposal cluster posterior probabilites
+					\item[]
+					\item If proposal is accepted then compute new metabolite, adduct, and isotope posterior probabilities
+					\item[]
+		\end{itemize}
+		\item When convergence criteria is satisfied return assignments 
+	\end{itemize}
+\end{frame}
+
 \section{Discussion}
 
 \begin{frame}{Outline}
