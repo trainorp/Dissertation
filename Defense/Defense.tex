@@ -41,32 +41,32 @@
 \begin{frame}{Introduction}{Probabilistic interaction modeling (Interactomes)}
 	\vspace{-15pt}
 	\begin{center}
-		%\includegraphics[scale=.64]{path2}
+		\includegraphics[scale=.64]{path2}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Introduction}{Generating a diagnostic model for Acute MI}
 	\vspace{-15pt}
 	\begin{center}
-		%\includegraphics[scale=.9]{xcms2Class}
+		\includegraphics[scale=.9]{xcms2Class}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Introduction}{Methods for compound identification}
 	\vspace{-15pt}
 	\begin{center}
-		%\includegraphics[scale=.8]{compID}
+		\includegraphics[scale=.8]{compID}
 	\end{center}
 \end{frame}
 
 \begin{frame}{}{}
 	\vspace{-15pt}
 	{\Huge
-	The thread that binds the aims:
+	The thread that binds the aims: \pause
 	\begin{align*}
 		&\downarrow n \; \text{(samples)} \\
 		&\uparrow p  \; \text{(metabolites)}
-	\end{align*}}
+	\end{align*}} \pause 
 	{\LARGE \\the integration of extra-experimental scientific knowledge is vital}
 
 \end{frame}
@@ -92,7 +92,7 @@
 	\vspace{-15.5pt}
 	{\LARGE In someone else's words...}
 	\begin{center}
-		%\includegraphics[scale=.5]{../Metabolomics2018/JohnsonNatureReview}
+		\includegraphics[scale=.5]{../Metabolomics2018/JohnsonNatureReview}
 	\end{center}
 	(2016). \emph{Nature Rev Mol Cell Bio, 17}. doi: 10.1038/nrm.2016.25
 \end{frame}
@@ -102,7 +102,7 @@
 		{\LARGE A tale of two aims:}
 		
 		\begin{enumerate}[{1)}]
-			\item ``...Aim 2 determines which TAM metabolic pathway(s) is regulated by c-Maf using systems metabolomics approach. We will first determine TAM metabolic pathways using Stable Isotope Resolved Metabolomics (SIRM) approach...'' [1R01CA213990-01]
+			\item ``...Aim 2 determines which TAM metabolic pathway(s) is regulated by c-Maf using systems metabolomics approach. We will first determine TAM metabolic pathways using Stable Isotope Resolved Metabolomics (SIRM) approach...'' [1R01CA213990-01] \pause
 			\item[]
 			\item ``...The objective of the proposed project is to perform untargeted metabolite profiling to reveal metabolite abnormalities that are common to sALS patients and to determine metabolic pathways whose dysregulation contributes to the disease...'' [5F31NS095698-02]
 		\end{enumerate}
@@ -110,12 +110,12 @@
 
 \begin{frame}{Motivation}{Biomarker hypotheses}
 	\vspace{-10pt}
-	You are interested in whether a therapeutic ``changes'' the abundance of a metabolite, $X$ in plasma (e.g. a specific lipid)
+	You are interested in whether a therapeutic ``changes'' the abundance of a metabolite, $X$ in plasma (e.g. a specific lipid) \pause
 	\begin{itemize}
-		\item $H_0$: The abundance of $X$ does not differ between two (or more) phenotypes 
+		\item $H_0$: The abundance of $X$ does not differ between two (or more) phenotypes \pause
 		\item $H_A$: The abundance of $X$ does differ between two (or more) phenotypes 
 		\item[]
-	\end{itemize} 
+	\end{itemize} \pause
 	
 	Or formulated as an equivalence test:
 	\begin{itemize}
@@ -126,7 +126,7 @@
 
 \begin{frame}
 	\begin{center}
-			%\includegraphics[scale=.4]{../Plots/cholesterol.png}
+			\includegraphics[scale=.4]{../Plots/cholesterol.png}
 			
 			Lieberman, M., Ahles, P., et al. \emph{Wikipathways}: WP197
 	\end{center}
@@ -134,10 +134,10 @@
 
 \begin{frame}{Motivation}{Hypotheses}
 	\vspace{-10pt}
-	You are interested in whether a therapeutic ``changes'' cholesterol biosynthesis
+	You are interested in whether a therapeutic ``changes'' cholesterol biosynthesis \pause
 	\begin{itemize}
 		\item $H_0$: cholesterol biosynthesis does not differ between two (or more) phenotypes 
-		\item $H_A$: cholesterol biosynthesis does differ between two (or more) phenotypes
+		\item $H_A$: cholesterol biosynthesis does differ between two (or more) phenotypes \pause
 		\item[]
 	\end{itemize} 
 	
@@ -150,7 +150,7 @@
 
 \begin{frame}
 	\begin{center}
-		%\includegraphics[scale=.4]{../Plots/cholesterol.png}
+		\includegraphics[scale=.4]{../Plots/cholesterol.png}
 		
 		Lieberman, M., Ahles, P., et al. \emph{Wikipathways}: WP197
 	\end{center}
@@ -158,14 +158,14 @@
 
 \begin{frame}{Motivation}{Higher order inference}
 	\vspace{-10pt}
-	{\Large Higher-order inference: the testing of hypotheses that are more complex than single metabolite hypothesis tests} \vspace{7pt}
+	{\Large Higher-order inference: the testing of hypotheses that are more complex than single metabolite hypothesis tests} \vspace{7pt} \pause
 	
 	\begin{itemize}
 		\item \textbf{``Data dependent'' / ``Unbiased'' Approaches:} 
 		\begin{itemize}
 		\item Analyses of correlation networks
 		\item Module analyses (WGCNA)
-		\item Multivariate statistical approaches (Clustering; Latent component modeling such as PCA, PLS-R, PLS-DA)
+		\item Multivariate statistical approaches (Clustering; Latent component modeling such as PCA, PLS-R, PLS-DA) \pause
 		\end{itemize}
 		\item[]
 		\item \textbf{\emph{A priori approaches}--Pathway (or other ontology) enrichment analyses:} 
@@ -179,7 +179,7 @@
 
 \begin{frame}{Pathway enrichment analysis}
 	\vspace{-10pt}
-{\Large Test for pathway enrichment: Does a pathway have more ``significant'' differences in metabolite abundances than expected?} \vspace{10pt}
+{\Large Test for pathway enrichment: Does a pathway have more ``significant'' differences in metabolite abundances than expected?} \vspace{10pt} \pause
 
 	\begin{itemize}
 		\item pmf for the hypergeometric distribution: 
@@ -198,34 +198,34 @@
 \begin{frame}{Bias in pathway enrichment analysis}{The reference set}
 	\vspace{-15.5pt}
 	\begin{figure}
-		%\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_1}
+		\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_1}
 	\end{figure}
 \end{frame}
 
 \begin{frame}{Bias in pathway enrichment analysis}{The reference set}
 	\vspace{-15.5pt}
 	\begin{figure}
-		%\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_2}
+		\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_2}
 	\end{figure}
 \end{frame}
 
 \begin{frame}{Bias in pathway enrichment analysis}{Metabolic footprint vs. cellular metabolism}	\vspace{-10.5pt}
 	\begin{center}
-		%\includegraphics[scale=.3]{../Metabolomics2018/512px-Circulatory_System_en}
+		\includegraphics[scale=.3]{../Metabolomics2018/512px-Circulatory_System_en}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Correlation networks}{What do they tell you?}
 	{I simulated this...}
 	\begin{center}
-		%\includegraphics[scale=.5]{../../Aim2/Plots/AR1_Om}
+		\includegraphics[scale=.5]{../../Aim2/Plots/AR1_Om}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Correlation networks}{What do they tell you?}
 	{And fit a correlation network...}
 	\begin{center}
-		%\includegraphics[scale=.5]{../../Aim2/Plots/AR1_Cor}
+		\includegraphics[scale=.5]{../../Aim2/Plots/AR1_Cor}
 	\end{center}
 \end{frame}
 
@@ -234,7 +234,7 @@
 	{\Large \textbf{Gaussian Graphical Models (GGM)}: from correlation to partial correlation...}
 	
 	\begin{center}
-		%\includegraphics[scale=.75]{../Metabolomics2018/ggmPrev} \\
+		\includegraphics[scale=.75]{../Metabolomics2018/ggmPrev} \\
 		Krumsiek et al. (2011). \emph{BMC Syst Bio, 5}(21) doi: 10.1186/1752-0509-5-21
 	\end{center}
 \end{frame}
@@ -242,9 +242,9 @@
 \begin{frame}{Partial correlation}{A better approach}
 	\vspace{-15.5pt}
 	\begin{center}
-		%\includegraphics[scale=.75]{../Metabolomics2018/ggmPrev} \\
+		\includegraphics[scale=.75]{../Metabolomics2018/ggmPrev} \\
 		Krumsiek et al. (2011). \emph{BMC Syst Bio, 5}(21) doi: 10.1186/1752-0509-5-21
-	\end{center}
+	\end{center} \pause
 	\begin{itemize}
 		\item Problem: requires estimating $\frac{p*(p-1)}{2}$ coefficients
 		\item[]
@@ -255,13 +255,13 @@
 \begin{frame}{Motivation}
 	\vspace{-15.5pt}
 	\begin{itemize}
-		\item Succinct problem statement: 
+		\item Succinct problem statement: \pause
 		\begin{itemize}
-			\item To make higher-order inference a model of how metabolites are related is required
+			\item To make higher-order inference a model of how metabolites are related is required \pause
 			\item[]
-			\item Unbiased approach (using a GGM to estimate partial correlation coefficients) is often unfeasible 
+			\item Unbiased approach (using a GGM to estimate partial correlation coefficients) is often unfeasible \pause
 			\item[]
-			\item Pathway-based approach may be inappropriate (given the experimental system, sample media, etc.)
+			\item Pathway-based approach may be inappropriate (given the experimental system, sample media, etc.) \pause
 		\end{itemize}
 		\item[]
 		\item A Bayesian call to action!
@@ -272,17 +272,17 @@
 	
 	{\LARGE Frameworks}
 	\begin{itemize}
-		\item Today:
+		\item Today: \pause
 		\begin{enumerate}[{1)}]
-			\item Collect experimental data
-			\item Do frequentist analysis
-			\item Use your expert knowledge of metabolism to interpret what the results mean ``I knocked out DHCR7 which explains why there are changes in 7-Dehydrocholesterol and Cholesterol''
+			\item Collect experimental data \pause
+			\item Do frequentist analysis \pause
+			\item Use your expert knowledge of metabolism to interpret what the results mean ``I knocked out DHCR7 which explains why there are changes in 7-Dehydrocholesterol and Cholesterol'' \pause
 		\end{enumerate}
 		\item[]
 		\item Hopefully the future:
 		\begin{enumerate}[{1)}]
-			\item Use knowledge of metabolism to formulate informative (or weakly informative) priors
-			\item Collect experimental data
+			\item Use knowledge of metabolism to formulate informative (or weakly informative) priors \pause
+			\item Collect experimental data \pause
 			\item Evaluate posterior distributions to make inference
 		\end{enumerate}
 	\end{itemize}
@@ -295,9 +295,63 @@
 \end{frame}
 
 \begin{frame}{Bayesian reasoning example}
+\vspace{-15pt}
+\begin{itemize}
+	\item Mathematical foundation:
+	\begin{align*}
+	p(\theta|\textbf{x})&=\frac{p(\textbf{x}|\theta)p(\theta)}{\int_{\tilde{\theta} \in \Theta} p(\textbf{x}|\tilde{\theta})p(\tilde{\theta})d\tilde{\theta}}\\ &=\frac{p(\textbf{x}|\theta)p(\theta)}{p(\textbf{x})}\\
+	&\propto p(\textbf{x}|\theta)p(\theta).
+	\end{align*}
+	\item Example:
+	\begin{itemize}
+		\item Mass spectrometer with a counting detector that records the counts per second over a fixed $m/z$ window
+		\item $X\sim Pois(\lambda)$
+		\item Sample: $\{107, 103, 110, 99, 108, 108, 105\}$
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Bayesian reasoning example}
+	\vspace{-15pt}
+	\begin{itemize}
+		\item Poisson pmf:
+				\begin{gather*}
+				f(x|\lambda)=\frac{\lambda^x e^{-\lambda}}{x!}, \quad x \in \mathbb{N}, \quad \lambda \in \left[0, \infty \right)
+				\end{gather*}
+		\item Ten prior count observations and that the sum of counts from these observations was 1,000
+		\item Prior distribution for $\lambda$ of $Gamma(\alpha, \beta)$ with $\alpha=1000$, $\beta=10$
+		\item Gamma pdf:
+		\begin{gather*}
+		f(\lambda|\alpha,\beta) =\frac{\beta^{\alpha}}{\Gamma(\alpha)}\lambda^{\alpha-1}e^{-\beta \lambda}, \quad \lambda \in \left[0, \infty \right), \quad \alpha,\beta >0.
+		\end{gather*}
+		\item \textbf{Goal}:  $p(\textbf{x}|\lambda)p(\lambda)$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Bayesian reasoning example}
+		We note that the likelihood for the Poisson distribution factorizes as in the following:
+		\begin{align*}
+		\mathcal{L}(\lambda|\textbf{x})=p(\textbf{x}|\lambda)=\prod_{i=1}^n \frac{\lambda^{x_i}e^{-\lambda}}{x_i!}= \left( \prod_{i=1}^n x_i! \right)^{-1} \times \lambda^{\sum_{i=1}^n x_i} e^{-n\lambda}. 
+		\label{eq:poissonLik}
+		\end{align*}
+		Considering the prior distribution that we have specified:
+		\begin{align*}
+		p(\lambda|\textbf{x})&\propto \frac{\beta^{\alpha}}{\Gamma(\alpha)}\lambda^{\alpha-1}e^{-\beta \lambda} \lambda^{\sum_{i=1}^n x_i} e^{-n\lambda} \\
+		&\propto \frac{\beta^{\alpha}}{\Gamma(\alpha)} \lambda^{\alpha + \sum_{i=1}^n x_i -1} e^{-(\beta+n)\lambda},
+		\end{align*}
+		we can note that:
+		\begin{align*}
+		p(\lambda|\textbf{x}) =c(\textbf{x},\alpha,\beta)^{-1} \lambda^{\alpha + \sum_{i=1}^n x_i -1} e^{-(\beta+n)\lambda}
+		\end{align*}
+\end{frame}
+
+\begin{frame}{Bayesian reasoning example}
 	\vspace{-5pt}
 	\begin{center}
-		%\includegraphics[scale=.6]{../Plots/Poisson}
+		$p(\lambda|\textbf{x})\sim Gamma(\alpha+ \sum_{i=1}^n x_i, \beta+n)$
+		\includegraphics[scale=.6]{../Plots/Poisson}
+		
+		$\hat{\lambda}_{MLE}=105.7143, \quad \tilde{\lambda}=102.2941$
 	\end{center}
 \end{frame}
 
@@ -310,11 +364,11 @@
 \begin{frame}{Gaussian Graphical Models (GGMs)}
 	\vspace{-5.5pt}
 	\begin{itemize}
-		\item Markov Random Fields: A graph $G=(V,E)$ in which random variables $X_i\in V$, $i\in \{1,2,...p\}$ are represented by vertices and edges in the edge set $E \subseteq V \times V$ represent probabilistic interactions
+		\item Markov Random Fields: A graph $G=(V,E)$ in which random variables $X_i\in V$, $i\in \{1,2,...p\}$ are represented by vertices and edges in the edge set $E \subseteq V \times V$ represent probabilistic interactions \pause
 		\item[]
-		\item GGM: $\textbf{X}\sim \mathcal{N}(\boldsymbol{\mu},\boldsymbol{\Omega}^{-1})$ where $\boldsymbol{\Omega}$ is the concentration matrix (inverse of covariance matrix)
+		\item GGM: $\textbf{X}\sim \mathcal{N}(\boldsymbol{\mu},\boldsymbol{\Omega}^{-1})$ where $\boldsymbol{\Omega}$ is the concentration matrix (inverse of covariance matrix) \pause
 		\item[]
-		\item Gaussian conditional distributions and marginal distributions
+		\item Gaussian conditional distributions and marginal distributions \pause
 		\item[]
 		\item From a GGM you can determine partial correlation coefficients 
 	\end{itemize}
@@ -326,11 +380,11 @@
 		\item Likelihood:
 		\begin{align*}
 		L(\boldsymbol{\Omega}|\textbf{X})&=(2 \pi)^{-np/2}|\boldsymbol{\Omega}|^{n/2} \exp \left(-\frac{1}{2}\sum_{i=1}^{n} (\textbf{x}_i-\boldsymbol{\mu})^T \boldsymbol{\Omega} (\textbf{x}_i-\boldsymbol{\mu})\right) 
-		\end{align*}
+		\end{align*}\pause
 		\item Proportionally:
 		\begin{align*} 
 		l(\boldsymbol{\Omega}|\textbf{S})\propto\log (\det \boldsymbol{\Omega})-\tr \left( \textbf{S} \boldsymbol{\Omega} \right)
-		\end{align*}
+		\end{align*}\pause
 		\item[]
 		\item Given the experimental design of many/most metabolomics studies the likelihood would be non-convex
 	\end{itemize}
@@ -342,8 +396,8 @@
 		\item $L_1$ regularized likelihood:
 		\begin{align*}
 		l(\boldsymbol{\Omega})\propto\log (\det \boldsymbol{\Omega})-\tr \left( \textbf{S} \boldsymbol{\Omega} \right)-\lambda ||\boldsymbol{\Omega}||_1
-		\end{align*}
-		\item Method for optimizing: the Graphical Lasso. Friedman, J., et al. (2007). \emph{Biostatistics, 9}. doi: 10.1093/biostatistics/kxm045
+		\end{align*}\pause
+		\item Method for optimizing: the Graphical Lasso. Friedman, J., et al. (2007). \emph{Biostatistics, 9}. doi: 10.1093/biostatistics/kxm045 \pause
 		\item[]
 		\item Adaptive graphical Lasso: Zou, H. (2006).  \emph{J Amer Stat Assoc, 101}. doi: 10.1198/016214506000000735 
 		\begin{align*}
@@ -361,7 +415,7 @@
 		\begin{align*}
 		p(\textbf{x}_i|\boldsymbol{\Omega}) =& \mathcal{N}(\textbf{0},\boldsymbol{\Omega}^{-1}) \quad \text{for} \; i=1,2,\hdots,n\\
 		p(\boldsymbol{\Omega}|\lambda) =& \frac{1}{C} \prod_{i<j} \DE(\omega_{ij}|\lambda) \prod_{i=1}^{p} \EXP (\omega_{ii} | \lambda / 2) \cdot 1_{\boldsymbol{\Omega}\in M^+},
-		\end{align*}
+		\end{align*} \pause
 	\item[]
 	\item As a scale mixture of Gaussian distributions:
 \end{itemize}
@@ -393,7 +447,8 @@
 		\item \textbf{Idea}:  incorporate prior knowledge regarding the substructures that are shared between compounds (molecular similarity). That is:
 		\begin{align*}
 			\lambda_{ij}\sim Gamma(r,s_{ij})
-		\end{align*}
+		\end{align*}\pause
+		\item[]
 		\item[]
 		\item Conditional expectation: $\EE(\lambda_{ij}|\boldsymbol{\Omega})=(1+r)/(|\omega_{ij} |+s_{ij})$.
 	\end{itemize}
@@ -401,16 +456,16 @@
 
 \begin{frame}{Informative Bayesian estimation}{The current work}
 	\begin{center}
-			%\includegraphics[scale=.7]{../../Aim2/Plots/lambdasVsSim}
+			\includegraphics[scale=.7]{../../Aim2/Plots/lambdasVsSim}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Informative Bayesian estimation}{Block Gibbs Sampler}
 	\vspace{-10.5pt}
 	\begin{itemize}
-		\item Need a way to simulate the posterior distribution 
+		\item Need a way to simulate the posterior distribution \pause
 		\item[]
-		\item Gibb's sampling is a MCMC technique for simulating a target distribution if conditional distributions are known
+		\item Gibb's sampling is a MCMC technique for simulating a target distribution if conditional distributions are known \pause
 		\item[]
 		\item Conditional distribution for concentration matrix columns:
 	\end{itemize}
@@ -428,17 +483,19 @@
 \begin{frame}{Informative Bayesian estimation}{Block Gibbs Sampler}
 	\vspace{-15.5pt}
 	\begin{itemize}
-		\item Developed an R package for implementing this sampler: \emph{BayesianGLasso}
+		\item Developed an R package for implementing this sampler: \emph{BayesianGLasso} \pause
 		\item[]
-		\item Sampler is written in C++ utilizing the Armadillo linear algebra library
+		\item Sampler is written in C++ utilizing the Armadillo linear algebra library \pause
 		\item[]
-		\item To interface between R and C++, utilized \emph{Rcpp} and \emph{RcppArmadillo}
+		\item To interface between R and C++, utilized \emph{Rcpp} and \emph{RcppArmadillo} \pause
+		\item[]
+		\item To utilize with $\approx 500$ metabolites significant optimization was required (openBLAS \& LAPACK routines)
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Simulated experiment}
 	\begin{center}
-		%\includegraphics[scale=.33]{../../Aim2/Plots/AR1}
+		\includegraphics[scale=.33]{../../Aim2/Plots/AR1}
 	\end{center}
 \end{frame}
 
@@ -450,11 +507,11 @@
 \begin{frame}{Heart Disease Interactome}
 	\vspace{-15.5pt}
 	\begin{itemize}
-		\item Goal: We sought to construct a stable heart disease plasma metabolite interactome
+		\item Goal: We sought to construct a stable heart disease plasma metabolite interactome \pause
 		\item[]
-		\item Long term motivation:  to serve as a reference for analyzing metabolic changes to an acute state (MI)
+		\item Long term motivation:  to serve as a reference for analyzing metabolic changes to an acute state (MI) \pause
 		\item[]
-		\item 47 plasma samples from human subjects with heart disease
+		\item 47 plasma samples from human subjects with heart disease \pause
 		\item[]
 		\item 522 compounds identified from and quantified by UPLC-MS/MS and GC-MS
 	\end{itemize}
@@ -463,7 +520,7 @@
 \begin{frame}{Heart Disease Interactome}
 		\vspace{-15.5pt}
 	\begin{center}
-		%\includegraphics[scale=.35]{../../Aim2/Plots/StructHeatmaps}
+		\includegraphics[scale=.35]{../../Aim2/Plots/StructHeatmaps}
 		
 		Local substructure similarity measure adapted from Mitchell, J. (2014). doi: 10.3389/fgene.2014.00237 (collaboration)
 	\end{center}
@@ -472,33 +529,33 @@
 \begin{frame}{Heart Disease Interactome}{MCMC sampling}
 	\vspace{-10.5pt}
 	\begin{center}
-		%\includegraphics[scale=.52]{../../Aim2/Plots/MCMC}
+		\includegraphics[scale=.52]{../../Aim2/Plots/MCMC}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Heart Disease Interactome}
 	\vspace{-10.5pt}
 	\begin{center}
-		%\includegraphics[scale=.52]{../../Aim2/Plots/aiBGL1CorBigGraph}
+		\includegraphics[scale=.52]{../../Aim2/Plots/aiBGL1CorBigGraph}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Heart Disease Interactome}
 	\vspace{-10.5pt}
 	\begin{center}
-		%\includegraphics[scale=.175]{../../Aim2/Plots/aiBGL1Cor(2)}
+		\includegraphics[scale=.175]{../../Aim2/Plots/aiBGL1Cor(2)}
 	\end{center}
 \end{frame}
 
 \begin{frame}{The future}
 	\vspace{-15pt}
 	\begin{center}
-		%\includegraphics[scale=.225]{../Metabolomics2018/FlowChart2}
+		\includegraphics[scale=.225]{../Metabolomics2018/FlowChart2}
 		
-		Trainor, P. (2018), \emph{J Biomed Info, 81}. doi: 10.1016/j.jbi.2018.03.007 
+		Trainor, P. (2018), \emph{J Biomed Info, 81}. doi: 10.1016/j.jbi.2018.03.007 \pause
 	\end{center}
 	\begin{itemize}
-		\item Use the stable disease interactome to determine systems-levels changes that occur in the relationships between metabolites in plasma following acute disease events (e.g. heart attacks)
+		\item Use the stable disease interactome to determine systems-levels changes that occur in the relationships between metabolites in plasma following acute disease events (e.g. heart attacks) \pause
 		\item[]
 		\item Prior distributions 
 	\end{itemize}
@@ -522,7 +579,7 @@
 		\item Characterized by myocardial ischemia (exposure of cardiac myocytes to oxygen deprivation) and necrosis (a form of cell death)
 	\end{itemize}
 	\begin{center}
-		%\includegraphics[scale=.7]{miType}
+		\includegraphics[scale=.7]{miType}
 		
 		Thygesen, et al. (2012). doi: 10.1016/j.jacc.2012.08.001
 	\end{center}
@@ -531,11 +588,11 @@
 \begin{frame}{Acute Myocardial Infarction}
 		\vspace{-5pt}
 		\begin{itemize}
-			\item Criteria utilized for diagnosing MI (EKG, Troponin, symptoms) do not definitively rule in or out presence of a thrombus 
-			\item Troponin elevation is not sufficient for determining the cause of an MI 
+			\item Criteria utilized for diagnosing MI (EKG, Troponin, symptoms) do not definitively rule in or out presence of a thrombus \pause
+			\item Troponin elevation is not sufficient for determining the cause of an MI \pause
 		\end{itemize}
 		\begin{center}
-			%\includegraphics[scale=.4]{elevTrop}
+			\includegraphics[scale=.4]{elevTrop}
 			
 			Newby, et al. (2012). doi: 10.1016/j.jacc.2012.08.969
 		\end{center}
@@ -544,14 +601,14 @@
 \begin{frame}{Objective}
 	\vspace{-10pt}
 	\begin{itemize}
-		\item Metabolite concentrations are a product of genetic factors, environmental exposures, and gene $\times$ environment 
+		\item Metabolite concentrations are a product of genetic factors, environmental exposures, and gene $\times$ environment \pause
 		\item[]
-		\item Metabolite concentrations are dynamic (especially in blood)
+		\item Metabolite concentrations are dynamic (especially in blood) \pause
 		\item[]
 		\item \textbf{Implicit hypothesis:} If we quantify metabolites in plasma will observe evidence of:
 		\begin{itemize}
 			\item Myocardial ischemia and necrosis (all MI types)
-			\item Metabolic processes specific to thrombotic MI (platelet activation, platelet aggregation, fibrinolysis)
+			\item Metabolic processes specific to thrombotic MI (platelet activation, platelet aggregation, fibrinolysis) \pause
 			\item[]
 		\end{itemize}
 		\item \textbf{Goal:} Utilize this to construct a non-invasive diagnostic test capable of discriminating between thrombotic and non-thrombotic MI
@@ -568,7 +625,7 @@
 \begin{frame}{Cohort}
 	\vspace{-10pt}
 	\begin{center}
-		%\includegraphics[scale=.65]{cohort}
+		\includegraphics[scale=.65]{cohort}
 		
 		DeFilippis, Trainor, et al. (2017). doi: 10.1371/journal.pone.0175591
 	\end{center}
@@ -586,7 +643,7 @@
 		\item Multinomial logistic regression model:
 			\begin{align*}
 			\eta_{ij} = \log \frac{\pi_{ij}}{\pi_{iJ}} = \alpha_j + \textbf{x}_i^T \boldsymbol{\beta}_j,
-			\end{align*} 
+			\end{align*} \pause
 		\item Parameters:
 		\begin{itemize}
 			\item $i$ indexes individual samples
@@ -595,7 +652,7 @@
 			\item $\boldsymbol{\beta}_j$ is a vector of regression coefficients 
 			\item $\alpha_j$ is a group specific intercept term
 			\item $J$ represents the reference group.
-		\end{itemize}
+		\end{itemize} \pause
 		\item Membership probability for each group:
 		\begin{align*}
 		\hat{\pi}_{ij} = \frac{\exp \hat{\eta}_{ij}}{\sum_{k=1}^{J}\exp \hat{\eta}_{ik}}.
@@ -621,7 +678,7 @@
 \begin{frame}{Feature selection}
 	\vspace{-10pt}
 	\begin{center}
-		%\includegraphics[scale=.09]{../../../AthroMetab/WoAC/corrplot333}
+		\includegraphics[scale=.09]{../../../AthroMetab/WoAC/corrplot333}
 		
 		Trainor, P. (2018). doi: 10.1016/j.jbi.2018.03.007 
 	\end{center}
@@ -636,7 +693,7 @@
 \begin{frame}{Hamiltonian Systems}
 	\vspace{-5pt}
 	\begin{center}
-		%\includegraphics[scale=.375]{phase}
+		\includegraphics[scale=.375]{phase}
 		
 		Lecture notes Physics 3210, Dr. Ethan Neil, CU Boulder
 	\end{center}
@@ -645,7 +702,7 @@
 \begin{frame}{Target distributions as vector fields}
 	\vspace{-5pt}
 	\begin{center}
-		%\includegraphics[scale=.6]{HMC1}
+		\includegraphics[scale=.6]{HMC1}
 		
 	Betancourt. (2017). arXiv:1701.02434
 	\end{center}
@@ -654,7 +711,7 @@
 \begin{frame}{Target distributions as vector fields}
 	\vspace{-5pt}
 	\begin{center}
-		%\includegraphics[scale=.55]{HMC2}
+		\includegraphics[scale=.55]{HMC2}
 		
 		Betancourt. (2017). arXiv:1701.02434
 	\end{center}
@@ -663,7 +720,7 @@
 \begin{frame}{The No-U-Turn sampler}
 	\vspace{-10pt}
 	\begin{center}
-		%\includegraphics[scale=.48]{nuts}
+		\includegraphics[scale=.48]{nuts}
 		\vspace{2ex}
 		Hoffman \& Gelman. (2014). \emph{Journal of Machine Learning Research}. dl.acm.org/citation.cfm?id=2638586
 	\end{center}
@@ -678,7 +735,7 @@
 \begin{frame}{MCMC for a metabolite parameter}
 	\vspace{-5pt}
 	\begin{center}
-		%\includegraphics[scale=.5]{../../Aim3/MCMCEx.png}
+		\includegraphics[scale=.5]{../../Aim3/MCMCEx.png}
 	\end{center}
 \end{frame}
 
@@ -686,28 +743,28 @@
 \begin{frame}{Model coefficients}{No troponin}
 	\vspace{-5pt}
 	\begin{center}
-		%\includegraphics[scale=.575]{../../Aim3/brm1Coef}
+		\includegraphics[scale=.575]{../../Aim3/brm1Coef}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Model coefficients}{With troponin}
 	\vspace{-5pt}
 	\begin{center}
-		%\includegraphics[scale=.575]{../../Aim3/brm2Coef}
+		\includegraphics[scale=.575]{../../Aim3/brm2Coef}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Model coefficients}{Posterior distribution}
 		\vspace{-5pt}
 		\begin{center}
-			%\includegraphics[scale=.15]{../../Aim3/coefPost}
+			\includegraphics[scale=.15]{../../Aim3/coefPost}
 		\end{center}
 \end{frame}
 
 \begin{frame}{Model coefficients}{Posterior distribution}
 	\vspace{-5pt}
 	\begin{center}
-		%\includegraphics[scale=.6]{../../Aim3/coefPost2}
+		\includegraphics[scale=.6]{../../Aim3/coefPost2}
 	\end{center}
 \end{frame}
 
@@ -737,14 +794,14 @@
 \begin{frame}{Markov chain for a human subject}
 	\vspace{-5pt}
 	\begin{center}
-		%\includegraphics[scale=.6]{../../Aim3/ptid2010MCMC}
+		\includegraphics[scale=.6]{../../Aim3/ptid2010MCMC}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Markov chain for a human subject}
 	\vspace{-7pt}
 	\begin{center}
-		%\includegraphics[scale=.65]{../../Aim3/ptid2010Hist}
+		\includegraphics[scale=.65]{../../Aim3/ptid2010Hist}
 	\end{center}
 \end{frame}
 
@@ -827,12 +884,12 @@
 			\end{center}
 		\end{column}
 		\begin{column}{0.55\textwidth}
-			\textbf{Features observed in MS:}
+			\textbf{Features observed in MS:} \pause
 			\begin{itemize}
-				\item Mass-to-charge ratio (m/z) of the ions
-				\item Fragmentation pattern of either parent or fragment ions (if generated)
-				\item Isotopic distribution (e.g. the relative abundance of isotopes can be evaluated by comparing the ratio of 13C to 12C)
-				\item Elution times from chromatographic separation 
+				\item Mass-to-charge ratio (m/z) of the ions \pause
+				\item Fragmentation pattern of either parent or fragment ions (if generated) \pause
+				\item Isotopic distribution (e.g. the relative abundance of isotopes can be evaluated by comparing the ratio of 13C to 12C) \pause
+				\item Elution times from chromatographic separation \pause
 				\item Peak shape
 			\end{itemize}
 		\end{column}
@@ -859,7 +916,7 @@
 		\item Noise error model conditioned on an assignment:
 		\begin{align*}
 		\left. \frac{x_{m_i}}{x_{\ell_j}} \right| \{ I(m_i=\ell_j )=1 \} \sim N\left(1, \gamma^{-1}\right).
-		\end{align*}
+		\end{align*} \pause
 		\item[]
 		\item Conditional prior probability of an assignment:
 		\begin{align*}
@@ -878,7 +935,7 @@
 		\begin{itemize}
 					\item $\textbf{W}$ as an indicator matrix that represents possible reactions
 					\item $\delta$ is a hyperparameter
-					\item $\beta_{ji}$ represents a count of the number of biochemical transformations from compound labels currently assigned to result in a new annotation
+					\item $\beta_{ji}$ represents a count of the number of biochemical transformations from compound labels currently assigned to result in a new annotation \pause
 					\item[]
 		\end{itemize}
 		\item Rogers et al. propose a Gibbs sampler for sampling from the posterior:
@@ -895,16 +952,90 @@
 \end{frame}
 
 \begin{frame}{Formalization and Pathway Databases}{Silva, et al. (2014)}
-	\begin{align*}
-	p( \mathbfcal{I}|\textbf{Y}) & \propto p(\textbf{Y}| \mathbfcal{I}) p( \mathbfcal{I}) \\
-	p(\mathbfcal{I}|\textbf{Y}) & \propto p_N(\textbf{Y}|\mathbfcal{I}) \cdot p_{rt}(\textbf{Y}|\mathbfcal{I}) \cdot p_{iso}(\textbf{Y}|\mathbfcal{I}) \cdot p( \mathbfcal{I}),
-	\end{align*}
+	\vspace{-12pt}
+Silva, et al. formalized a comprehensive model:
+			\begin{align*}
+			p( \mathbfcal{I}|\textbf{Y}) & \propto p(\textbf{Y}| \mathbfcal{I}) p( \mathbfcal{I}) \\
+			p(\mathbfcal{I}|\textbf{Y}) & \propto p_N(\textbf{Y}|\mathbfcal{I}) \cdot p_{rt}(\textbf{Y}|\mathbfcal{I}) \cdot p_{iso}(\textbf{Y}|\mathbfcal{I}) \cdot p( \mathbfcal{I}),
+			\end{align*} 
+			\begin{itemize}
+				\item $p_N(\cdot)$ is an error model for the measurement of $m/z$
+				\item $p_{rt}(\cdot)$ is a retention time / index error model
+				\item $p_{iso}(\cdot)$ is an isotopic distribution error model
+				\item $p( \mathbfcal{I})$ is the prior probability of compound label to mass feature assignments
+			\end{itemize}
+\end{frame}
+
+\begin{frame}{Formalization and Pathway Databases}{Silva, et al. (2014)}
+	\vspace{-12pt}
+	\begin{itemize}
+		\item The probability distribution of compound labels for a specific mass feature, conditioned on other assignments, is then:
+		\begin{align*}
+		p( I(m_i=\ell_j )| \mathbfcal{I}^{(-m_i)}) &\propto \\ p_N(x_{m_i}| I(m_i=\ell_j )) &\cdot p_{rt}(t_{m_i}|\mathbfcal{I}^{(-m_i)}) \cdot p_{iso}(\textbf{r}_{m_i}|\mathbfcal{I}^{(-m_i)}) \cdot p( \mathbfcal{I}^{(-m_i)}).
+		\end{align*} \pause
+		\item[]
+		\item Also proposed a new m/z error model
+		\begin{align*}
+		p_N(x_{m_i}| I(m_i=\ell_j ),w) \propto I(x_{\ell_j}\in N_w(x_{m_i})) \left(1-\Phi\left(\frac{|x_{m_i}/x_{\ell_j}-1|-\mu_w}{\sigma_w}\right) \right),
+		\end{align*}
+		where $N_\varepsilon(x)$ is a neighborhood about the point $x$ with radius $\varepsilon$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Formalization and Pathway Databases}{Silva, et al. (2014)}
+	\vspace{-12pt}
+	\begin{center}
+		\includegraphics[scale=.75]{Silva}
+	\end{center}
 \end{frame}
 
 \subsection{Bayesian clustering of mass features}
 \begin{frame}{Outline}
 	\vspace{-10.5pt}
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{Bayesian clustering of mass features}{Daly, et al. (2014).}
+	\vspace{-12pt}
+	\begin{center}
+		\includegraphics[scale=1]{Daly1}
+		
+		Daly, et al. (2014). doi: 10.1093/bioinformatics/btu37
+	\end{center}
+\end{frame}
+
+\begin{frame}{Bayesian clustering of mass features}{Daly, et al. (2014).}
+	\vspace{-12pt}
+	\begin{itemize}
+		\item m/z measurement error:
+			\begin{align*}
+			p(x_n|v_{nkai}=1) = N(log(x_n)|log(y_{\phi_k ai}),\zeta^{-1}). 
+			\end{align*} \pause
+		\item Isotope profile error:
+			\begin{align*}
+			p(w_n|v_{nkai}=1)=N(\beta_{\phi_k ai} \lambda_{*},\kappa^{-1}+\beta^2_{\phi_k ai}\kappa^{-1}_{*}).
+			\end{align*} \pause
+		\item Retention time error:
+			\begin{align*}
+			p(r_n|v_{nkai}=1)=N(r_n|\mu_*,\delta_*^{-1}+\gamma^{-1}).
+			\end{align*}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Bayesian clustering of mass features}{Daly, et al. (2014).}
+	\vspace{-12pt}
+	Conceptual overview of sampling routine:
+	
+	\begin{itemize}
+		\item Initialize with random clustering
+		\begin{itemize}
+					\item Compute cluster posterior probabilities as well as new proposal cluster posterior probabilites
+					\item[]
+					\item If proposal is accepted then compute new metabolite, adduct, and isotope posterior probabilities
+					\item[]
+		\end{itemize}
+		\item When convergence criteria is satisfied return assignments 
+	\end{itemize}
 \end{frame}
 
 \section{Discussion}
@@ -917,14 +1048,14 @@
 \begin{frame}{Discussion}
 	\vspace{-10.5pt}
 	\begin{itemize}
-		\item Metabolomics experiments / studies are characterized by $\downarrow n$ and $\uparrow p$
+		\item Metabolomics experiments / studies are characterized by $\downarrow n$ and $\uparrow p$ \pause
 		\item[]
-		\item There are many sources of extra-experimental knowledge that are relevant to metabolomics studies 
+		\item There are many sources of extra-experimental knowledge that are relevant to metabolomics studies \pause
 		\item[] 
-		\item ``Extra-experimental prior beliefs'':
+		\item ``Extra-experimental prior beliefs'': \pause
 		\begin{itemize}
-			\item Structurally related metabolites are more likely to exhibit partial dependency than those that are not structurally related
-			\item Diagnostic models from metabolites should have moderated coefficient estimates
+			\item Structurally related metabolites are more likely to exhibit partial dependency than those that are not structurally related \pause
+			\item Diagnostic models from metabolites should have moderated coefficient estimates \pause
 			\item Adduct \& isotopic peaks in LC-MS data should co-elute, isotopic peaks should have predictable intensity ratios, and the presence of one metabolite should increase the likelihood of the presence of biochemically related metabolites
 		\end{itemize}
 	\end{itemize}
@@ -939,28 +1070,28 @@
 \begin{frame}{Acknowledgments}
 	\vspace{-5.5pt}
 	\begin{center}
-		%\includegraphics[scale=.95]{../../../TempPics/Lab/Edits/DSC_0278-2}
+		\includegraphics[scale=.95]{../../../TempPics/Lab/Edits/DSC_0278-2}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Acknowledgments}
 	\vspace{-5.5pt}
 	\begin{center}
-		%\includegraphics[scale=.25]{fam}
+		\includegraphics[scale=.25]{fam}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Acknowledgments}
 	\vspace{-5.5pt}
 	\begin{center}
-		%\includegraphics[scale=.25]{sam}
+		\includegraphics[scale=.25]{sam}
 	\end{center}
 \end{frame}
 
 \begin{frame}{Acknowledgments}
 	\vspace{-15.5pt}
 	\begin{center}
-		%\includegraphics[scale=.5]{../Metabolomics2018/SUSignatureHorizontal-2color}
+		\includegraphics[scale=.5]{../Metabolomics2018/SUSignatureHorizontal-2color}
 	\end{center}
 \end{frame}
 
