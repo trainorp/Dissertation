@@ -307,6 +307,7 @@
 		\item Mass spectrometer with a counting detector that records the counts per second over a fixed $m/z$ window
 		\item $X\sim Pois(\lambda)$
 		\item Sample: $\{107, 103, 110, 99, 108, 108, 105\}$
+		\item Prior data: 10 observations of 100
 	\end{itemize}
 \end{itemize}
 \end{frame}
@@ -314,15 +315,15 @@
 \begin{frame}{Bayesian reasoning example}
 	\vspace{-15pt}
 	\begin{itemize}
-		\item Poisson pmf:
-				\begin{gather*}
-				f(x|\lambda)=\frac{\lambda^x e^{-\lambda}}{x!}, \quad x \in \mathbb{N}, \quad \lambda \in \left[0, \infty \right)
-				\end{gather*}
 		\item Ten prior count observations and that the sum of counts from these observations was 1,000
 		\item Prior distribution for $\lambda$ of $Gamma(\alpha, \beta)$ with $\alpha=1000$, $\beta=10$
 		\item Gamma pdf:
 		\begin{gather*}
 		f(\lambda|\alpha,\beta) =\frac{\beta^{\alpha}}{\Gamma(\alpha)}\lambda^{\alpha-1}e^{-\beta \lambda}, \quad \lambda \in \left[0, \infty \right), \quad \alpha,\beta >0.
+		\end{gather*}
+		\item Poisson pmf:
+		\begin{gather*}
+			f(x|\lambda)=\frac{\lambda^x e^{-\lambda}}{x!}, \quad x \in \mathbb{N}, \quad \lambda \in \left[0, \infty \right)
 		\end{gather*}
 		\item \textbf{Goal}:  $p(\textbf{x}|\lambda)p(\lambda)$
 	\end{itemize}
