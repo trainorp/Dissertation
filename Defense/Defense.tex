@@ -255,7 +255,7 @@
 \begin{frame}{Motivation}
 	\vspace{-15.5pt}
 	\begin{itemize}
-		\item Succinct problem statement: \pause
+		\item Problem statement: \pause
 		\begin{itemize}
 			\item To make higher-order inference a model of how metabolites are related is required \pause
 			\item[]
@@ -631,6 +631,19 @@
 	\end{center}
 \end{frame}
 
+\begin{frame}{Cohort}
+	\vspace{-10pt}
+	\begin{itemize}
+		\item Samples were analyzed by GC-MS, UPLC-MS/MS \pause
+		\item[]
+		\item Positive \& Negative mode ESI for UPLC-MS/MS \pause
+		\item[]
+		\item 1,032 distinct chemical features \pause
+		\item[]
+		\item 522 identified MSI Level 1
+	\end{itemize}
+\end{frame}
+
 \subsection{Statistical model for discriminating MI type}
 \begin{frame}{Outline}
 	\vspace{-10.5pt}
@@ -688,6 +701,13 @@
 \begin{frame}{Outline}
 	\vspace{-10.5pt}
 	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{Computational nuances}
+		\begin{align*}
+		p(\theta|\textbf{x})&=\frac{p(\textbf{x}|\theta)p(\theta)}{\int_{\tilde{\theta} \in \Theta} p(\textbf{x}|\tilde{\theta})p(\tilde{\theta})d\tilde{\theta}}\\ &=\frac{p(\textbf{x}|\theta)p(\theta)}{p(\textbf{x})}\\
+		&\propto p(\textbf{x}|\theta)p(\theta).
+		\end{align*}
 \end{frame}
 
 \begin{frame}{Hamiltonian Systems}
@@ -842,7 +862,7 @@
 	
 \begin{tabular}{l|ccc}
 	& \emph{Predicted} & & \\
-	\emph{Group}  &     \textbf{sCAD} & \textbf{Thrombotic MI} & \textbf{Non-Thromb. MI} \\
+	\emph{Actual}  &     \textbf{sCAD} & \textbf{Thrombotic MI} & \textbf{Non-Thromb. MI} \\
 	\hline
 	\textbf{sCAD}   &     13    &     0    &     2\\
 	\textbf{Thrombotic MI}  &  0    &    10    &     1\\
@@ -1024,14 +1044,14 @@ Silva, et al. formalized a comprehensive model:
 
 \begin{frame}{Bayesian clustering of mass features}{Daly, et al. (2014).}
 	\vspace{-12pt}
-	Conceptual overview of sampling routine:
+	Conceptual overview of sampling routine: \pause
 	
 	\begin{itemize}
-		\item Initialize with random clustering
+		\item Initialize with random clustering \pause
 		\begin{itemize}
-					\item Compute cluster posterior probabilities as well as new proposal cluster posterior probabilites
+					\item Compute cluster posterior probabilities as well as new proposal cluster posterior probabilites \pause
 					\item[]
-					\item If proposal is accepted then compute new metabolite, adduct, and isotope posterior probabilities
+					\item If proposal is accepted then compute new metabolite, adduct, and isotope posterior probabilities \pause
 					\item[]
 		\end{itemize}
 		\item When convergence criteria is satisfied return assignments 
