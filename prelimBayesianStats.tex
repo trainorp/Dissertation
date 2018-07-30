@@ -74,15 +74,23 @@ As can be observed, the center (mode or mean) of the posterior probability distr
 In addition to point-wise summaries (such as the mode of the posterior distribution), interval summaries can be provided utilizing the posterior distribution of a parameter. In this case, a Bayesian credible interval \cite{gelman2004} can be analytically computed using a quantile function as the analytical form of the posterior distribution is known. Specifically, a two-sided 95\% Bayesian credible interval (CI) can be determined by finding the unique solution to $(l,u)$, such that $F(l|\alpha+ \sum_{i=1}^n x_i -1,\beta+n)=0.025$ and $F(u|\alpha+ \sum_{i=1}^n x_i -1,\beta+n)=.975$ where $F(x)$ is the cumulative distribution function for the Gamma distribution. In the current example, this yields a 95\% CI of $(97.600, 107.218)$.
  
 \section{Specification of prior distribution}
-[To do: describe conjugacy of distribution ]
+Given that the posterior distribution of parameters depends on both the data likelihood and the prior distribution, the specification of prior distribution is of critical interest in Bayesian inference. While a general distinction is made between ``informative'' priors and ``non-informative'' priors \cite{gelman2006}, ``weekly informative'' priors represent an in-between. Non-informative priors are prior distributions that are vague, flat, diffuse \cite{gelman2004}, and do not incorporate external information into posterior probability distributions. Weekly informative priors generally incorporate some other goal, such as encouraging regularization without introducing specific \emph{a priori} knowledge about the prior likelihood of parameter values. In contrast, informative priors do incorporate external information (outside of the empirical data) \cite{gelman2004}. Informative priors may be generated from previous experimentation, often by the use of conjugate distributions \cite{hoff2009}. 
 
-Given the form of the data-augmented posterior distribution, $p(\lambda|\textbf{x})\sim Gamma(\alpha+ \sum_{i=1}^n x_i, \beta+n)$,  the posterior Gamma distribution parameters can be noted as $\alpha'=\alpha+ \sum_{i=1}^n x_i$ and $\beta'=\beta+n$, where $\alpha$ and $\beta$ are the prior parameters. This provides a natural way to encapsulate prior empirical evidence. Noting that prior expectation for $\lambda$ is $\EE(\lambda)=\frac{\alpha}{\beta}$, while the posterior expectation conditional expectation is:
+\begin{definition}{Conjugate probability distribution}
+	Let $\mathcal{F}$ be a class of probability distributions from which $x$ may be sampled with parameter $\theta$, that is $f(x|\theta)$ and let $\mathcal{P}$ be a class of prior distributions for $\theta$. $\mathcal{P}$ is said to be cojugate to $\mathcal{F}$ if $p(\theta|x)\in \mathcal{P} \; \forall f(\cdot | \theta) \in \mathcal{F} \text{ and } p(\cdot) \in \mathcal{P}$.
+\end{definition}
+
+Following these definitions, we return to our discussion of the counting mass detector example. This example utilized an informative conjugate prior distribution for the Poisson rate parameter. Given the form of the data-augmented posterior distribution, $p(\lambda|\textbf{x})\sim Gamma(\alpha+ \sum_{i=1}^n x_i, \beta+n)$,  the posterior Gamma distribution parameters can be noted as $\alpha'=\alpha+ \sum_{i=1}^n x_i$ and $\beta'=\beta+n$, where $\alpha$ and $\beta$ are the prior parameters. This provides a natural way to encapsulate prior empirical evidence. Noting that prior expectation for $\lambda$ is $\EE(\lambda)=\frac{\alpha}{\beta}$, while the posterior expectation conditional expectation is:
 \begin{align}
 	\EE(\lambda|\textbf{x})=\frac{\alpha+ \sum_{i=1}^n x_i}{\beta+n} =\frac{\alpha}{\beta+n}+\frac{\sum_{i=1}^n x_i}{\beta+n},
 \end{align} it can be seen that if the sum of counts observed in $\beta$ previous experiments (where $\beta$ is a natural number) was $\alpha$, then the conditional expectation of $\lambda$ is a weighted average of the prior observed counts and the current observed counts (weighted by the respective number of observations). 
 
 \section{MCMC methods for inference}
-[To do: describe MCMC methods for inference]
+Many posterior probability distributions do not have an expression in analytical form, or it may be challenging to determine such a form. In such cases, Markov chain Monte Carlo (MCMC) methods may be utilized for simulating the posterior distribution. The fundamental principal of Monte Carlo methods is that if an integral $I=\int_{\Omega} f(\textbf{x}) d\textbf{x}$ cannot be obtained analytically, then the law of large numbers justifies generating a random sample $\{\textbf{X}_i \}_{i=1}^n$ from a distribution $p(x)$ over $\Omega$ and using it for approximation \cite{gelman2004}, that is:
+\begin{align}
+I \approx  \frac{1}{n} \sum_{i=1}^n g(\textbf{X}_i),
+\end{align}
+where $g(x)= f(x) / p(x)$. Two commonly utilized MCMC approaches are Metropolis-Hastings type algorithms which rely on formulating a proposal density for accepting or rejecting random moves according to the target distribution and Gibbs sampling which draws from conditional distributions.
 
 \subsection{Gibbs Sampling}
 In addition to not having an analytical form of the joint posterior distribution of model parameters (which justifies the use of posterior simulation) it may be the case that it is straightforward to sample from conditional distributions of parameters but not for sampling from the joint distribution. In such cases, Gibbs sampling may be employed \cite{gelman2004,hoff2009}. The idea of Gibbs sampling is straightforward. First, parameters estimates are initialized to some initial values. Next, one parameter is fixed as the target parameter. A sample is then drawn from the conditional distribution of this target parameter (conditioned on both the non-target parameter estimates and the observed sample). Gibbs sampling can be extended to using target sets of parameters without loss of generality. A more precise definition of a Gibbs sampler is as follows and pseudocode is presented as Alg.~\ref{alg:gibbs}. Let $\boldsymbol{\theta}=\{\theta_1, \theta_2, \hdots,  \theta_p \}$ be a vector of parameters and let $\boldsymbol{\theta}_j$ be a vector defined by a subset of the parameters with the subsets indexed by $j=1, 2, \hdots, J$. Let $\tilde{\boldsymbol{\theta}}_j^{(t)}$ denote the estimate of the subset of parameters at time $t$. 
@@ -161,9 +169,16 @@ It can thus be seen that the conditional distribution for $\lambda_1$ (condition
 Finally, for the latent indicator variables:
 \begin{align}
 	\begin{split}
-f(z_{ij}=1|x_i,\boldsymbol{\lambda},\textbf{p})=
-\frac{f(x_i|\boldsymbol{\lambda},\textbf{p},z_{ij}=1)f(z_{ij}=1|\boldsymbol{\lambda},\textbf{p},x_i)}{}
+f(z_{ij}=1|x_i,\boldsymbol{\lambda},\textbf{p})&=
+\frac{f(x_i|\boldsymbol{\lambda},\textbf{p},z_{ij}=1)f(z_{ij}=1|\boldsymbol{\lambda},\textbf{p},x_i)}{\sum_{j=1}^3 f(x_i|\boldsymbol{\lambda},\textbf{p},z_{ij}=1)f(z_{ij}=1|\boldsymbol{\lambda},\textbf{p},x_i)} \\
+&=\frac{f(x_i|\boldsymbol{\lambda},z_{ij}=1)f(z_{ij}=1|\boldsymbol{\lambda},\textbf{p})}{\sum_{j=1}^3 f(x_i|\boldsymbol{\lambda},z_{ij}=1)f(z_{ij}=1|\boldsymbol{\lambda},\textbf{p})} \\
+&=\frac{f(x_i|\lambda_j)p_j}{\sum_{j=1}^3 f(x_i|\lambda_j)p_j} \\
+&= \frac{f(x_i|\lambda_j)p_j}{ f(x_i)}.
 	\end{split}
+\end{align}
+Thus it can be seen that the conditional distribution for each $z_i^{(-i)}$ is:
+\begin{align}
+	z_i^{(-i)} |(\boldsymbol{\theta},\textbf{p},\textbf{z},\textbf{x} )\sim Multi \left(1,\frac{f(x_i|\lambda_1)p_1}{ f(x_i)},\hdots , \frac{f(x_i|\lambda_3)p_3}{ f(x_i)} \right)
 \end{align}
 
 \end{DoubleSpace*}
