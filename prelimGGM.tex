@@ -19,7 +19,7 @@ To find the maximum likelihood estimator of $\boldsymbol{\Omega}$ the log likeli
 \begin{align} 
 l(\boldsymbol{\Omega})\propto\log (\det \boldsymbol{\Omega})-\tr \left( \textbf{S} \boldsymbol{\Omega} \right),
 \end{align}
-where $\textbf{S}=\frac{1}{n}\textbf{X}^T \textbf{X}$ is the empirical covariance matrix. In the case that $p>n$ maximization of the log likelihood function is not guaranteed to be convex [check]. To overcome this problem, several approaches have been proposed for maximizing the $L_1$ norm penalized log-likelihood \cite{friedman2007,yuan2007,banerjee2008}:
+where $\textbf{S}=\frac{1}{n}\textbf{X}^T \textbf{X}$ is the empirical covariance matrix. In the case that $p>n$ maximization of the log likelihood function is not guaranteed to be convex. To overcome this problem, several approaches have been proposed for maximizing the $L_1$ norm penalized log-likelihood \cite{friedman2007,yuan2007,banerjee2008}:
 \begin{align}
 l(\boldsymbol{\Omega})\propto\log (\det \boldsymbol{\Omega})-\tr \left( \textbf{S} \boldsymbol{\Omega} \right)-\rho ||\boldsymbol{\Omega}||_1
 \label{eq:likelihood}
@@ -48,12 +48,8 @@ Given this partition, the maximization of the log-likelihood (Eq. \ref{eq:likeli
 \end{align}
 where $b=\textbf{W}_{11}^{-1/2} \textbf{s}_{12}$, then $\textbf{w}_{12}=\textbf{W}_{11} \hat{\beta}$.
 
-Critically, \cite{friedman2007} [LOH]
-
-[Add lasso problem and lambda optimization]
-
 \subsection{The SCAD penalty and the Adaptive Graphical Lasso}
-It has been shown that the linear increase penalization relative to the norm incurred with $L_1$ regularization of parameters introduces bias, especially in the case of parameters that have large magnitude \cite{fan2009,lam2009}. Two alternative penalized likelihoods have been proposed as a solution to this known problem and have been shown to satisfy the oracle property: the smoothly clipped absolute deviation (SCAD) penalization and the adaptive lasso. The oracle property states that an optimal estimator of [LOH] and it has been shown that the oracle property is not universally satisfied by the lasso \cite{zou2006}. The lasso, SCAD penalized estimation, and adaptive lasso share similar developmental histories, being developed first for variable selection and linear/generalized linear model parameter estimation with later extension to GGM parameter estimation. The smoothly clipped absolute deviation is a non-concave penalty function defined as \cite{fan2001}:
+It has been shown that the linear increase penalization relative to the norm incurred with $L_1$ regularization of parameters introduces bias, especially in the case of parameters that have large magnitude \cite{fan2009,lam2009}. Two alternative penalized likelihoods have been proposed as a solution to this known problem and have been shown to satisfy the oracle property: the smoothly clipped absolute deviation (SCAD) penalization and the adaptive lasso. It has been shown that the oracle property is not universally satisfied by the lasso \cite{zou2006}. The lasso, SCAD penalized estimation, and adaptive lasso share similar developmental histories, being developed first for variable selection and linear/generalized linear model parameter estimation with later extension to GGM parameter estimation. The smoothly clipped absolute deviation is a non-concave penalty function defined as \cite{fan2001}:
 \begin{align}
 f_{\lambda,a}(\theta)=
 \begin{cases} 
@@ -66,12 +62,12 @@ The behavior of this penalty with respect to coefficient magnitude can be examin
 \begin{align}
 f'_{\lambda,a}(\theta)=\lambda \left[I(\theta \leq \lambda) + \frac{(a \lambda-\theta)_+}{(a-1)\lambda}I(\theta>\lambda)\right]
 \end{align}
-for $\theta > 0$ and $\alpha>2$. In general, the advantage of this penalization over $L_1$ norm penalization is that large values of $\theta$ are not excessively penalized. [LOH: Oracle property and behavior of the derivative] The two parameters of the penalty function can be optimized by cross-validation or via minimization of Bayes risk as was done in \cite{fan2001}. To generalize the SCAD penalty for regularized estimation of GGMs, the SCAD penalized log-likelihood is noted [LOH]:
+for $\theta > 0$ and $\alpha>2$. In general, the advantage of this penalization over $L_1$ norm penalization is that large values of $\theta$ are not excessively penalized. The two parameters of the penalty function can be optimized by cross-validation or via minimization of Bayes risk as was done in \cite{fan2001}. To generalize the SCAD penalty for regularized estimation of GGMs, the SCAD penalized log-likelihood is noted:
 \begin{align*}
 l(\boldsymbol{\Omega}) \propto \log(\det \boldsymbol{\Omega})-\tr \left(\frac{\textbf{S}}{n} \boldsymbol{\Omega} \right) - \sum_{i=1}^{p} \sum_{j=1}^{p} f_{\lambda,a} (|\omega_{ij}|)
 \end{align*}
 
-After demonstrating the conditions in which lasso variable selection is not guaranteed to be consistent and hence not satisfying the oracle property, \cite{zou2006} modified the $L_1$ lasso penalty $\lambda ||\boldsymbol{\theta}||_1$ to incorporate parameter specific weights $\textbf{w}$ [LOH] yielding penalty $\lambda ||\textbf{w} \boldsymbol{\theta}||_1$. The penalized likelihood for the adaptive graphical lasso is then:
+After demonstrating the conditions in which lasso variable selection is not guaranteed to be consistent and hence not satisfying the oracle property, \cite{zou2006} modified the $L_1$ lasso penalty $\lambda ||\boldsymbol{\theta}||_1$ to incorporate parameter specific weights $\textbf{w}$  yielding penalty $\lambda ||\textbf{w} \boldsymbol{\theta}||_1$. The penalized likelihood for the adaptive graphical lasso is then:
 \begin{align}
 \log(\det \boldsymbol{\Omega})-\tr \left(\frac{\mathbf{S}}{n} \boldsymbol{\Omega}\right) - \lambda \sum_{1\leq i \leq p} \sum_{1 \leq j \leq p} w_{ij} |\omega_{ij}|.
 \end{align}
@@ -148,7 +144,7 @@ where $\tilde{\rho}_{ij}$ is the posterior mean estimator of $\rho_{ij}$ and $\t
 \section{Bayesian inference given \emph{G}-Wishart priors}
 An alternative Bayesian treatment focuses on  \cite{dawid1993,roverato2002,atay2005,dobra2011a,dobra2011b,wang2012,cheng2012} the estimation of GGMs via conjugate inference for $\boldsymbol{\Omega}$ given that $\boldsymbol{\Omega}$ is faithful to a fixed graph $G$, as opposed to estimation with shrinkage.
 
-Early work \cite{dawid1993} focused on the case of decomposable GGMs. A decomposition of a graph $G$ is a pair subsets $(R,S)$, $R\subseteq V$, $S\subseteq V$ such that $V=R \cup S$, the graph defined by $R \cap S$ is complete, and $R \cap S$ is the separator of $R$ and $S$--that is any path between $R$ and $S$ must go through $R \cap S$. A graph $G$ is a decomposable graph if it complete or there exists a proper decomposition $(R,S)$ of $G$. Equivalently, a graph is decomposable if each prime component of the graph is complete \cite{roverato2002}. \cite{dawid1993} first describe the Hyper Inverse Wishart distribution for cliques $C\in \mathcal{C}$ where $\{C_1,C_2, \hdots,C_k \}$ is a perfectly ordered set of cliques in the decomposable graph $G$ and $S$ [LOH]
+Early work \cite{dawid1993} focused on the case of decomposable GGMs. A decomposition of a graph $G$ is a pair subsets $(R,S)$, $R\subseteq V$, $S\subseteq V$ such that $V=R \cup S$, the graph defined by $R \cap S$ is complete, and $R \cap S$ is the separator of $R$ and $S$--that is any path between $R$ and $S$ must go through $R \cap S$. A graph $G$ is a decomposable graph if it complete or there exists a proper decomposition $(R,S)$ of $G$. Equivalently, a graph is decomposable if each prime component of the graph is complete \cite{roverato2002}. \cite{dawid1993} first describe the Hyper Inverse Wishart distribution for cliques $C\in \mathcal{C}$ where $\{C_1,C_2, \hdots,C_k \}$ is a perfectly ordered set of cliques in the decomposable graph $G$ and $S$.
 
 \begin{align}
 f_G(\boldsymbol{\Sigma}^{\mathcal{V}}|\delta,\textbf{D}^{\mathcal{V}})= \frac{\prod_{j=1}^k f_{C_j}(\boldsymbol{\Sigma}_{C_j C_j}|\delta,\textbf{D}_{C_j C_j})}{\prod_{j=2}^k f_{S_j}(\boldsymbol{\Sigma}_{S_j S_j}|\delta,\textbf{D}_{S_j S_j})}
