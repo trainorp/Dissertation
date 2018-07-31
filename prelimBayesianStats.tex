@@ -1,7 +1,8 @@
 \label{prelimBayesian}
 \begin{DoubleSpace*}
+Bayesian statistics represents both a sub-discipline of statistics as well as a philosophical paradigm. A philosophical discussion of the relative merits of frequentist versus Bayesian statistics is beyond the scope of this text. However, we do note the following general distinctions between frequentist and Bayesian statistics. First, frequentist approaches assume that a population parameter is fixed, while samples are drawn (a stochastic or random process) from a population to estimate this population parameter. Contrastingly, Bayesian approaches assume that the sample data is fixed, but the population parameter is a random variate for which a probability distribution can be specified. Given a fixed population parameter, frequentist approaches are based on the long run behavior of drawing repeated samples from a population. For example, a 95\% confidence interval (CI) for a population parameter means that if 100 samples were randomly drawn a CI constructed in an identical manner 95 would contain the population value on average. This implies that the frequentist approaches consider the likelihood of both observed and unobserved data. In contrast, Bayesian approaches evaluate the probability distribution of a population parameter the observed sample. This probability distribution can be determined by considering the integrating the likelihood of the  observed sample given each possible parameter values times the probability of these parameter values, divided by the likelihood of the sample. Consequently, Bayesian approaches require the prior stipulation of the probability distribution of the population parameter.
+ 
 \section{Bayes rule}
-
 The central foundation of Bayesian statistics is Bayes rule \cite{gelman2004}. 
 \begin{theorem} If $A$ and $B$ are events with $\PP(B)>0$, then:
 	\begin{gather}
@@ -13,8 +14,8 @@ Further, Bayes rule can be extended to any arbitrary partitioning of a sample sp
 \begin{theorem}
 	Let $\mathcal{P}=\{A_i: i=1,2, \hdots, N\}$ represents an arbitrary partitioning of a sample space $S$, then for a specific $A_i$:
 	\begin{gather}
-			 \PP(A_i|B)=\frac{\PP(B|A_i)P(A_i)}{\sum_{A_j\in \mathcal{P}}\PP(B|A_j)P(A_j)}
-	\end{gather}.
+			 \PP(A_i|B)=\frac{\PP(B|A_i)P(A_i)}{\sum_{A_j\in \mathcal{P}}\PP(B|A_j)P(A_j)}.
+	\end{gather}
 \end{theorem}
 
 \section{Bayesian inference regarding a parameter}
@@ -180,5 +181,6 @@ Thus it can be seen that the conditional distribution for each $z_i^{(-i)}$ is:
 \begin{align}
 	z_i^{(-i)} |(\boldsymbol{\theta},\textbf{p},\textbf{z},\textbf{x} )\sim Multi \left(1,\frac{f(x_i|\lambda_1)p_1}{ f(x_i)},\hdots , \frac{f(x_i|\lambda_3)p_3}{ f(x_i)} \right)
 \end{align}
+From these conditional distributions, a Gibbs sampler can be formulated.
 
 \end{DoubleSpace*}
