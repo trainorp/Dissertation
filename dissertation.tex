@@ -58,6 +58,7 @@
 \renewcommand{\thesection}{\arabic{section}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage[left=1.5in,right=1in,top=1in,bottom=1in,footskip=.5in]{geometry} 
 \begin{document}
 % ---------------------------------------
 % Front matter
@@ -69,16 +70,17 @@
 \authordegree{M.S. in Biostatistics, 2014\\M.A. in Mathematics, 2014\\B.S. in Mathematics, 2012}
 
 % Dissertation title
-\title{Bayesian analytical approaches for metabolomics: a novel method for molecular structure-informed metabolite interaction modeling, a novel diagnostic model for differentiating Myocardial Infarction type, and  approaches for compound identification given mass spectrometry data}
+\title{BAYESIAN ANALYTICAL APPROACHES FOR METABOLOMICS: A NOVEL METHOD FOR MOLECULAR STRUCTURE-INFORMED METABOLITE INTERACTION MODELING, A NOVEL DIAGNOSTIC MODEL FOR DIFFERENTIATING MYOCARDIAL INFARCTION TYPE, AND APPROACHES FOR COMPOUND IDENTIFICATION GIVEN MASS SPECTROMETRY DATA}
+%\title{Bayesian analytical approaches for metabolomics: a novel method for molecular structure-informed metabolite interaction modeling, a novel diagnostic model for differentiating Myocardial Infarction type, and  approaches for compound identification given mass spectrometry data}
 
 % Dissertation degree
 \dissertationdegree{Doctor of Philosophy}
 
 % Dissertation discipline (may differ from the department name)
-\dissertationdiscipline{Bioinformatics}
+\dissertationdiscipline{Interdisciplinary Studies:  Bioinformatics}
 
 % Month and year of degree award
-\dissertationdate{July 2018}
+\dissertationdate{August 2018}
 
 % Month day and year of dissertation approval
 \approvaldate{July 19, 2018}
@@ -124,14 +126,19 @@ Finally, acknowledgments are due to the following organizations for providing fi
 
 % Dissertation abstract 
 \begin{dissertationabstract}
-Metabolomics, the study of small molecules in biological systems, has enjoyed great success in enabling researchers to examine disease-associated metabolic dysregulation and has been utilized for the discovery biomarkers of disease and phenotypic states. In spite of recent technological advances in the analytical platforms utilized in metabolomics and the proliferation of tools for the analysis of metabolomics data, significant challenges in metabolomics data analyses remain. In this dissertation, we present three of these challenges and Bayesian methodological solutions for each. In the first part we develop a new methodology to serve a basis for making higher order inferences in metabolomics, which we define as the testing of hypotheses that are more complex than single metabolite hypothesis tests. This methodology utilizes informative priors that are generated via the analysis of molecular structure similarity to enable the estimation of metabolite “interactomes” (or probabilistic models) which are organism-, sample media-, and condition-specific as well as comprehensive; and that can serve as reference models for studying perturbations in metabolic systems. After discussing the development of our methodology, we present an evaluation of its performance conducted using simulation studies, and we use the methodology for estimating a plasma metabolite interactome for stable heart disease. This interactome may serve as a reference model for evaluating systems-level changes that occur with acute disease events such as myocardial infarction (MI) or unstable angina. In the second part of this work, we present the challenge of developing diagnostic classification models which utilize metabolite abundances and that do not “overfit” relatively small sample sizes, especially given the high dimensionality of metabolite data acquired using platforms such as liquid chromatography-mass spectrometry. We use a Bayesian methodology for estimating a multinomial logistic regression classifier for the detection and discrimination of the subtype of acute myocardial infarction utilizing metabolite abundance data quantified from blood plasma. As heart disease is the leading cause of global mortality, a blood-based and non-invasive diagnostic test that could differentiate between MI types at the time of the event would have great utility. In the final part of this dissertation we review Bayesian approaches for compound identification in metabolomics experiments that utilize liquid chromatography-mass spectrometry which remains a challenging problem.
+\begin{center}
+	BAYESIAN ANALYTICAL APPROACHES FOR METABOLOMICS: A NOVEL METHOD FOR MOLECULAR STRUCTURE-INFORMED METABOLITE INTERACTION MODELING, A NOVEL DIAGNOSTIC MODEL FOR DIFFERENTIATING MYOCARDIAL INFARCTION TYPE, AND APPROACHES FOR COMPOUND IDENTIFICATION GIVEN MASS SPECTROMETRY DATA \\
+	Patrick Trainor \\
+	July 19, 2018
+\end{center}
+Metabolomics, the study of small molecules in biological systems, has enjoyed great success in enabling researchers to examine disease-associated metabolic dysregulation and has been utilized for the discovery biomarkers of disease and phenotypic states. In spite of recent technological advances in the analytical platforms utilized in metabolomics and the proliferation of tools for the analysis of metabolomics data, significant challenges in metabolomics data analyses remain. In this dissertation, we present three of these challenges and Bayesian methodological solutions for each. In the first part we develop a new methodology to serve a basis for making higher order inferences in metabolomics, which we define as the testing of hypotheses that are more complex than single metabolite hypothesis tests. This methodology utilizes informative priors that are generated via the analysis of molecular structure similarity to enable the estimation of metabolite ``interactomes'' (or probabilistic models) which are organism-, sample media-, and condition-specific as well as comprehensive; and that can serve as reference models for studying perturbations in metabolic systems. After discussing the development of our methodology, we present an evaluation of its performance conducted using simulation studies, and we use the methodology for estimating a plasma metabolite interactome for stable heart disease. This interactome may serve as a reference model for evaluating systems-level changes that occur with acute disease events such as myocardial infarction (MI) or unstable angina. In the second part of this work, we present the challenge of developing diagnostic classification models which utilize metabolite abundances and that do not ``overfit'' relatively small sample sizes, especially given the high dimensionality of metabolite data acquired using platforms such as liquid chromatography-mass spectrometry. We use a Bayesian methodology for estimating a multinomial logistic regression classifier for the detection and discrimination of the subtype of acute myocardial infarction utilizing metabolite abundance data quantified from blood plasma. As heart disease is the leading cause of global mortality, a blood-based and non-invasive diagnostic test that could differentiate between MI types at the time of the event would have great utility. In the final part of this dissertation we review Bayesian approaches for compound identification in metabolomics experiments that utilize liquid chromatography-mass spectrometry which remains a challenging problem.
 \end{dissertationabstract}
 
 % These commands will generate the required tables of contents. 
 % The \clearpage commands insure that the next one begins on a new page.
-\tableofcontents \clearpage
-\listoftables \clearpage
-\listoffigures \clearpage
+{\newgeometry{top=1in,left=1.5in,bottom=1in,footskip=.5in} \setlength{\beforechapskip}{.75in}  \tableofcontents \clearpage}
+{\newgeometry{top=1in,left=1.5in,bottom=1in,footskip=.5in} \setlength{\beforechapskip}{.75in} \listoftables \clearpage}
+{\newgeometry{top=1in,left=1.5in,bottom=1in,footskip=.5in} \setlength{\beforechapskip}{.75in} \listoffigures \clearpage}
 
 % ---------------------------------------------
 % Main matter
@@ -172,11 +179,6 @@ Metabolomics, the study of small molecules in biological systems, has enjoyed gr
 
 \chapter{Conclusions, discussion, and future directions} 
 \input{conclusions.tex}
-
-% ---------------------------------------------
-% Back matter
-% ---------------------------------------------
-% The layout changes for the last part and you need this command
 
 \backmatter
 \begin{DoubleSpace*}
