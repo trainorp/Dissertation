@@ -57,6 +57,7 @@ Results from the simulation studies given an autoregressive covariance structure
 \KOMAoptions{paper=portrait,pagesize}
 \recalctypearea
 
+\newgeometry{top=1in,left=1.5in,bottom=1in,footskip=.5in}
 \begin{DoubleSpace}
 Results of the simulation studies for the autoregressive case are shown in Figure~\ref{fig:ar1res} with numerical summaries provided in Table~\ref{tab:ar1resTab}. GGM estimation by the Bayesian Graphical Lasso (BGL) and Adaptive BGL exhibited similar performance characteristics with respect to sensitivity, specificity, AUC, and $F_1$ measure. The performance of the chemical structure informative adaptive BGL varied significantly based on the suitability of the informative prior distribution for shrinkage parameters. In the “good prior” case in which it is assumed that the structural similarity and data generating process were deterministically linked, the structure adaptive BGL demonstrated significantly higher sensitivity, specificity, AUC, and $F_1$ measure than the other techniques. Conversely, in the “poor prior” case in which the relationship between the simulated structural similarity and the data generating process was masked by gaussian noise, average AUC and $F_1$ measure were significantly lower for the structure adaptive BGL than the remaining techniques. 
 

@@ -87,6 +87,7 @@ As the objective of the present analysis was to develop a model capable of discr
 \KOMAoptions{paper=portrait,pagesize}
 \recalctypearea
 
+\newgeometry{top=1in,left=1.5in,bottom=1in,footskip=.5in}
 \begin{DoubleSpace*}
 Given that the MCMC chains provide the joint posterior distribution of model parameters, the correlation between parameter estimates can be evaluated. Two parameter estimates were significantly correlated, both of which were for monoacylglycerols [1-linoleoylglycerol (18:2)] and [2-linoleoylglycerol (18:2)]. This relationship was further explored. Figure~\ref{fig:coefPost} shows a 3-dimensional scatterplot of samples from the simulated posterior distribution. In the first plane, the parameter estimates for both monoacylglycerols are shown, while the remaining axis shows the log-posterior probability of the model with these parameterizations.  Similarly, Figure~\ref{fig:coefPost2} shows the same slice of the posterior distribution with the log-posterior probability axis removed and represented as a color instead. The relatively strong negative correlation between the parameter estimates, without a systemic change in the log-posterior probability suggests that these two monoacylglycerols modulate the probability of the phenotypes in a similar way. 
 
