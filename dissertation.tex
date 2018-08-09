@@ -24,7 +24,7 @@
 \usepackage[paper=portrait,pagesize]{typearea}
 \usepackage{setspace}
 \usepackage{breakcites}
-
+\usepackage{pdflscape}
 \DeclareMathOperator{\PP}{P}
 \DeclareMathOperator{\EE}{E}
 \DeclareMathOperator{\argmin}{argmin}
@@ -59,6 +59,7 @@
 \renewcommand\bibname{REFERENCES}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \RequirePackage[left=1.5in,right=1in,top=1in,bottom=1in,footskip=.5in]{geometry} 
+
 \begin{document}
 % ---------------------------------------
 % Front matter
@@ -136,9 +137,24 @@ Metabolomics, the study of small molecules in biological systems, has enjoyed gr
 
 % These commands will generate the required tables of contents. 
 % The \clearpage commands insure that the next one begins on a new page.
-{\newgeometry{top=1in,left=1.5in,bottom=1in,footskip=.5in} \setlength{\beforechapskip}{.75in}  \tableofcontents* \clearpage}
-{\newgeometry{top=1in,left=1.5in,bottom=1in,footskip=.5in} \setlength{\beforechapskip}{.75in} \listoftables \clearpage}
-{\newgeometry{top=1in,left=1.5in,bottom=1in,footskip=.5in} \setlength{\beforechapskip}{.75in} \listoffigures \clearpage}
+{\newgeometry{top=1in,left=1.5in,bottom=1in,footskip=.5in} \setlength{\beforechapskip}{.75in} 
+	\hypersetup{
+		colorlinks=false,
+		pdfborder={0 0 0},
+	}
+	\tableofcontents* \clearpage}
+{\newgeometry{top=1in,left=1.5in,bottom=1in,footskip=.5in} \setlength{\beforechapskip}{.75in}
+	\hypersetup{
+		colorlinks=false,
+		pdfborder={0 0 0},
+	}
+	 \listoftables \clearpage}
+{\newgeometry{top=1in,left=1.5in,bottom=1in,footskip=.5in} \setlength{\beforechapskip}{.75in}
+	\hypersetup{
+		colorlinks=false,
+		pdfborder={0 0 0},
+	}
+	 \listoffigures \clearpage}
 
 % ---------------------------------------------
 % Main matter
@@ -149,39 +165,38 @@ Metabolomics, the study of small molecules in biological systems, has enjoyed gr
 % Use separate files for chapters and include the chapter titles here.
 % Having the titles here is necessary to get them properly indexed and 
 % formatted.
-
-\chapter{Introduction}
+\chapter{INTRODUCTION}
 \input{intro.tex}
 
-\chapter{Preliminaries: Metabolomics}
+\chapter{PRELIMINARIES: METABOLOMICS}
 \input{prelimMetabolomics.tex}
 
-\chapter{Preliminaries: Bayesian statistics}
+\chapter{PRELIMINARIES: BAYESIAN STATISTICS}
 \input{prelimBayesianStats.tex}
 
-\chapter{Preliminaries: Gaussian graphical modeling}
+\chapter{PRELIMINARIES: GAUSSIAN GRAPHICAL MODELING}
 \input{prelimGGM.tex}
 
-\chapter{Higher-order inference in metabolomics}
+\chapter{HIGHER-ORDER INFERENCE IN METABOLOMICS}
 \input{HigherOrderIn.tex}
 
 {\newgeometry{top=1in,left=1.5in,bottom=1in,footskip=.5in} 
-\chapter{Inferring metabolite interactomes via Bayesian graphical model selection utilizing molecular structure informative priors}
+\chapter{INFERRING METABOLITE INTERACTOMES VIA BAYESIAN GRAPHICAL MODEL SELECTION UTILIZING MOLECULAR STRUCTURE INFORMATIVE PRIORS}
 \input{structureAdBLG.tex}
 }
 
 {\newgeometry{top=1in,left=1.5in,bottom=1in,footskip=.5in} 
-\chapter{A plasma interactome for stable heart disease}
+\chapter{A PLASMA INTERACTOME FOR STABLE HEART DISEASE}
 \input{heartDiseaseInteractome.tex}
 }
 
-\chapter{A Bayesian diagnostic model for differentiating MI type}
+\chapter{A BAYESIAN DIAGNOSTIC MODEL FOR DIFFERENTIATING MI TYPE}
 \input{diagnostic.tex}
 
-\chapter{Bayesian approaches for compound identification given LC-MS data}
+\chapter{BAYESIAN APPROACHES FOR COMPOUND IDENTIFICATION GIVEN LC-MS DATA}
 \input{priorCompID.tex}
 
-\chapter{Conclusions, discussion, and future directions} 
+\chapter{CONCLUSION, DISCUSSION, AND FUTURE DIRECTIONS}
 \input{conclusions.tex}
 
 \backmatter
@@ -197,16 +212,16 @@ Metabolomics, the study of small molecules in biological systems, has enjoyed gr
 \end{DoubleSpace*}
 % Appendices and the Vita are treated as chapters in the back matter
 
-\chapter{Appendix A: Acronyms Utilized}
-\input{acronyms.tex}
+\newgeometry{top=1in,bottom=1in,footskip=.5in,left=1.5in}{
+\chapter{APPENDIX A: ACRONYMS UTILIZED}
+\input{acronyms.tex}}
 
-\chapter{Appendix B: Software developed for the Bayesian Graphical Lasso}
-\input{code.tex}
+\newgeometry{top=1in,bottom=1in,footskip=.5in,left=1.5in}{
+\chapter{APPENDIX B: SOFTWARE DEVELOPED FOR THE BAYESIAN GRAPHICAL LASSO}
+\input{code.tex}}
 
+\newgeometry{top=1in,bottom=1in,footskip=.5in,left=1.5in}{
 \chapter{CURRICULUM VITAE}
-\begin{DoubleSpace*}
-\input{vita.tex}
-\end{DoubleSpace*}
-}
+\input{vita.tex}}
 
 \end{document}

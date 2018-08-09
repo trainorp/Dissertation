@@ -66,11 +66,9 @@ As the objective of the present analysis was to develop a model capable of discr
 
 \end{DoubleSpace*}
 
-\newpage
-\KOMAoptions{paper=landscape}
-\recalctypearea
+\begin{landscape}
 \begin{figure}[H]
-	\includegraphics[scale=1.1]{../Aim3/MCMCEx.png}
+	\includegraphics[scale=.8]{../Aim3/MCMCEx.png}
 	\caption[Time series plot of the MCMC chain for 3-hydroxypyridine sulfate multinomial logistic regression coefficient and resulting histogram showing the posterior distribution]{(a) MCMC chains for the by-group multinomial logit model parameters corresponding to 3-hydroxypyridine sulfate. (b) Histogram showing the simulated posterior probability distribution for the same parameters. \label{fig:brm1Coef} }
 \end{figure}
 \newpage
@@ -83,11 +81,8 @@ As the objective of the present analysis was to develop a model capable of discr
 	\includegraphics[scale=1.15]{../Aim3/brm2Coef}
 	\caption[Bayesian credible intervals for multinomial logit model parameters with troponin]{\DoubleSpacing 50\% Bayesian credible intervals for the by-group multinomial logistic regression coefficients. The multinomial models did include clinical troponin assay values. \label{fig:brm2Coef} }
 \end{figure}
-\newpage
-\KOMAoptions{paper=portrait,pagesize}
-\recalctypearea
+\end{landscape}
 
-\newgeometry{top=1in,left=1.5in,bottom=1in,footskip=.5in}
 \begin{DoubleSpace*}
 Given that the MCMC chains provide the joint posterior distribution of model parameters, the correlation between parameter estimates can be evaluated. Two parameter estimates were significantly correlated, both of which were for monoacylglycerols [1-linoleoylglycerol (18:2)] and [2-linoleoylglycerol (18:2)]. This relationship was further explored. Figure~\ref{fig:coefPost} shows a 3-dimensional scatterplot of samples from the simulated posterior distribution. In the first plane, the parameter estimates for both monoacylglycerols are shown, while the remaining axis shows the log-posterior probability of the model with these parameterizations.  Similarly, Figure~\ref{fig:coefPost2} shows the same slice of the posterior distribution with the log-posterior probability axis removed and represented as a color instead. The relatively strong negative correlation between the parameter estimates, without a systemic change in the log-posterior probability suggests that these two monoacylglycerols modulate the probability of the phenotypes in a similar way. 
 
@@ -160,7 +155,7 @@ Non-Thrombotic MI &   2  &   0 &    10
   	\centering
  	  	\caption[Leave-one-out cross-validation (LOOCV) estimated group probabilities from the Bayesian multinomial logistic regression models for each of human subject in the cohort.]{\DoubleSpacing  Leave-one-out cross-validation (LOOCV) estimated group probabilities from the Bayesian multinomial logistic regression models for each of human subject in the cohort. M1: Model without clinical troponin values. M2: Model with clinical troponin values. Blue-to-red continuous scale ranks estimated probabilities from low-to-high.}
 	  	\label{tab:modelRes3}
- 	\includegraphics[scale=.9]{../Aim3/PatientPred}
+ 	\includegraphics[scale=.8]{../Aim3/PatientPred}
 \end{table}
 
 \section{Discussion}
