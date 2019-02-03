@@ -38,45 +38,79 @@
 	\titlepage
 \end{frame}
 
-\begin{frame}
-	\begin{center}
-		\includegraphics[scale=1]{../../centralDogma}
-	\end{center}
-\end{frame}
+\section{Overview}
 
-\begin{frame}
-\begin{center}
-	\includegraphics{../../centralDogmaB.pdf}
-\end{center}
-\end{frame}
-
-\begin{frame}
-	\begin{center}
-		\includegraphics[scale=.5]{../../tryptophan}
-	\end{center}
-\end{frame}
-
-\begin{frame}{Part \#1}{Generating metabolomics \& lipidomics data using mass spectrometry}
+\begin{frame}{Part \#1}{Bioinformatic processing of metabolomics \& lipidomics data generated using mass spectrometry}
 \vspace{-15pt}
 \begin{center}
 	\includegraphics[scale=.3]{SLU1}
 \end{center}
 \end{frame}
 
-\begin{frame}{Part \#2}{A novel method for ``systems-level'' inference from metabolomics \& lipidomics data}
-	\vspace{-15pt}
-	\begin{center}
-		\includegraphics[scale=.64]{path2}
+\begin{frame}{Part \#2}{A novel method for making ``systems-level'' inference from metabolomics \& lipidomics data}
+\vspace{-15pt}
+\begin{center}
+\includegraphics[scale=.64]{path2}
+\end{center}
+\end{frame}
+
+\begin{frame}{Introduction}{Where do metabolites and lipids belong in the central dogma?}
+\vspace{-7 pt}
+\begin{center}
+		\includegraphics[scale=1]{../../centralDogma}
 	\end{center}
 \end{frame}
 
-\begin{frame}{Outline}
-	\vspace{-10.5pt}
-	\tableofcontents[hideallsubsections]
+\begin{frame}{Introduction}{Where do metabolites and lipids belong in the central dogma?}
+\vspace{-7 pt}
+\begin{center}
+	\includegraphics{../../centralDogmaB.pdf}
+\end{center}
 \end{frame}
 
-\section{Bioinformatics for mass spectrometry}
+\begin{frame}
+	\vspace{-10.5pt}
+	\begin{center}
+		\includegraphics[scale=.5]{../../tryptophan}
+		
+		\text{\tiny{(commons.wikimedia.org/wiki/File:Tryptophan\_metabolism.svg)}}
+	\end{center}
+\end{frame}
 
+\begin{frame}
+\begin{center}
+	\includegraphics[scale=.5]{../../metabolomics1}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+	\includegraphics[scale=.5]{../../metabolomics2}
+\end{center}
+\end{frame}
+
+\begin{frame}
+	\begin{center}
+		\includegraphics[scale=.3]{../../Eicosanoid_synthesis}
+		
+		\text{\tiny{(commons.wikimedia.org/wiki/File:Eicosanoid\_synthesis.svg)}}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+	\includegraphics[scale=.3]{../../Eicosanoid_synthesis2}
+\end{center}
+\end{frame}
+
+\begin{frame}{Introduction}{Where do metabolites and lipids belong in the central dogma?}
+\vspace{-7 pt}
+\begin{center}
+	\includegraphics{../../centralDogmaB.pdf}
+\end{center}
+\end{frame}
+
+\section{Bioinformatic processing of LC-MS data}
 \begin{frame}{Mass spectrometry is ubiquitous}
 	\vspace{-15pt}
 \begin{center}
@@ -84,42 +118,39 @@
 \end{center}
 \end{frame}
 
-\begin{frame}{}
-	\includegraphics{johanes}\\
-	Sketch courtesy of Dr. Johannes Rainer (Institute for Biomedicine, Eurac
-	Research, Bolzano, Italy)
+\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Chromatography}
+	content...
 \end{frame}
 
-\section{Probabilistic interaction modeling (Interactome)}
-\subsection{Motivation: Higher order inference in metabolomics}
-\begin{frame}{Outline}
-	\vspace{-10.5pt}
-	\tableofcontents[currentsection,subsectionstyle=hide]
+\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Ionization (Electrospray Ionization)}
+\vspace{-7pt}
+\begin{center}
+	\includegraphics[scale=.45]{../../ESI}
+	
+	\tiny{(Cartoon from Agilent Q-ToF MS manual)}
+\end{center}
 \end{frame}
 
-\begin{frame}{Outline}
-	\vspace{-10.5pt}
-	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Quadrupole Time-of-Flight Instruments}
+\vspace{-7pt}
+\begin{center}
+	\includegraphics[scale=.6]{../../qtof}
+\end{center}
 \end{frame}
 
-\begin{frame}{Motivation}
-	\vspace{-15.5pt}
-	{\LARGE In someone else's words...}
-	\begin{center}
-		\includegraphics[scale=.5]{../Metabolomics2018/JohnsonNatureReview}
-	\end{center}
-	(2016). \emph{Nature Rev Mol Cell Bio, 17}. doi: 10.1038/nrm.2016.25
+\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Form of the data}
+\vspace{-7pt}
+\includegraphics{johanes}
+
+\tiny{Sketch courtesy of Dr. Johannes Rainer (Institute for Biomedicine, Eurac Research, Bolzano, Italy)}
 \end{frame}
 
-\begin{frame}{Motivation}
-	\vspace{-10pt}
-		{\LARGE A tale of two aims:}
-		
-		\begin{enumerate}[{1)}]
-			\item ``...Aim 2 determines which TAM metabolic pathway(s) is regulated by c-Maf using systems metabolomics approach. We will first determine TAM metabolic pathways using Stable Isotope Resolved Metabolomics (SIRM) approach...'' [1R01CA213990-01] \pause
-			\item[]
-			\item ``...The objective of the proposed project is to perform untargeted metabolite profiling to reveal metabolite abnormalities that are common to sALS patients and to determine metabolic pathways whose dysregulation contributes to the disease...'' [5F31NS095698-02]
-		\end{enumerate}
+\section{Systems-level inference given metabolomics \& lipidomics data}
+\begin{frame}{Part \#2}{A novel method for making ``systems-level'' inference from metabolomics \& lipidomics data}
+\vspace{-15pt}
+\begin{center}
+	\includegraphics[scale=.64]{path2}
+\end{center}
 \end{frame}
 
 \begin{frame}{Motivation}{Biomarker hypotheses}
@@ -280,74 +311,6 @@
 		\item[]
 		\item Solution: Utilize prior scientific knowledge (biochemistry) to inform the search for graphical models that can then be used to estimate partial correlation coefficients
 	\end{itemize}
-\end{frame}
-
-\subsection{Bayesian reasoning}
-\begin{frame}{Outline}
-	\vspace{-10.5pt}
-	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
-\end{frame}
-
-\begin{frame}{Bayesian reasoning example}
-\vspace{-15pt}
-\begin{itemize}
-	\item Mathematical foundation:
-	\begin{align*}
-	p(\theta|\textbf{x})&=\frac{p(\textbf{x}|\theta)p(\theta)}{\int_{\tilde{\theta} \in \Theta} p(\textbf{x}|\tilde{\theta})p(\tilde{\theta})d\tilde{\theta}}\\ &=\frac{p(\textbf{x}|\theta)p(\theta)}{p(\textbf{x})}\\
-	&\propto p(\textbf{x}|\theta)p(\theta).
-	\end{align*}
-	\item Example:
-	\begin{itemize}
-		\item Mass spectrometer with a counting detector that records the counts per second over a fixed $m/z$ window
-		\item $X\sim Pois(\lambda)$
-		\item Sample: $\{107, 103, 110, 99, 108, 108, 105\}$
-		\item Prior data: 10 observations of 100
-	\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Bayesian reasoning example}
-	\vspace{-15pt}
-	\begin{itemize}
-		\item Ten prior count observations and that the sum of counts from these observations was 1,000
-		\item Prior distribution for $\lambda$ of $Gamma(\alpha, \beta)$ with $\alpha=1000$, $\beta=10$
-		\item Gamma pdf:
-		\begin{gather*}
-		f(\lambda|\alpha,\beta) =\frac{\beta^{\alpha}}{\Gamma(\alpha)}\lambda^{\alpha-1}e^{-\beta \lambda}, \quad \lambda \in \left[0, \infty \right), \quad \alpha,\beta >0.
-		\end{gather*}
-		\item Poisson pmf:
-		\begin{gather*}
-			f(x|\lambda)=\frac{\lambda^x e^{-\lambda}}{x!}, \quad x \in \mathbb{N}, \quad \lambda \in \left[0, \infty \right)
-		\end{gather*}
-		\item \textbf{Goal}:  $p(\textbf{x}|\lambda)p(\lambda)$
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Bayesian reasoning example}
-		We note that the likelihood for the Poisson distribution factorizes as in the following:
-		\begin{align*}
-		\mathcal{L}(\lambda|\textbf{x})=p(\textbf{x}|\lambda)=\prod_{i=1}^n \frac{\lambda^{x_i}e^{-\lambda}}{x_i!}= \left( \prod_{i=1}^n x_i! \right)^{-1} \times \lambda^{\sum_{i=1}^n x_i} e^{-n\lambda}. 
-		\label{eq:poissonLik}
-		\end{align*}
-		Considering the prior distribution that we have specified:
-		\begin{align*}
-		p(\lambda|\textbf{x})&\propto \frac{\beta^{\alpha}}{\Gamma(\alpha)}\lambda^{\alpha-1}e^{-\beta \lambda} \lambda^{\sum_{i=1}^n x_i} e^{-n\lambda} \\
-		&\propto \frac{\beta^{\alpha}}{\Gamma(\alpha)} \lambda^{\alpha + \sum_{i=1}^n x_i -1} e^{-(\beta+n)\lambda},
-		\end{align*}
-		we can note that:
-		\begin{align*}
-		p(\lambda|\textbf{x}) =c(\textbf{x},\alpha,\beta)^{-1} \lambda^{\alpha + \sum_{i=1}^n x_i -1} e^{-(\beta+n)\lambda}
-		\end{align*}
-\end{frame}
-
-\begin{frame}{Bayesian reasoning example}
-	\vspace{-5pt}
-	\begin{center}
-		$p(\lambda|\textbf{x})\sim Gamma(\alpha+ \sum_{i=1}^n x_i, \beta+n)$
-		\includegraphics[scale=.6]{../Plots/Poisson}
-		
-		$\hat{\lambda}_{MLE}=105.7143, \quad \tilde{\lambda}=102.2941$
-	\end{center}
 \end{frame}
 
 \subsection{The current model}
