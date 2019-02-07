@@ -150,20 +150,20 @@
 \begin{enumerate}
 	\setbeamertemplate{enumerate items}[default]
 	\item File conversion
-	\begin{itemize}
-		\item Vendor data files (or directories) containing scan-level data are non-standard
-		\item Need to convert to mzML or mzXML
-		\item msconvert from proteowizard
-	\end{itemize}
+	\item[]
 	\item Peak detection
+	\item[]
 	\item Retention time alignment
-	\item Peak grouping 
+	\item[]
+	\item Peak grouping
+	\item[]
 	\item Peak filling
+	\item[]
 	\item Compound identification
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Bioinformatic processing}{File Conversion}
+\begin{frame}{Bioinformatic processing}{1. File conversion}
 \vspace{-10pt}
 	\begin{enumerate}
  \setbeamertemplate{enumerate items}[default]
@@ -176,8 +176,39 @@
 	\end{enumerate}
 \end{frame}
 
-\begin{frame}{Bioinformatic processing}{Peak Detection}
-	LOH
+\begin{frame}{Bioinformatic processing}{2. Peak detection}
+\vspace{-10pt}
+\begin{center}
+	\includegraphics[scale=.625]{../../xcmsPlots/nicePeak}
+\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{2. Peak detection}
+\vspace{-10pt}
+\begin{center}
+	\includegraphics[scale=.625]{../../xcmsPlots/notNicePeak}
+\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
+\vspace{-10pt}
+\begin{center}
+	\includegraphics[scale=.7]{../../xcmsPlots/NotAligned}
+\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
+\vspace{-14pt}
+\begin{center}
+\includegraphics[scale=.7]{../../xcmsPlots/rtAdjust}
+\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
+\vspace{-10pt}
+\begin{center}
+	\includegraphics[scale=.7]{../../xcmsPlots/Aligned}
+\end{center}
 \end{frame}
 
 \section{Systems-level inference given metabolomics \& lipidomics data}
