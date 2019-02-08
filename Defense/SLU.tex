@@ -150,20 +150,20 @@
 \begin{enumerate}
 	\setbeamertemplate{enumerate items}[default]
 	\item File conversion
-	\begin{itemize}
-		\item Vendor data files (or directories) containing scan-level data are non-standard
-		\item Need to convert to mzML or mzXML
-		\item msconvert from proteowizard
-	\end{itemize}
+	\item[]
 	\item Peak detection
+	\item[]
 	\item Retention time alignment
-	\item Peak grouping 
+	\item[]
+	\item Peak grouping
+	\item[]
 	\item Peak filling
+	\item[]
 	\item Compound identification
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Bioinformatic processing}{File Conversion}
+\begin{frame}{Bioinformatic processing}{1. File conversion}
 \vspace{-10pt}
 	\begin{enumerate}
  \setbeamertemplate{enumerate items}[default]
@@ -174,6 +174,95 @@
 			\item msconvert from proteowizard
 		\end{itemize}
 	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{2. Peak detection}
+\vspace{-7pt}
+\begin{center}
+	\includegraphics[scale=.7]{../../xcmsPlots/TIC}
+\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{2. Peak detection}
+\vspace{-7pt}
+\begin{center}
+	\includegraphics[scale=.7]{../../xcmsPlots/TICZoom}
+\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{2. Peak detection}
+\vspace{-10pt}
+\begin{center}
+	\includegraphics[scale=.625]{../../xcmsPlots/Spec440}
+\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{2. Peak detection}
+\vspace{-10pt}
+\begin{center}
+	\includegraphics[scale=.625]{../../xcmsPlots/Spec440Log}
+\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{2. Peak detection}
+\vspace{-10pt}
+\begin{center}
+	\includegraphics[scale=.625]{../../xcmsPlots/nicePeak}
+\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{2. Peak detection}
+\vspace{-10pt}
+\begin{center}
+	\includegraphics[scale=.625]{../../xcmsPlots/notNicePeak}
+\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
+\vspace{-10pt}
+\begin{center}
+	\includegraphics[scale=.7]{../../xcmsPlots/NotAligned}
+\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
+\vspace{-10pt}
+\begin{center}
+\includegraphics[scale=.7]{../../xcmsPlots/rtAdjust}
+\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
+\vspace{-10pt}
+\begin{center}
+	\includegraphics[scale=.7]{../../xcmsPlots/Aligned}
+\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{4. Peak grouping}
+\vspace{-7pt}
+\textbf{Peak grouping} can refer to: \pause
+		\begin{itemize}
+			\item Grouping the same peak across multiple samples \pause
+			\item Grouping isotopic peaks 
+		\end{itemize}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{4. Peak grouping}
+\vspace{-10pt}
+\begin{center}
+	\includegraphics[scale=.625]{../../xcmsPlots/nicePeak}
+\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{4. Peak grouping}
+\vspace{-7pt}
+\textbf{Peak grouping} can refer to:
+\begin{itemize}
+	\item Grouping the same peak across multiple samples 
+	\item Grouping isotopic peaks 
+	\item Grouping other molecular features (adducts, in-source fragments) together
+\end{itemize}
 \end{frame}
 
 \section{Systems-level inference given metabolomics \& lipidomics data}
@@ -344,12 +433,6 @@
 	\end{itemize}
 \end{frame}
 
-\subsection{The current model}
-\begin{frame}{Outline}
-	\vspace{-10.5pt}
-	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
-\end{frame}
-
 \begin{frame}{Gaussian Graphical Models (GGMs)}
 	\vspace{-5.5pt}
 	\begin{itemize}
@@ -426,10 +509,7 @@
 \end{frame}
 
 \subsection{Using molecular similarity for estimation}
-\begin{frame}{Outline}
-	\vspace{-10.5pt}
-	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
-\end{frame}
+
 \begin{frame}{An informative Bayesian estimation}{The current work}
 	\vspace{-15.5pt}
 	\begin{itemize}
@@ -465,10 +545,7 @@
 \end{frame}
 
 \subsection{Computational nuances}
-\begin{frame}{Outline}
-	\vspace{-10.5pt}
-	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
-\end{frame}
+
 \begin{frame}{Informative Bayesian estimation}{Block Gibbs Sampler}
 	\vspace{-15.5pt}
 	\begin{itemize}
@@ -489,10 +566,7 @@
 \end{frame}
 
 \subsection{A Heart Disease interactome}
-\begin{frame}{Outline}
-	\vspace{-10.5pt}
-	\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
-\end{frame}
+
 \begin{frame}{Heart Disease Interactome}
 	\vspace{-15.5pt}
 	\begin{itemize}
@@ -550,38 +624,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{}{}
-\vspace{-15pt}
-{\Huge
-	Important message:
-	\begin{align*}
-	&\downarrow n \; \text{(samples)} \\
-	&\uparrow p  \; \text{(metabolites)}
-	\end{align*}} \pause 
-{\LARGE \\the integration of extra-experimental scientific knowledge is vital}
-\end{frame}
-
-\begin{frame}{Discussion}
-	\vspace{-10.5pt}
-	\begin{itemize}
-		\item Metabolomics experiments / studies are characterized by $\downarrow n$ and $\uparrow p$ \pause
-		\item[]
-		\item There are many sources of extra-experimental knowledge that are relevant to metabolomics studies \pause
-		\item[] 
-		\item ``Extra-experimental prior beliefs'': \pause
-		\begin{itemize}
-			\item Structurally related metabolites are more likely to exhibit partial dependency than those that are not structurally related \pause
-			\item Diagnostic models from metabolites should have moderated coefficient estimates \pause
-			\item Adduct \& isotopic peaks in LC-MS data should co-elute, isotopic peaks should have predictable intensity ratios, and the presence of one metabolite should increase the likelihood of the presence of biochemically related metabolites
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
 \section{Acknowledgments}
-\begin{frame}{Outline}
-	\vspace{-10.5pt}
-	\tableofcontents[currentsection,subsectionstyle=hide]
-\end{frame}
 
 \begin{frame}{Acknowledgments}
 	\vspace{-15.5pt}
