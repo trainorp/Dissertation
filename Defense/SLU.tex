@@ -35,7 +35,7 @@
 	\titlepage
 \end{frame}
 
-\section{Overview}
+\section{Introduction}
 
 \begin{frame}{Part \#1}{Bioinformatic processing of metabolomics \& lipidomics data generated using mass spectrometry}
 \vspace{-15pt}
@@ -49,6 +49,11 @@
 \begin{center}
 \includegraphics[scale=.64]{path2}
 \end{center}
+\end{frame}
+
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=hide]
 \end{frame}
 
 \begin{frame}{Introduction}{Where do metabolites and lipids belong in the central dogma?}
@@ -108,6 +113,11 @@
 \end{frame}
 
 \section{Bioinformatic processing of LC-MS data}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=hide]
+\end{frame}
+
 \begin{frame}{Mass spectrometry is ubiquitous}
 	\vspace{-15pt}
 \begin{center}
@@ -330,6 +340,13 @@ These should not be grouped!
 \end{frame}
 
 \section{Systems-level inference given metabolomics \& lipidomics data}
+
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection]
+\end{frame}
+
+\section{A new paradigm}
 \begin{frame}{Part \#2}{A novel method for making ``systems-level'' inference from metabolomics \& lipidomics data}
 \vspace{-15pt}
 \begin{center}
@@ -385,19 +402,20 @@ These should not be grouped!
 	\end{center}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{The need for a new paradigm}
 \vspace{-15.5pt}
 \begin{itemize}
 	\item Problem statement: \pause
 	\begin{itemize}
 		\item To make higher-order inference a model of how metabolites are related is required \pause
 		\item[]
-		\item Unbiased approach (using a GGM to estimate partial correlation coefficients) is often unfeasible \pause
-		\item[]
 		\item Pathway-based approach may be inappropriate (given the experimental system, sample media, etc.) \pause
+		\item[]
+		\item Bottom up approaches can be non-informative \pause
+
 	\end{itemize}
 	\item[]
-	\item Solution: Utilize prior scientific knowledge (biochemistry) to inform the search for graphical models that can then be used to estimate partial correlation coefficients
+	\item My proposed solution: Utilize prior scientific knowledge (biochemistry) to inform the search for graphical models that can then be used to estimate partial correlation coefficients
 \end{itemize}
 \end{frame}
 
@@ -433,7 +451,8 @@ These should not be grouped!
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Bias in pathway enrichment analysis}{Metabolic footprint vs. cellular metabolism}	\vspace{-10.5pt}
+\begin{frame}{Bias in pathway enrichment analysis}{Metabolic footprint vs. cellular metabolism}
+\vspace{-10.5pt}
 	\begin{center}
 		\includegraphics[scale=.3]{../Metabolomics2018/512px-Circulatory_System_en}
 	\end{center}
@@ -451,6 +470,18 @@ These should not be grouped!
 	\begin{center}
 		\includegraphics[scale=.5]{../../Aim2/Plots/AR1_Cor}
 	\end{center}
+\end{frame}
+
+\begin{frame}{Needed: partial correlation coefficients}
+\begin{columns}
+	\column{.4 \textwidth}
+	\vspace{-15 pt}
+	\begin{center}
+		\includegraphics[scale=.45]{../../Aim2/Plots/AR1_Om}
+	\end{center}
+	\column{.4 \textwidth}
+ The partial correlation coefficient between $X$ and $Y$, that is $\rho_{XY|Z}$, is the correlation between two random variables after conditioning on the dependencies between $X$ and $Z$, and $Y$ and $Z$ 
+\end{columns}
 \end{frame}
 
 \begin{frame}{Gaussian Graphical Models (GGMs)}
@@ -570,6 +601,14 @@ These should not be grouped!
 \subsection{A Heart Disease interactome}
 
 \begin{frame}{Heart Disease Interactome}
+		\begin{center}
+		\includegraphics[scale=.5]{../Metabolomics2018/FlowChart2}
+		
+		Trainor, P. (2018), \emph{J Biomed Info, 81}. doi: 10.1016/j.jbi.2018.03.007 \pause
+	\end{center}
+\end{frame}
+
+\begin{frame}{Heart Disease Interactome}
 	\vspace{-15.5pt}
 	\begin{itemize}
 		\item Goal: We sought to construct a stable heart disease plasma metabolite interactome \pause
@@ -629,8 +668,37 @@ These should not be grouped!
 \section{Acknowledgments}
 
 \begin{frame}{Acknowledgments}
-
+	\begin{columns}
+		\column{.5 \textwidth}
+			\textbf{Funding support}:
+			\begin{itemize}
+				\item NIH NIGMS 2P20GM103492-06 (Metabolomic Analysis of Atherothrombosis)
+				\item[]
+				\item Alpha Phi Foundation Heart-to-Heart Award
+				\item[]
+				\item NIH 1U24DK097154 (PI: Oliver Fiehn) Subproject Award
+			\end{itemize}
+		\column{.5 \textwidth}
+			\begin{itemize}
+				\item Atherosclerosis and Atherothrombois Research Lab (University of Louisville)
+				\begin{itemize}
+					\item Andrew DeFilippis, MD, MSc
+					\item Alok Amraotkar, MD, MPH
+					\item Amanda Coulter, BS
+					\item Allison Smith, BS
+				\end{itemize}
+				\item[]
+				\item Other important collaborators:
+				\begin{itemize}
+					\item Bradford Hill, PhD
+					\item Samantha Carlisle, PhD
+					\item Aruni Bhatnagar, PhD
+					\item Shesh Rai, PhD
+				\end{itemize}
+			\end{itemize}
+	\end{columns}
 \end{frame}
+
 
 %\begin{frame}{Acknowledgments}
 %	\begin{columns}
