@@ -25,12 +25,9 @@
 	
 \title[Bioinformatics for MS and Systems Inference]{{\bf Bioinformatics for mass spectrometry-based metabolomics/lipidomics \& a novel paradigm for systems-level inference}}
 \author[P.J. Trainor]{Patrick J. Trainor, PhD, MS, MA}
-\institute[U of L]
 {
 	% \includegraphics[scale=.4]{/home/patrick/gdrive//MetabClass/Old/RL2015/IMClogo}\\
-	Adjunct Assistant Professor of Medicine \\
-	Division of Cardiovascular Medicine  \\
-	University of Louisville %\\[2ex]
+
 }
 \date[February 2019]{February 14, 2019}
 
@@ -259,10 +256,47 @@
 \vspace{-7pt}
 \textbf{Peak grouping} can refer to:
 \begin{itemize}
-	\item Grouping the same peak across multiple samples 
+	\item Grouping ``split peaks''
+	\item Grouping the same peak across multiple samples
 	\item Grouping isotopic peaks 
 	\item Grouping other molecular features (adducts, in-source fragments) together
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{4. Peak grouping}
+These should not be grouped!
+	\begin{center}
+		\includegraphics[scale=.6]{../../xcmsPlots/chromPeakDensity}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{6. Compound identification}
+\vspace{-10pt}
+\begin{columns}
+	\column{0.5\textwidth}
+	Parameters we use:
+		\begin{itemize}
+			\item Retention time \pause
+			\item m/z from MS1 scans \pause
+			\item m/z spectra from MS\textsuperscript{2} / MS\textsuperscript{(n)} scans \pause
+			\begin{itemize}
+				\item Spectral matching using DBs: Metlin, NIST, HMDB, Lipid Maps
+			\end{itemize}
+		\end{itemize}
+	\column{0.5\textwidth}
+	\begin{center}
+			\includegraphics[scale=.3]{../../xcmsPlots/SpecEx}
+	\end{center}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Bioinformatic processing}{5 + 6. Peak grouping + Compound identification}
+\vspace{-10pt}
+\begin{center}
+	\includegraphics[scale=.45]{../../xcmsPlots/metAssign}
+	\\
+	\tiny{Ronan Daly, et al. (2014). MetAssign: probabilistic annotation of metabolites from LC–MS data using a Bayesian clustering approach. \emph{Bioinformatics, 19}.}
+\end{center}
 \end{frame}
 
 \section{Systems-level inference given metabolomics \& lipidomics data}
