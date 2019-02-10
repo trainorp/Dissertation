@@ -35,7 +35,7 @@
 	\titlepage
 \end{frame}
 
-\section{Overview}
+\section{Introduction}
 
 \begin{frame}{Part \#1}{Bioinformatic processing of metabolomics \& lipidomics data generated using mass spectrometry}
 \vspace{-15pt}
@@ -49,6 +49,11 @@
 \begin{center}
 \includegraphics[scale=.64]{path2}
 \end{center}
+\end{frame}
+
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=hide]
 \end{frame}
 
 \begin{frame}{Introduction}{Where do metabolites and lipids belong in the central dogma?}
@@ -108,6 +113,11 @@
 \end{frame}
 
 \section{Bioinformatic processing of LC-MS data}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=hide]
+\end{frame}
+
 \begin{frame}{Mass spectrometry is ubiquitous}
 	\vspace{-15pt}
 \begin{center}
@@ -116,7 +126,19 @@
 \end{frame}
 
 \begin{frame}{Liquid Chromatography - Mass Spectrometry}{Chromatography}
-	content...
+\begin{center}
+	\includegraphics[scale=.6]{../../xcmsPlots/primer_e_lcsystem}
+	
+	\tiny{(From Waters product literature)}
+\end{center}
+\end{frame}
+
+\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Chromatography}
+\begin{center}
+\includegraphics[scale=.6]{../../xcmsPlots/primer_S-2_ReversedPhase}
+	
+	\tiny{(From Waters product literature)}
+\end{center}
 \end{frame}
 
 \begin{frame}{Liquid Chromatography - Mass Spectrometry}{Ionization (Electrospray Ionization)}
@@ -132,6 +154,8 @@
 \vspace{-7pt}
 \begin{center}
 	\includegraphics[scale=.6]{../../qtof}
+	
+	\tiny{(Cartoon from Agilent Q-ToF MS manual)}
 \end{center}
 \end{frame}
 
@@ -270,22 +294,38 @@ These should not be grouped!
 	\end{center}
 \end{frame}
 
+\begin{frame}{Bioinformatic processing}{5. Peak filling}
+	\begin{itemize}
+		\item If peak detection is applied individually over each sample / replicate, there may be missing values \pause
+		\item[]
+		\item Sources of missingness: \pause
+		\begin{itemize}
+			\item Peak intensity is below a signal-to-noise or other filter threshold \pause
+			\item The peak was not detected \emph{because the ion is not actually there} \pause
+		\end{itemize}
+		\item[]
+		\item Peak intensity can be ``filled'' by re-examining the intensity in the sample / replicate 
+	\end{itemize}
+\end{frame}
+
 \begin{frame}{Bioinformatic processing}{6. Compound identification}
-\vspace{-10pt}
+\vspace{-11pt}
 \begin{columns}
-	\column{0.5\textwidth}
+	\column{0.45\textwidth}
 	Parameters we use:
 		\begin{itemize}
 			\item Retention time \pause
+			\item[]
 			\item m/z from MS1 scans \pause
+			\item[]
 			\item m/z spectra from MS\textsuperscript{2} / MS\textsuperscript{(n)} scans \pause
 			\begin{itemize}
 				\item Spectral matching using DBs: Metlin, NIST, HMDB, Lipid Maps
 			\end{itemize}
 		\end{itemize}
-	\column{0.5\textwidth}
+	\column{0.55\textwidth}
 	\begin{center}
-			\includegraphics[scale=.3]{../../xcmsPlots/SpecEx}
+			\includegraphics[scale=.38]{../../xcmsPlots/SpecEx}
 	\end{center}
 \end{columns}
 \end{frame}
@@ -294,12 +334,19 @@ These should not be grouped!
 \vspace{-10pt}
 \begin{center}
 	\includegraphics[scale=.45]{../../xcmsPlots/metAssign}
-	\\
+	\vspace{5mm}
 	\tiny{Ronan Daly, et al. (2014). MetAssign: probabilistic annotation of metabolites from LC–MS data using a Bayesian clustering approach. \emph{Bioinformatics, 19}.}
 \end{center}
 \end{frame}
 
 \section{Systems-level inference given metabolomics \& lipidomics data}
+
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection]
+\end{frame}
+
+\section{A new paradigm}
 \begin{frame}{Part \#2}{A novel method for making ``systems-level'' inference from metabolomics \& lipidomics data}
 \vspace{-15pt}
 \begin{center}
@@ -355,25 +402,21 @@ These should not be grouped!
 	\end{center}
 \end{frame}
 
-\begin{frame}{Motivation}{Higher order inference}
-	\vspace{-10pt}
-	{\Large Higher-order inference: the testing of hypotheses that are more complex than single metabolite hypothesis tests} \vspace{7pt} \pause
-	
+\begin{frame}{The need for a new paradigm}
+\vspace{-15.5pt}
+\begin{itemize}
+	\item Problem statement: \pause
 	\begin{itemize}
-		\item \textbf{``Data dependent'' / ``Unbiased'' Approaches:} 
-		\begin{itemize}
-		\item Analyses of correlation networks
-		\item Module analyses (WGCNA)
-		\item Multivariate statistical approaches (Clustering; Latent component modeling such as PCA, PLS-R, PLS-DA) \pause
-		\end{itemize}
+		\item To make higher-order inference a model of how metabolites are related is required \pause
 		\item[]
-		\item \textbf{\emph{A priori approaches}--Pathway (or other ontology) enrichment analyses:} 
-		\begin{itemize}
-			\item Discrete statistical tests (e.g. hypergeometric)
-			\item KS statistic-based set enrichments (e.g. GSEA/MSEA)
-		\end{itemize}
+		\item Pathway-based approach may be inappropriate (given the experimental system, sample media, etc.) \pause
+		\item[]
+		\item Bottom up approaches can be non-informative \pause
+
 	\end{itemize}
-	
+	\item[]
+	\item My proposed solution: Utilize prior scientific knowledge (biochemistry) to inform the search for graphical models that can then be used to estimate partial correlation coefficients
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Pathway enrichment analysis}
@@ -408,7 +451,8 @@ These should not be grouped!
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Bias in pathway enrichment analysis}{Metabolic footprint vs. cellular metabolism}	\vspace{-10.5pt}
+\begin{frame}{Bias in pathway enrichment analysis}{Metabolic footprint vs. cellular metabolism}
+\vspace{-10.5pt}
 	\begin{center}
 		\includegraphics[scale=.3]{../Metabolomics2018/512px-Circulatory_System_en}
 	\end{center}
@@ -428,43 +472,16 @@ These should not be grouped!
 	\end{center}
 \end{frame}
 
-\begin{frame}{Partial correlation}{A better approach}
-	\vspace{-15.5pt}
-	{\Large \textbf{Gaussian Graphical Models (GGM)}: from correlation to partial correlation...}
-	
+\begin{frame}{Needed: partial correlation coefficients}
+\begin{columns}
+	\column{.4 \textwidth}
+	\vspace{-15 pt}
 	\begin{center}
-		\includegraphics[scale=.75]{../Metabolomics2018/ggmPrev} \\
-		Krumsiek et al. (2011). \emph{BMC Syst Bio, 5}(21) doi: 10.1186/1752-0509-5-21
+		\includegraphics[scale=.45]{../../Aim2/Plots/AR1_Om}
 	\end{center}
-\end{frame}
-
-\begin{frame}{Partial correlation}{A better approach}
-	\vspace{-15.5pt}
-	\begin{center}
-		\includegraphics[scale=.75]{../Metabolomics2018/ggmPrev} \\
-		Krumsiek et al. (2011). \emph{BMC Syst Bio, 5}(21) doi: 10.1186/1752-0509-5-21
-	\end{center} \pause
-	\begin{itemize}
-		\item Problem: requires estimating $\frac{p*(p-1)}{2}$ coefficients
-		\item[]
-		\item Not feasible for most metabolomics studies 
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Motivation}
-	\vspace{-15.5pt}
-	\begin{itemize}
-		\item Problem statement: \pause
-		\begin{itemize}
-			\item To make higher-order inference a model of how metabolites are related is required \pause
-			\item[]
-			\item Unbiased approach (using a GGM to estimate partial correlation coefficients) is often unfeasible \pause
-			\item[]
-			\item Pathway-based approach may be inappropriate (given the experimental system, sample media, etc.) \pause
-		\end{itemize}
-		\item[]
-		\item Solution: Utilize prior scientific knowledge (biochemistry) to inform the search for graphical models that can then be used to estimate partial correlation coefficients
-	\end{itemize}
+	\column{.4 \textwidth}
+ The partial correlation coefficient between $X$ and $Y$, that is $\rho_{XY|Z}$, is the correlation between two random variables after conditioning on the dependencies between $X$ and $Z$, and $Y$ and $Z$ 
+\end{columns}
 \end{frame}
 
 \begin{frame}{Gaussian Graphical Models (GGMs)}
@@ -514,26 +531,8 @@ These should not be grouped!
 \end{frame}
 
 \begin{frame}{Bayesian estimation}
-	\vspace{-5.5pt}
-\begin{itemize}
-	\item A hierarchical Bayesian model for the graphical Lasso (Wang, H. [2012]. \emph{Bayesian Analysis, 7}. doi: 10.1214/12-ba729): 
-	
-		\begin{align*}
-		p(\textbf{x}_i|\boldsymbol{\Omega}) =& \mathcal{N}(\textbf{0},\boldsymbol{\Omega}^{-1}) \quad \text{for} \; i=1,2,\hdots,n\\
-		p(\boldsymbol{\Omega}|\lambda) =& \frac{1}{C} \prod_{i<j} \DE(\omega_{ij}|\lambda) \prod_{i=1}^{p} \EXP (\omega_{ii} | \lambda / 2) \cdot 1_{\boldsymbol{\Omega}\in M^+},
-		\end{align*} \pause
-	\item[]
-	\item As a scale mixture of Gaussian distributions:
-\end{itemize}
-		\begin{align*}
-		p(\boldsymbol{\omega}| \boldsymbol{\tau},\lambda)=\frac{1}{C_{\boldsymbol{\tau}}} \prod_{i<j} \left[ \frac{1}{\sqrt{2\pi \tau_{ij}}} \exp \left(- \frac{\omega_{ij}^2}{2\tau_{ij}}\right) \right] 
-		\prod_{i=1}^{p}  \left[\frac{\lambda}{2} \exp \left(-\frac{\lambda}{2}\omega_{ii} \right)\right] \cdot 1_{\boldsymbol{\Omega}\in M^+}
-		\end{align*}
-\end{frame}
-
-\begin{frame}{Bayesian estimation}
 	\vspace{-15.5pt}
-	Also a hierarchical Bayesian model for the adaptive graphical Lasso (Wang, H. [2012]. \emph{Bayesian Analysis, 7}. doi: 10.1214/12-ba729):
+	A hierarchical Bayesian model for the adaptive graphical Lasso (Wang, H. [2012]. \emph{Bayesian Analysis, 7}. doi: 10.1214/12-ba729):
 	
 	\begin{align*}
 	p(\mathbf{x}_i|\boldsymbol{\Omega}) = & \mathcal{N}(\mathbf{0,\boldsymbol{\Omega}}^{-1}) \quad \text{for} \; i=1,2,\hdots,n\\
@@ -602,6 +601,14 @@ These should not be grouped!
 \subsection{A Heart Disease interactome}
 
 \begin{frame}{Heart Disease Interactome}
+		\begin{center}
+		\includegraphics[scale=.5]{../Metabolomics2018/FlowChart2}
+		
+		Trainor, P. (2018), \emph{J Biomed Info, 81}. doi: 10.1016/j.jbi.2018.03.007 \pause
+	\end{center}
+\end{frame}
+
+\begin{frame}{Heart Disease Interactome}
 	\vspace{-15.5pt}
 	\begin{itemize}
 		\item Goal: We sought to construct a stable heart disease plasma metabolite interactome \pause
@@ -661,47 +668,73 @@ These should not be grouped!
 \section{Acknowledgments}
 
 \begin{frame}{Acknowledgments}
-	\vspace{-15.5pt}
-	\begin{center}
-		\includegraphics[scale=.5]{../Metabolomics2018/SUSignatureHorizontal-2color}
-	\end{center}
-\end{frame}
-
-\begin{frame}{Acknowledgments}
 	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			\textbf{Doctoral supervision}:
-			\begin{itemize}
-				\item Andrew DeFilippis, MD, MSc
-				\item Shesh Rai, PhD
-				\item[]
-			\end{itemize}
+		\column{.5 \textwidth}
 			\textbf{Funding support}:
 			\begin{itemize}
 				\item NIH NIGMS 2P20GM103492-06 (Metabolomic Analysis of Atherothrombosis)
+				\item[]
 				\item Alpha Phi Foundation Heart-to-Heart Award
+				\item[]
 				\item NIH 1U24DK097154 (PI: Oliver Fiehn) Subproject Award
-				\item[]
 			\end{itemize}
-		\end{column}
-		\vspace{-25.5pt}
-		\begin{column}{0.5\textwidth}
-			\textbf{Doctoral committee }
+		\column{.5 \textwidth}
 			\begin{itemize}
-				\item Eric Rouchka, DSc
-				\item Juw Won Park, PhD
+				\item Atherosclerosis and Atherothrombois Research Lab (University of Louisville)
+				\begin{itemize}
+					\item Andrew DeFilippis, MD, MSc
+					\item Alok Amraotkar, MD, MPH
+					\item Amanda Coulter, BS
+					\item Allison Smith, BS
+				\end{itemize}
 				\item[]
+				\item Other important collaborators:
+				\begin{itemize}
+					\item Bradford Hill, PhD
+					\item Samantha Carlisle, PhD
+					\item Aruni Bhatnagar, PhD
+					\item Shesh Rai, PhD
+				\end{itemize}
 			\end{itemize}
-			\textbf{Collaborators}:
-			\begin{itemize}
-				\item Joshua Mitchell 
-				\item Hunter Moseley, PhD
-				\item Samantha Carlisle, MS
-				\item[]
-			\end{itemize}
-			\textbf{Lab}: Atherosclerosis/Atherothrombosis Research Laboratory (Twitter: @AtheroLab)
-		\end{column}
 	\end{columns}
 \end{frame}
+
+
+%\begin{frame}{Acknowledgments}
+%	\begin{columns}
+%		\begin{column}{0.5\textwidth}
+%			\textbf{Doctoral supervision}:
+%			\begin{itemize}
+%				\item Andrew DeFilippis, MD, MSc
+%				\item Shesh Rai, PhD
+%				\item[]
+%			\end{itemize}
+%			\textbf{Funding support}:
+%			\begin{itemize}
+%				\item NIH NIGMS 2P20GM103492-06 (Metabolomic Analysis of Atherothrombosis)
+%				\item Alpha Phi Foundation Heart-to-Heart Award
+%				\item NIH 1U24DK097154 (PI: Oliver Fiehn) Subproject Award
+%				\item[]
+%			\end{itemize}
+%		\end{column}
+%		\vspace{-25.5pt}
+%		\begin{column}{0.5\textwidth}
+%			\textbf{Doctoral committee }
+%			\begin{itemize}
+%				\item Eric Rouchka, DSc
+%				\item Juw Won Park, PhD
+%				\item[]
+%			\end{itemize}
+%			\textbf{Collaborators}:
+%			\begin{itemize}
+%				\item Joshua Mitchell 
+%				\item Hunter Moseley, PhD
+%				\item Samantha Carlisle, MS
+%				\item[]
+%			\end{itemize}
+%			\textbf{Lab}: Atherosclerosis/Atherothrombosis Research Laboratory (Twitter: @AtheroLab)
+%		\end{column}
+%	\end{columns}
+%\end{frame}
 
 \end{document}
