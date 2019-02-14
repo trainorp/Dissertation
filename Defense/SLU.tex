@@ -346,7 +346,12 @@ These should not be grouped!
 \tableofcontents[currentsection]
 \end{frame}
 
-\section{A new paradigm}
+\subsection{Needed: A new paradigm}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,currentsubsection]
+\end{frame}
+
 \begin{frame}{Part \#2}{A novel method for making ``systems-level'' inference from metabolomics \& lipidomics data}
 \vspace{-15pt}
 \begin{center}
@@ -378,30 +383,6 @@ These should not be grouped!
 	\end{center}
 \end{frame}
 
-\begin{frame}{Motivation}{Hypotheses}
-	\vspace{-10pt}
-	You are interested in whether a therapeutic ``changes'' cholesterol biosynthesis \pause
-	\begin{itemize}
-		\item $H_0$: cholesterol biosynthesis does not differ between two (or more) phenotypes 
-		\item $H_A$: cholesterol biosynthesis does differ between two (or more) phenotypes \pause
-		\item[]
-	\end{itemize} 
-	
-	Or formulated as an equivalence test:
-	\begin{itemize}
-		\item $H_0$: cholesterol biosynthesis is the same between two (or more) phenotypes 
-		\item $H_A$: cholesterol biosynthesis is not the same between two (or more) phenotypes
-	\end{itemize}
-\end{frame}
-
-\begin{frame}
-	\begin{center}
-		\includegraphics[scale=.4]{../Plots/cholesterol.png}
-		
-		Lieberman, M., Ahles, P., et al. \emph{Wikipathways}: WP197
-	\end{center}
-\end{frame}
-
 \begin{frame}{The need for a new paradigm}
 \vspace{-15.5pt}
 \begin{itemize}
@@ -415,7 +396,7 @@ These should not be grouped!
 
 	\end{itemize}
 	\item[]
-	\item My proposed solution: Utilize prior scientific knowledge (biochemistry) to inform the search for graphical models that can then be used to estimate partial correlation coefficients
+	\item \textbf{My proposed solution:} Utilize prior scientific knowledge (biochemistry) to inform the search for graphical models that can be utilized for systems-level inference
 \end{itemize}
 \end{frame}
 
@@ -472,6 +453,8 @@ These should not be grouped!
 	\end{center}
 \end{frame}
 
+\subsection{Generating metabolite / lipid probabilistic interactomes}
+
 \begin{frame}{Needed: partial correlation coefficients}
 \begin{columns}
 	\column{.4 \textwidth}
@@ -482,6 +465,11 @@ These should not be grouped!
 	\column{.4 \textwidth}
  The partial correlation coefficient between $X$ and $Y$, that is $\rho_{XY|Z}$, is the correlation between two random variables after conditioning on the dependencies between $X$ and $Z$, and $Y$ and $Z$ 
 \end{columns}
+\end{frame}
+
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,currentsubsection]
 \end{frame}
 
 \begin{frame}{Gaussian Graphical Models (GGMs)}
@@ -543,7 +531,12 @@ These should not be grouped!
 
 \subsection{Using molecular similarity for estimation}
 
-\begin{frame}{An informative Bayesian estimation}{The current work}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,currentsubsection]
+\end{frame}
+
+\begin{frame}{An informative Bayesian estimation}
 	\vspace{-15.5pt}
 	\begin{itemize}
 		\item \textbf{Idea}:  incorporate prior knowledge regarding the substructures that are shared between compounds (molecular similarity). That is:
@@ -556,7 +549,7 @@ These should not be grouped!
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Informative Bayesian estimation}{The current work}
+\begin{frame}{Informative Bayesian estimation}
 	\begin{center}
 			\includegraphics[scale=.7]{../../Aim2/Plots/lambdasVsSim}
 	\end{center}
@@ -579,6 +572,11 @@ These should not be grouped!
 
 \subsection{Computational nuances}
 
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,currentsubsection]
+\end{frame}
+
 \begin{frame}{Informative Bayesian estimation}{Block Gibbs Sampler}
 	\vspace{-15.5pt}
 	\begin{itemize}
@@ -600,11 +598,16 @@ These should not be grouped!
 
 \subsection{A Heart Disease interactome}
 
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,currentsubsection]
+\end{frame}
+
 \begin{frame}{Heart Disease Interactome}
 		\begin{center}
-		\includegraphics[scale=.5]{../Metabolomics2018/FlowChart2}
+		\includegraphics[scale=.35]{../Metabolomics2018/FlowChart2}
 		
-		Trainor, P. (2018), \emph{J Biomed Info, 81}. doi: 10.1016/j.jbi.2018.03.007 \pause
+		Trainor, P. (2018), \emph{J Biomed Info, 81}. doi: 10.1016/j.jbi.2018.03.007
 	\end{center}
 \end{frame}
 
