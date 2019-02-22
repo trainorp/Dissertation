@@ -23,7 +23,7 @@
 
 \begin{document}
 	
-\title[Bioinformatics for MS and Systems Inference]{{\bf Bioinformatics for mass spectrometry-based metabolomics/lipidomics \& a novel paradigm for systems-level inference}}
+\title[Metabolite Interactomes \& HMC Modeling]{{\bf A molecular structure-informed Bayesian method for probabilistic metabolite interaction modeling and a Hamiltonian Monte Carlo approach for differentiating myocardial infarction type}}
 \author[P.J. Trainor]{Patrick J. Trainor, PhD, MS, MA}
 \institute[]{
 
@@ -33,7 +33,7 @@
 	University of Louisville %\\[2ex]
 
 }
-\date[February 2019]{February 14, 2019}
+\date[March 2019]{March 1, 2019}
 
 \begin{frame}
 	\titlepage
@@ -118,234 +118,6 @@
 \vspace{-7 pt}
 \begin{center}
 	\includegraphics{../../centralDogmaB.pdf}
-\end{center}
-\end{frame}
-
-\section{Bioinformatic processing of LC-MS data}
-\begin{frame}{Outline}
-\vspace{-10.5pt}
-\tableofcontents[currentsection,subsectionstyle=hide]
-\addtocounter{framenumber}{-1}
-\end{frame}
-
-\begin{frame}{Mass spectrometry is ubiquitous}
-	\vspace{-15pt}
-\begin{center}
-	\includegraphics[scale=.4]{35168-8377116}
-\end{center}
-\end{frame}
-
-\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Chromatography}
-\begin{center}
-	\includegraphics[scale=.6]{../../xcmsPlots/primer_e_lcsystem}
-	
-	\tiny{(From Waters product literature)}
-\end{center}
-\end{frame}
-
-\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Chromatography}
-\begin{center}
-\includegraphics[scale=.6]{../../xcmsPlots/primer_S-2_ReversedPhase}
-	
-	\tiny{(From Waters product literature)}
-\end{center}
-\end{frame}
-
-\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Ionization (Electrospray Ionization)}
-\vspace{-7pt}
-\begin{center}
-	\includegraphics[scale=.45]{../../ESI}
-	
-	\tiny{(Cartoon from Agilent Q-ToF MS manual)}
-\end{center}
-\end{frame}
-
-\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Quadrupole Time-of-Flight Instruments}
-\vspace{-7pt}
-\begin{center}
-	\includegraphics[scale=.6]{../../qtof}
-	
-	\tiny{(Cartoon from Agilent Q-ToF MS manual)}
-\end{center}
-\end{frame}
-
-\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Form of the data}
-\vspace{-7pt}
-\includegraphics{johanes}
-
-\tiny{Sketch courtesy of Dr. Johannes Rainer (Institute for Biomedicine, Eurac Research, Bolzano, Italy)}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{Overview of steps}
-\vspace{-10pt}
-\begin{enumerate}
-	\setbeamertemplate{enumerate items}[default]
-	\item File conversion
-	\item[]
-	\item Peak detection
-	\item[]
-	\item Retention time alignment
-	\item[]
-	\item Peak grouping
-	\item[]
-	\item Peak filling
-	\item[]
-	\item Compound identification
-\end{enumerate}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{1. File conversion}
-\vspace{-10pt}
-	\begin{enumerate}
- \setbeamertemplate{enumerate items}[default]
-		\item File conversion
-		\begin{itemize}
-			\item Vendor data files (or directories) containing scan-level data are non-standard
-			\item Need to convert to mzML or mzXML
-			\item msconvert from proteowizard
-		\end{itemize}
-	\end{enumerate}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{2. Peak detection}
-\vspace{-7pt}
-\begin{center}
-	\includegraphics[scale=.7]{../../xcmsPlots/TIC}
-\end{center}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{2. Peak detection}
-\vspace{-7pt}
-\begin{center}
-	\includegraphics[scale=.7]{../../xcmsPlots/TICZoom}
-\end{center}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{2. Peak detection}
-\vspace{-10pt}
-\begin{center}
-	\includegraphics[scale=.625]{../../xcmsPlots/Spec440}
-\end{center}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{2. Peak detection}
-\vspace{-10pt}
-\begin{center}
-	\includegraphics[scale=.625]{../../xcmsPlots/Spec440Log}
-\end{center}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{2. Peak detection}
-\vspace{-10pt}
-\begin{center}
-	\includegraphics[scale=.625]{../../xcmsPlots/nicePeak}
-\end{center}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{2. Peak detection}
-\vspace{-10pt}
-\begin{center}
-	\includegraphics[scale=.625]{../../xcmsPlots/notNicePeak}
-\end{center}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
-\vspace{-10pt}
-\begin{center}
-	\includegraphics[scale=.7]{../../xcmsPlots/NotAligned}
-\end{center}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
-\vspace{-10pt}
-\begin{center}
-\includegraphics[scale=.7]{../../xcmsPlots/rtAdjust}
-\end{center}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
-\vspace{-10pt}
-\begin{center}
-	\includegraphics[scale=.7]{../../xcmsPlots/Aligned}
-\end{center}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{4. Peak grouping}
-\vspace{-7pt}
-\textbf{Peak grouping} can refer to: \pause
-		\begin{itemize}
-			\item Grouping the same peak across multiple samples \pause
-			\item Grouping isotopic peaks 
-		\end{itemize}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{4. Peak grouping}
-\vspace{-10pt}
-\begin{center}
-	\includegraphics[scale=.625]{../../xcmsPlots/nicePeak}
-\end{center}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{4. Peak grouping}
-\vspace{-7pt}
-\textbf{Peak grouping} can refer to:
-\begin{itemize}
-	\item Grouping ``split peaks''
-	\item Grouping the same peak across multiple samples
-	\item Grouping isotopic peaks 
-	\item Grouping other molecular features (adducts, in-source fragments) together
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{4. Peak grouping}
-These should not be grouped!
-	\begin{center}
-		\includegraphics[scale=.6]{../../xcmsPlots/chromPeakDensity}
-	\end{center}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{5. Peak filling}
-	\begin{itemize}
-		\item If peak detection is applied individually over each sample / replicate, there may be missing values \pause
-		\item[]
-		\item Sources of missingness: \pause
-		\begin{itemize}
-			\item Peak intensity is below a signal-to-noise or other filter threshold \pause
-			\item The peak was not detected \emph{because the ion is not actually there} \pause
-		\end{itemize}
-		\item[]
-		\item Peak intensity can be ``filled'' by re-examining the intensity in the sample / replicate 
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{6. Compound identification}
-\vspace{-11pt}
-\begin{columns}
-	\column{0.45\textwidth}
-	Parameters we use:
-		\begin{itemize}
-			\item Retention time \pause
-			\item[]
-			\item m/z from MS1 scans \pause
-			\item[]
-			\item m/z spectra from MS\textsuperscript{2} / MS\textsuperscript{(n)} scans \pause
-			\begin{itemize}
-				\item Spectral matching using DBs: Metlin, NIST, HMDB, Lipid Maps
-			\end{itemize}
-		\end{itemize}
-	\column{0.55\textwidth}
-	\begin{center}
-			\includegraphics[scale=.38]{../../xcmsPlots/SpecEx}
-	\end{center}
-\end{columns}
-\end{frame}
-
-\begin{frame}{Bioinformatic processing}{5 + 6. Peak grouping + Compound identification}
-\vspace{-10pt}
-\begin{center}
-	\includegraphics[scale=.45]{../../xcmsPlots/metAssign}
-	\vspace{5mm}
-	\tiny{Ronan Daly, et al. (2014). MetAssign: probabilistic annotation of metabolites from LC–MS data using a Bayesian clustering approach. \emph{Bioinformatics, 19}.}
 \end{center}
 \end{frame}
 
@@ -686,6 +458,333 @@ These should not be grouped!
 	\end{itemize}
 \end{frame}
 
+\section{Diagnostic model for Acute MI}
+\subsection{Acute Myocardial Infarction}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=hide]
+\end{frame}
+
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{Acute Myocardial Infarction}
+\vspace{-5pt}
+\begin{itemize}
+\item Characterized by myocardial ischemia (exposure of cardiac myocytes to oxygen deprivation) and necrosis (a form of cell death)
+\end{itemize}
+\begin{center}
+\includegraphics[scale=.7]{miType}
+
+Thygesen, et al. (2012). doi: 10.1016/j.jacc.2012.08.001
+\end{center}
+\end{frame}
+
+\begin{frame}{Acute Myocardial Infarction}
+\vspace{-5pt}
+\begin{itemize}
+\item Criteria utilized for diagnosing MI (EKG, Troponin, symptoms) do not definitively rule in or out presence of a thrombus \pause
+\item Troponin elevation is not sufficient for determining the cause of an MI \pause
+\end{itemize}
+\begin{center}
+\includegraphics[scale=.4]{elevTrop}
+
+Newby, et al. (2012). doi: 10.1016/j.jacc.2012.08.969
+\end{center}
+\end{frame}
+
+\begin{frame}{Objective}
+\vspace{-10pt}
+\begin{itemize}
+\item Metabolite concentrations are a product of genetic factors, environmental exposures, and gene $\times$ environment \pause
+\item[]
+\item Metabolite concentrations are dynamic (especially in blood) \pause
+\item[]
+\item \textbf{Implicit hypothesis:} If we quantify metabolites in plasma will observe evidence of:
+\begin{itemize}
+\item Myocardial ischemia and necrosis (all MI types)
+\item Metabolic processes specific to thrombotic MI (platelet activation, platelet aggregation, fibrinolysis) \pause
+\item[]
+\end{itemize}
+\item \textbf{Goal:} Utilize this to construct a non-invasive diagnostic test capable of discriminating between thrombotic and non-thrombotic MI
+\end{itemize}
+\end{frame}
+%In the present work, we set out to develop a Bayesian model for differentiating thrombotic MI from both non-thrombotic MI and stable coronary artery disease (CAD) using metabolites detected in blood plasma. We regard plasma as a promising media for developing a non-invasive test as plasma contains hormones, enzymes, lipoproteins, and other metabolic intermediates found in circulation. As metabolite concentrations are a product of genetic factors, environmental exposures, and the interaction between the two, sampling metabolites may provide a more robust characterization of the state of an organism than other approaches such as genomics. 
+
+\subsection{Clinical cohort \& samples}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{Cohort}
+\vspace{-10pt}
+\begin{center}
+\includegraphics[scale=.65]{cohort}
+
+DeFilippis, Trainor, et al. (2017). doi: 10.1371/journal.pone.0175591
+\end{center}
+\end{frame}
+
+\begin{frame}{Cohort}
+\vspace{-10pt}
+\begin{itemize}
+\item Samples were analyzed by GC-MS, UPLC-MS/MS \pause
+\item[]
+\item Positive \& Negative mode ESI for UPLC-MS/MS \pause
+\item[]
+\item 1,032 distinct chemical features \pause
+\item[]
+\item 522 identified MSI Level 1
+\end{itemize}
+\end{frame}
+
+\subsection{Statistical model for discriminating MI type}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{Statistical model}
+\vspace{-10.5pt}
+\begin{itemize}
+\item Multinomial logistic regression model:
+\begin{align*}
+\eta_{ij} = \log \frac{\pi_{ij}}{\pi_{iJ}} = \alpha_j + \textbf{x}_i^T \boldsymbol{\beta}_j,
+\end{align*} \pause
+\item Parameters:
+\begin{itemize}
+\item $i$ indexes individual samples
+\item $j$ is the index of study groups
+\item $\textbf{x}_i$ vector of metabolite abundances for the individual $i$
+\item $\boldsymbol{\beta}_j$ is a vector of regression coefficients 
+\item $\alpha_j$ is a group specific intercept term
+\item $J$ represents the reference group.
+\end{itemize} \pause
+\item Membership probability for each group:
+\begin{align*}
+\hat{\pi}_{ij} = \frac{\exp \hat{\eta}_{ij}}{\sum_{k=1}^{J}\exp \hat{\eta}_{ik}}.
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Statistical model}
+\vspace{-10.5pt}
+\begin{itemize}
+\item As a Bayesian model with the following priors and deterministic component:
+\begin{align*}
+\begin{split}
+\alpha_j &\sim N(0,4) \\
+\beta_j &\sim N(0,1) \\
+\log \frac{\pi_{ij}}{\pi_{iJ}} &= \alpha_j + \textbf{x}_i^T \boldsymbol{\beta}_j \\
+Y &\sim Multinom(\boldsymbol{\pi})
+\end{split}
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Feature selection}
+\vspace{-10pt}
+\begin{center}
+\includegraphics[scale=.09]{../../../AthroMetab/WoAC/corrplot333}
+
+Trainor, P. (2018). doi: 10.1016/j.jbi.2018.03.007 
+\end{center}
+\end{frame}
+
+\subsection{Computational nuances}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{Computational nuances}
+\begin{align*}
+p(\theta|\textbf{x})&=\frac{p(\textbf{x}|\theta)p(\theta)}{\int_{\tilde{\theta} \in \Theta} p(\textbf{x}|\tilde{\theta})p(\tilde{\theta})d\tilde{\theta}}\\ &=\frac{p(\textbf{x}|\theta)p(\theta)}{p(\textbf{x})}\\
+&\propto p(\textbf{x}|\theta)p(\theta).
+\end{align*}
+\end{frame}
+
+\begin{frame}{Hamiltonian Systems}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.375]{phase}
+
+Lecture notes Physics 3210, Dr. Ethan Neil, CU Boulder
+\end{center}
+\end{frame}
+
+\begin{frame}{Target distributions as vector fields}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.6]{HMC1}
+
+Betancourt. (2017). arXiv:1701.02434
+\end{center}
+\end{frame}
+
+\begin{frame}{Target distributions as vector fields}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.55]{HMC2}
+
+Betancourt. (2017). arXiv:1701.02434
+\end{center}
+\end{frame}
+
+\begin{frame}{The No-U-Turn sampler}
+\vspace{-10pt}
+\begin{center}
+\includegraphics[scale=.48]{nuts}
+\vspace{2ex}
+Hoffman \& Gelman. (2014). \emph{Journal of Machine Learning Research}. dl.acm.org/citation.cfm?id=2638586
+\end{center}
+\end{frame}
+
+\subsection{Model parameters}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{MCMC for a metabolite parameter}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.5]{../../Aim3/MCMCEx.png}
+\end{center}
+\end{frame}
+
+
+\begin{frame}{Model coefficients}{No troponin}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.575]{../../Aim3/brm1Coef}
+\end{center}
+\end{frame}
+
+\begin{frame}{Model coefficients}{With troponin}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.575]{../../Aim3/brm2Coef}
+\end{center}
+\end{frame}
+
+\begin{frame}{Model coefficients}{Posterior distribution}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.15]{../../Aim3/coefPost}
+\end{center}
+\end{frame}
+
+\begin{frame}{Model coefficients}{Posterior distribution}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.6]{../../Aim3/coefPost2}
+\end{center}
+\end{frame}
+
+\subsection{Model goodness of fit \& predictions}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{To include troponin?}
+\vspace{-10.5pt}
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+Model & WAIC  & SE \\
+\hline
+Without troponin & 15.43 & 4.05 \\ 
+With troponin & 14.60 & 3.72 \\
+Difference & 0.83 & 0.87 \\
+\hline
+\end{tabular}
+
+$\chi^2$-test $p=0.36$
+\end{center}
+\end{frame}
+
+\begin{frame}{Markov chain for a human subject}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.6]{../../Aim3/ptid2010MCMC}
+\end{center}
+\end{frame}
+
+\begin{frame}{Markov chain for a human subject}
+\vspace{-7pt}
+\begin{center}
+\includegraphics[scale=.65]{../../Aim3/ptid2010Hist}
+\end{center}
+\end{frame}
+
+\begin{frame}{LOO-CV estimation of error}
+\vspace{-15pt}
+Model estimated by Maximum Likelihood Estimation (non-Bayesian):
+\vspace{4ex}
+
+\begin{tabular}{l|ccc}
+& \emph{Predicted} & & \\
+\emph{Actual}  & \textbf{sCAD} & \textbf{Thrombotic MI} & \textbf{Non-Thromb. MI} \\
+\hline
+\textbf{sCAD} & 13 &  0 & 2\\
+\textbf{Thrombotic MI} &   1 & 9 &  1\\
+\textbf{Non-Thromb. MI}  & 2  & 2 & 8 
+\end{tabular}
+\end{frame}
+
+\begin{frame}{LOO-CV estimation of error}
+\vspace{-15pt}
+Bayesian model without troponin:
+\vspace{4ex}
+
+\begin{tabular}{l|ccc}
+& \emph{Predicted} & & \\
+\emph{Actual} &  \textbf{sCAD} & \textbf{Thrombotic MI} & \textbf{Non-Thromb. MI} \\
+\hline
+\textbf{sCAD}   &     13    &     0    &     2\\
+\textbf{Thrombotic MI}  &  0    &    10    &     1\\
+\textbf{Non-Thromb. MI} &   1    &     1   &     10
+\end{tabular}
+\end{frame}
+
+\begin{frame}{LOO-CV estimation of error}
+\vspace{-15pt}
+Bayesian model with troponin:
+\vspace{4ex}
+
+\begin{tabular}{l|ccc}
+& \emph{Predicted} & & \\
+\emph{Actual}  &     \textbf{sCAD} & \textbf{Thrombotic MI} & \textbf{Non-Thromb. MI} \\
+\hline
+\textbf{sCAD}   &     13    &     0    &     2\\
+\textbf{Thrombotic MI}  &  0    &    10    &     1\\
+\textbf{Non-Thromb. MI} &   2  &   0 &    10
+\end{tabular}
+\end{frame}
+
+\begin{frame}{LOO-CV estimation of error}
+\vspace{-15pt}
+Bayesian model with troponin:
+\vspace{2ex}
+\begin{center}
+\begin{tabular}{|c|c|cc|cc|}
+\hline
+& & \multicolumn{2}{|c|}{Sensitivity} & \multicolumn{2}{|c|}{Specificity} \\
+Model & Accuracy & Thromb. & Non-Thromb. &  Thromb. & Non-Thromb.  \\
+\hline
+M0 & 78.9\% & 81.8\% & 66.7\% & 92.6\% & 88.5\% \\
+M1 & 86.8\% & 90.9\% & 83.3\% & 96.3\% & 88.5\% \\
+M2 & 86.8\% & 90.9\% & 83.3\% & 100.0\% & 88.5\% \\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
 \section{Acknowledgments}
 
 \begin{frame}{Acknowledgments}
@@ -726,42 +825,232 @@ These should not be grouped!
 \end{center}
 \end{frame}
 
-
-%\begin{frame}{Acknowledgments}
-%	\begin{columns}
-%		\begin{column}{0.5\textwidth}
-%			\textbf{Doctoral supervision}:
-%			\begin{itemize}
-%				\item Andrew DeFilippis, MD, MSc
-%				\item Shesh Rai, PhD
-%				\item[]
-%			\end{itemize}
-%			\textbf{Funding support}:
-%			\begin{itemize}
-%				\item NIH NIGMS 2P20GM103492-06 (Metabolomic Analysis of Atherothrombosis)
-%				\item Alpha Phi Foundation Heart-to-Heart Award
-%				\item NIH 1U24DK097154 (PI: Oliver Fiehn) Subproject Award
-%				\item[]
-%			\end{itemize}
-%		\end{column}
-%		\vspace{-25.5pt}
-%		\begin{column}{0.5\textwidth}
-%			\textbf{Doctoral committee }
-%			\begin{itemize}
-%				\item Eric Rouchka, DSc
-%				\item Juw Won Park, PhD
-%				\item[]
-%			\end{itemize}
-%			\textbf{Collaborators}:
-%			\begin{itemize}
-%				\item Joshua Mitchell 
-%				\item Hunter Moseley, PhD
-%				\item Samantha Carlisle, MS
-%				\item[]
-%			\end{itemize}
-%			\textbf{Lab}: Atherosclerosis/Atherothrombosis Research Laboratory (Twitter: @AtheroLab)
-%		\end{column}
-%	\end{columns}
+%\section{Bioinformatic processing of LC-MS data}
+%\begin{frame}{Outline}
+%\vspace{-10.5pt}
+%\tableofcontents[currentsection,subsectionstyle=hide]
+%\addtocounter{framenumber}{-1}
+%\end{frame}
+%
+%\begin{frame}{Mass spectrometry is ubiquitous}
+%\vspace{-15pt}
+%\begin{center}
+%\includegraphics[scale=.4]{35168-8377116}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Chromatography}
+%\begin{center}
+%\includegraphics[scale=.6]{../../xcmsPlots/primer_e_lcsystem}
+%
+%\tiny{(From Waters product literature)}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Chromatography}
+%\begin{center}
+%\includegraphics[scale=.6]{../../xcmsPlots/primer_S-2_ReversedPhase}
+%
+%\tiny{(From Waters product literature)}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Ionization (Electrospray Ionization)}
+%\vspace{-7pt}
+%\begin{center}
+%\includegraphics[scale=.45]{../../ESI}
+%
+%\tiny{(Cartoon from Agilent Q-ToF MS manual)}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Quadrupole Time-of-Flight Instruments}
+%\vspace{-7pt}
+%\begin{center}
+%\includegraphics[scale=.6]{../../qtof}
+%
+%\tiny{(Cartoon from Agilent Q-ToF MS manual)}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Form of the data}
+%\vspace{-7pt}
+%\includegraphics{johanes}
+%
+%\tiny{Sketch courtesy of Dr. Johannes Rainer (Institute for Biomedicine, Eurac Research, Bolzano, Italy)}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{Overview of steps}
+%\vspace{-10pt}
+%\begin{enumerate}
+%\setbeamertemplate{enumerate items}[default]
+%\item File conversion
+%\item[]
+%\item Peak detection
+%\item[]
+%\item Retention time alignment
+%\item[]
+%\item Peak grouping
+%\item[]
+%\item Peak filling
+%\item[]
+%\item Compound identification
+%\end{enumerate}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{1. File conversion}
+%\vspace{-10pt}
+%\begin{enumerate}
+%\setbeamertemplate{enumerate items}[default]
+%\item File conversion
+%\begin{itemize}
+%\item Vendor data files (or directories) containing scan-level data are non-standard
+%\item Need to convert to mzML or mzXML
+%\item msconvert from proteowizard
+%\end{itemize}
+%\end{enumerate}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{2. Peak detection}
+%\vspace{-7pt}
+%\begin{center}
+%\includegraphics[scale=.7]{../../xcmsPlots/TIC}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{2. Peak detection}
+%\vspace{-7pt}
+%\begin{center}
+%\includegraphics[scale=.7]{../../xcmsPlots/TICZoom}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{2. Peak detection}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.625]{../../xcmsPlots/Spec440}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{2. Peak detection}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.625]{../../xcmsPlots/Spec440Log}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{2. Peak detection}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.625]{../../xcmsPlots/nicePeak}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{2. Peak detection}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.625]{../../xcmsPlots/notNicePeak}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.7]{../../xcmsPlots/NotAligned}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.7]{../../xcmsPlots/rtAdjust}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.7]{../../xcmsPlots/Aligned}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{4. Peak grouping}
+%\vspace{-7pt}
+%\textbf{Peak grouping} can refer to: \pause
+%\begin{itemize}
+%\item Grouping the same peak across multiple samples \pause
+%\item Grouping isotopic peaks 
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{4. Peak grouping}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.625]{../../xcmsPlots/nicePeak}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{4. Peak grouping}
+%\vspace{-7pt}
+%\textbf{Peak grouping} can refer to:
+%\begin{itemize}
+%\item Grouping ``split peaks''
+%\item Grouping the same peak across multiple samples
+%\item Grouping isotopic peaks 
+%\item Grouping other molecular features (adducts, in-source fragments) together
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{4. Peak grouping}
+%These should not be grouped!
+%\begin{center}
+%\includegraphics[scale=.6]{../../xcmsPlots/chromPeakDensity}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{5. Peak filling}
+%\begin{itemize}
+%\item If peak detection is applied individually over each sample / replicate, there may be missing values \pause
+%\item[]
+%\item Sources of missingness: \pause
+%\begin{itemize}
+%\item Peak intensity is below a signal-to-noise or other filter threshold \pause
+%\item The peak was not detected \emph{because the ion is not actually there} \pause
+%\end{itemize}
+%\item[]
+%\item Peak intensity can be ``filled'' by re-examining the intensity in the sample / replicate 
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{6. Compound identification}
+%\vspace{-11pt}
+%\begin{columns}
+%\column{0.45\textwidth}
+%Parameters we use:
+%\begin{itemize}
+%\item Retention time \pause
+%\item[]
+%\item m/z from MS1 scans \pause
+%\item[]
+%\item m/z spectra from MS\textsuperscript{2} / MS\textsuperscript{(n)} scans \pause
+%\begin{itemize}
+%\item Spectral matching using DBs: Metlin, NIST, HMDB, Lipid Maps
+%\end{itemize}
+%\end{itemize}
+%\column{0.55\textwidth}
+%\begin{center}
+%\includegraphics[scale=.38]{../../xcmsPlots/SpecEx}
+%\end{center}
+%\end{columns}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{5 + 6. Peak grouping + Compound identification}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.45]{../../xcmsPlots/metAssign}
+%\vspace{5mm}
+%\tiny{Ronan Daly, et al. (2014). MetAssign: probabilistic annotation of metabolites from LC–MS data using a Bayesian clustering approach. \emph{Bioinformatics, 19}.}
+%\end{center}
 %\end{frame}
 
 \end{document}
