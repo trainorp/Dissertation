@@ -44,17 +44,16 @@
 \tableofcontents[hideallsubsections]
 \end{frame}
 
-\section{Introduction}
-\subsection{Metabolomics}
+\section{Introduction: Metabolomics}
 
-\begin{frame}{Introduction: Metabolites \& Metabolomics}{The central dogma}
+\begin{frame}{Metabolites \& Metabolomics}{The central dogma}
 \vspace{-7 pt}
 \begin{center}
 		\includegraphics[scale=1]{../../centralDogma}
 	\end{center}
 \end{frame}
 
-\begin{frame}{Introduction: Metabolites \& Metabolomics}{The central dogma}
+\begin{frame}{Metabolites \& Metabolomics}{The central dogma}
 \vspace{-7 pt}
 \begin{center}
 	\includegraphics{../../centralDogmaB.pdf}
@@ -100,14 +99,38 @@
 \addtocounter{framenumber}{-1}
 \end{frame}
 
-\begin{frame}{Introduction: Metabolites \& Metabolomics}{The central dogma}
+\begin{frame}{Metabolites \& Metabolomics}{The central dogma}
 \vspace{-7 pt}
 \begin{center}
 	\includegraphics{../../centralDogmaB.pdf}
 \end{center}
 \end{frame}
 
-\subsection{Statistical activities in metabolomics}
+\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Chromatography}
+\begin{center}
+	\includegraphics[scale=.6]{../../xcmsPlots/primer_S-2_ReversedPhase}
+	
+	\tiny{(From Waters product literature)}
+\end{center}
+\end{frame}
+
+\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Quadrupole Time-of-Flight Instruments}
+\vspace{-7pt}
+\begin{center}
+	\includegraphics[scale=.6]{../../qtof}
+	
+	\tiny{(Cartoon from Agilent Q-ToF MS manual)}
+\end{center}
+\end{frame}
+
+\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Form of the data}
+\vspace{-7pt}
+\includegraphics{johanes}
+
+\tiny{Sketch courtesy of Dr. Johannes Rainer (Institute for Biomedicine, Eurac Research, Bolzano, Italy)}
+\end{frame}
+
+\section{Introduction: Statistical activities in metabolomics}
 \begin{frame}{Statistical Activity \#1}{Bioinformatic processing of metabolomics \& lipidomics data generated using mass spectrometry}
 \vspace{-15pt}
 \begin{center}
@@ -129,13 +152,7 @@
 \end{center}
 \end{frame}
 
-\begin{frame}{Outline}
-\vspace{-10.5pt}
-\tableofcontents[subsectionstyle=hide]
-\addtocounter{framenumber}{-1}
-\end{frame}
-
-\section{Systems-level statistical inference given metabolomics \& lipidomics data}
+\section[Systems-level statistical inference]{Systems-level statistical inference given metabolomics \& lipidomics data}
 
 \begin{frame}{A novel method for making ``systems-level'' inference from metabolomics \& lipidomics data}
 \vspace{-15pt}
@@ -509,23 +526,16 @@ Newby, et al. (2012). doi: 10.1016/j.jacc.2012.08.969
 \end{center}
 \end{frame}
 
-\begin{frame}{Objective}
-\vspace{-10pt}
+\begin{frame}{Acute Myocardial Infarction}
+\vspace{-5pt}
 \begin{itemize}
-\item Metabolite and lipid concentrations are a product of genetic factors, environmental exposures, and gene $\times$ environment \pause
-\item[]
-\item Metabolite and lipid concentrations are dynamic (especially in blood) \pause
-\item[]
-\item \textbf{Implicit hypothesis:} If we quantify metabolites and lipids in plasma will observe evidence of:
-\begin{itemize}
-\item Myocardial ischemia and necrosis (all MI types)
-\item Metabolic processes specific to thrombotic MI (platelet activation, platelet aggregation, fibrinolysis) \pause
-\item[]
-\end{itemize}
-\item \textbf{Goal:} Utilize this to construct a non-invasive diagnostic test capable of discriminating between thrombotic and non-thrombotic MI
+	\item Criteria utilized for diagnosing MI (EKG, Troponin, symptoms) do not definitively rule in or out presence of a thrombus \pause
+	\item[]
+	\item Troponin elevation is not sufficient for determining the cause of an MI \pause
+	\item[]
+	\item \textbf{Our Goal:} Construct a non-invasive diagnostic test capable of discriminating between thrombotic and non-thrombotic MI using metabolites and lipids
 \end{itemize}
 \end{frame}
-%In the present work, we set out to develop a Bayesian model for differentiating thrombotic MI from both non-thrombotic MI and stable coronary artery disease (CAD) using metabolites detected in blood plasma. We regard plasma as a promising media for developing a non-invasive test as plasma contains hormones, enzymes, lipoproteins, and other metabolic intermediates found in circulation. As metabolite concentrations are a product of genetic factors, environmental exposures, and the interaction between the two, sampling metabolites may provide a more robust characterization of the state of an organism than other approaches such as genomics. 
 
 \subsection{Clinical cohort \& samples}
 \begin{frame}{Outline}
