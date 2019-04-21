@@ -1,0 +1,1086 @@
+\documentclass[xcolor=dvipsnames]{beamer} 
+\usetheme{AnnArbor}
+\usecolortheme{beaver}
+
+\usepackage{amsmath,graphicx,booktabs,tikz,subfig,color}
+\definecolor{mycol}{rgb}{.4,.85,1}
+\setbeamercolor{title}{bg=mycol,fg=black} 
+\setbeamercolor{palette primary}{use=structure,fg=white,bg=red}
+\setbeamercolor{block title}{fg=white,bg=red!50!black}
+%\setbeamercolor{block title}{fg=white,bg=blue!75!black}
+
+\DeclareMathOperator{\PP}{P}
+\DeclareMathOperator{\EE}{E}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator{\ent}{H}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\DE}{DE}
+\DeclareMathOperator{\EXP}{EXP}
+\DeclareMathOperator{\GA}{GA}
+\DeclareMathAlphabet\mathbfcal{OMS}{cmsy}{b}{n}
+
+\begin{document}
+	
+\title[Bayesian Approaches in Metabolomics]{{\bf Informative Bayesian statistical approaches for the analysis of metabolomics data: from inference in systems biology to diagnostic models for disease states}}
+\author[P.J. Trainor]{Patrick J. Trainor, PhD, MS, MA}
+\institute[]{
+
+	Adjunct Assistant Professor of Medicine \\
+	Division of Cardiovascular Medicine  \\
+	Department of Medicine \\
+	University of Louisville %\\[2ex]
+
+}
+\date[April 2019]{April 25, 2019}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[hideallsubsections]
+\end{frame}
+
+\section{Introduction}
+\subsection{Metabolomics}
+
+\begin{frame}{Introduction: Metabolites \& Metabolomics}{The central dogma}
+\vspace{-7 pt}
+\begin{center}
+		\includegraphics[scale=1]{../../centralDogma}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Introduction: Metabolites \& Metabolomics}{The central dogma}
+\vspace{-7 pt}
+\begin{center}
+	\includegraphics{../../centralDogmaB.pdf}
+\end{center}
+\addtocounter{framenumber}{-1}
+\end{frame}
+
+\begin{frame}
+	\vspace{-10.5pt}
+	\begin{center}
+		\includegraphics[scale=.5]{../../tryptophan}
+		
+		\text{\tiny{(commons.wikimedia.org/wiki/File:Tryptophan\_metabolism.svg)}}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+	\includegraphics[scale=.5]{../../metabolomics1}
+\end{center}
+\addtocounter{framenumber}{-1}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+	\includegraphics[scale=.5]{../../metabolomics2}
+\end{center}
+\addtocounter{framenumber}{-1}
+\end{frame}
+
+\begin{frame}
+	\begin{center}
+		\includegraphics[scale=.3]{../../Eicosanoid_synthesis}
+		
+		\text{\tiny{(commons.wikimedia.org/wiki/File:Eicosanoid\_synthesis.svg)}}
+	\end{center}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+	\includegraphics[scale=.3]{../../Eicosanoid_synthesis2}
+\end{center}
+\addtocounter{framenumber}{-1}
+\end{frame}
+
+\begin{frame}{Introduction: Metabolites \& Metabolomics}{The central dogma}
+\vspace{-7 pt}
+\begin{center}
+	\includegraphics{../../centralDogmaB.pdf}
+\end{center}
+\end{frame}
+
+\subsection{Statistical activities in metabolomics}
+\begin{frame}{Statistical Activity \#1}{Bioinformatic processing of metabolomics \& lipidomics data generated using mass spectrometry}
+\vspace{-15pt}
+\begin{center}
+	\includegraphics[scale=.3]{SLU1}
+\end{center}
+\end{frame}
+
+\begin{frame}{Statistical Activity \#2}{Making ``systems-level'' statistical inference given metabolomics \& lipidomics data}
+\vspace{-15pt}
+\begin{center}
+\includegraphics[scale=.64]{path2}
+\end{center}
+\end{frame}
+
+\begin{frame}{Statistical Activity \#3}{Developing diagnostic \& prognostic models from metabolomics \& lipidomics data}
+\vspace{-15pt}
+\begin{center}
+\includegraphics[scale=1.3]{UAB1}
+\end{center}
+\end{frame}
+
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[subsectionstyle=hide]
+\addtocounter{framenumber}{-1}
+\end{frame}
+
+\section{Systems-level statistical inference given metabolomics \& lipidomics data}
+
+\begin{frame}{A novel method for making ``systems-level'' inference from metabolomics \& lipidomics data}
+\vspace{-15pt}
+\begin{center}
+	\includegraphics[scale=.64]{path2}
+\end{center}
+\end{frame}
+
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/show/hide]
+\addtocounter{framenumber}{-1}
+\end{frame}
+
+\subsection{Needed: A new paradigm}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\addtocounter{framenumber}{-1}
+\end{frame}
+
+\begin{frame}{Motivation}{Biomarker hypotheses}
+	\vspace{-10pt}
+	You are interested in whether a therapeutic ``changes'' the abundance of a metabolite, $X$ in plasma (e.g. a specific lipid) \pause
+	\begin{itemize}
+		\item $H_0$: The abundance of $X$ does not differ between two (or more) phenotypes \pause
+		\item $H_A$: The abundance of $X$ does differ between two (or more) phenotypes 
+		\item[]
+	\end{itemize} \pause
+	
+	Or formulated as an equivalence test:
+	\begin{itemize}
+		\item $H_0$: The abundance of $X$ is not equivalent between two (or more) phenotypes  
+		\item $H_A$: The abundance of $X$ is equivalent between two (or more) phenotypes  
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{center}
+			\includegraphics[scale=.4]{../Plots/cholesterol.png}
+			
+			Lieberman, M., Ahles, P., et al. \emph{Wikipathways}: WP197
+	\end{center}
+\end{frame}
+
+\begin{frame}{The need for a new paradigm}
+\vspace{-15.5pt}
+\begin{itemize}
+	\item Problem statement: \pause
+	\begin{itemize}
+		\item To make higher-order inference a model of how metabolites are related is required \pause
+		\item[]
+		\item Pathway-based approach may be inappropriate (given the experimental system, sample media, etc.) \pause
+		\item[]
+		\item Bottom up approaches can be non-informative \pause
+
+	\end{itemize}
+	\item[]
+	\item \textbf{My proposed solution:} Utilize prior scientific knowledge (biochemistry) to inform the search for graphical models that can be utilized for systems-level inference
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Pathway enrichment analysis}
+	\vspace{-10pt}
+{\Large Test for pathway enrichment: Does a pathway have more ``significant'' differences in metabolite abundances than expected?} \vspace{10pt} \pause
+
+	\begin{itemize}
+		\item pmf for the hypergeometric distribution: 
+		\begin{itemize}
+			\item $N=$ total metabolites,
+			\item $K=$ number of differentially abundant metabolites, 
+			\item $n=$ metabolites in the pathway of interest, 
+			\item $k=$ number of differentially abundant metabolites in the pathway of interest 
+		\end{itemize}
+		\begin{align*}
+		\PP(X=k) = \frac{  {{K}\choose{k}} {{N-K}\choose{n-k}}  }{ {{N}\choose{n}} } 
+		\end{align*}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Bias in pathway enrichment analysis}{The reference set}
+	\vspace{-15.5pt}
+	\begin{figure}
+		\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_1}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Bias in pathway enrichment analysis}{The reference set}
+	\vspace{-15.5pt}
+	\begin{figure}
+		\includegraphics[scale=.32]{/home/patrick/gdrive/Dissertation/Proposal/vennHell2_2}
+	\end{figure}
+\addtocounter{framenumber}{-1}
+\end{frame}
+
+\begin{frame}{Bias in pathway enrichment analysis}{Metabolic footprint vs. cellular metabolism}
+\vspace{-10.5pt}
+	\begin{center}
+		\includegraphics[scale=.3]{../Metabolomics2018/512px-Circulatory_System_en}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Correlation networks}{What do they tell you?}
+	{I simulated this...}
+	\begin{center}
+		\includegraphics[scale=.5]{../../Aim2/Plots/AR1_Om}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Correlation networks}{What do they tell you?}
+	{And fit a correlation network...}
+	\begin{center}
+		\includegraphics[scale=.5]{../../Aim2/Plots/AR1_Cor}
+	\end{center}
+\end{frame}
+
+\subsection{Generating metabolite / lipid probabilistic interactomes}
+
+\begin{frame}{Needed: partial correlation coefficients}
+\begin{columns}
+	\column{.4 \textwidth}
+	\vspace{-15 pt}
+	\begin{center}
+		\includegraphics[scale=.45]{../../Aim2/Plots/AR1_Om}
+	\end{center}
+	\column{.4 \textwidth}
+ The partial correlation coefficient between $X$ and $Y$, that is $\rho_{XY|Z}$, is the correlation between two random variables after conditioning on the dependencies between $X$ and $Z$, and $Y$ and $Z$ 
+\end{columns}
+\end{frame}
+
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\addtocounter{framenumber}{-1}
+\end{frame}
+
+\begin{frame}{Gaussian Graphical Models (GGMs)}
+	\vspace{-5.5pt}
+	\begin{itemize}
+		\item Markov Random Fields: A graph $G=(V,E)$ in which random variables $X_i\in V$, $i\in \{1,2,...p\}$ are represented by vertices and edges in the edge set $E \subseteq V \times V$ represent probabilistic interactions \pause
+		\item[]
+		\item GGM: $\textbf{X}\sim \mathcal{N}(\boldsymbol{\mu},\boldsymbol{\Omega}^{-1})$ where $\boldsymbol{\Omega}$ is the concentration matrix (inverse of covariance matrix) \pause
+		\item[]
+		\item Gaussian conditional distributions and marginal distributions \pause
+		\item[]
+		\item From a GGM you can determine partial correlation coefficients 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Gaussian Graphical Models (GGMs)}
+	\vspace{-15.5pt}
+	\begin{itemize}
+		\item Likelihood:
+		\begin{align*}
+		L(\boldsymbol{\Omega}|\textbf{X})&=(2 \pi)^{-np/2}|\boldsymbol{\Omega}|^{n/2} \exp \left(-\frac{1}{2}\sum_{i=1}^{n} (\textbf{x}_i-\boldsymbol{\mu})^T \boldsymbol{\Omega} (\textbf{x}_i-\boldsymbol{\mu})\right) 
+		\end{align*}\pause
+		\item Proportionally:
+		\begin{align*} 
+		l(\boldsymbol{\Omega}|\textbf{S})\propto\log (\det \boldsymbol{\Omega})-\tr \left( \textbf{S} \boldsymbol{\Omega} \right)
+		\end{align*}\pause
+		\item[]
+		\item Given the experimental design of many/most metabolomics studies the likelihood would be non-convex
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{GGM estimation}
+	\vspace{-15.5pt}
+	\begin{itemize}
+		\item $L_1$ regularized likelihood:
+		\begin{align*}
+		l(\boldsymbol{\Omega})\propto\log (\det \boldsymbol{\Omega})-\tr \left( \textbf{S} \boldsymbol{\Omega} \right)-\lambda ||\boldsymbol{\Omega}||_1
+		\end{align*}\pause
+		\item Method for optimizing: the Graphical Lasso. Friedman, J., et al. (2007). \emph{Biostatistics, 9}. doi: 10.1093/biostatistics/kxm045 \pause
+		\item[]
+		\item Adaptive graphical Lasso: Zou, H. (2006).  \emph{J Amer Stat Assoc, 101}. doi: 10.1198/016214506000000735 
+		\begin{align*}
+				l(\boldsymbol{\Omega})\propto \log(\det \boldsymbol{\Omega})-\tr \left(\mathbf{S} \boldsymbol{\Omega}\right) - \lambda \sum_{1\leq i \leq p} \sum_{1 \leq j \leq p} w_{ij} |\omega_{ij}|.
+		\end{align*}
+		with adaptive weights: $w_{ij}=|\hat{\omega}_{ij}|^\alpha$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Bayesian estimation}
+	\vspace{-15.5pt}
+	A hierarchical Bayesian model for the adaptive graphical Lasso (Wang, H. [2012]. \emph{Bayesian Analysis, 7}. doi: 10.1214/12-ba729):
+	
+	\begin{align*}
+	p(\mathbf{x}_i|\boldsymbol{\Omega}) = & \mathcal{N}(\mathbf{0,\boldsymbol{\Omega}}^{-1}) \quad \text{for} \; i=1,2,\hdots,n\\
+	p(\boldsymbol{\Omega}|\{\lambda_{ij}\}_{i\leq j}) = & C^{-1} \prod_{i<j} \DE(\omega_{ij}|\lambda_{ij}) \prod_{i=1}^{p} \EXP (\omega_{ii} | \lambda_{ii} / 2) \cdot 1_{\boldsymbol{\Omega}\in M^+}\\
+	p(\{\lambda_{ij}\}_{i<j}|\{\lambda_{ii}\}_{i=1}^p) &\propto C_{\{\lambda_{ij}\}_{i\leq j}} \prod_{i<j} \GA(r,s)
+	\end{align*}
+\end{frame}
+
+\subsection{Using molecular similarity for estimation}
+
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\addtocounter{framenumber}{-1}
+\end{frame}
+
+\begin{frame}{An informative Bayesian estimation}
+	\vspace{-15.5pt}
+	\begin{itemize}
+		\item \textbf{Idea}:  incorporate prior knowledge regarding the substructures that are shared between compounds (molecular similarity). That is:
+		\begin{align*}
+			\lambda_{ij}\sim Gamma(r,s_{ij})
+		\end{align*}\pause
+		\item[]
+		\item[]
+		\item Conditional expectation: $\EE(\lambda_{ij}|\boldsymbol{\Omega})=(1+r)/(|\omega_{ij} |+s_{ij})$.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Informative Bayesian estimation}
+	\begin{center}
+			\includegraphics[scale=.7]{../../Aim2/Plots/lambdasVsSim}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Informative Bayesian estimation}{Block Gibbs Sampler}
+	\vspace{-10.5pt}
+	\begin{itemize}
+		\item Need a way to simulate the posterior distribution \pause
+		\item[]
+		\item Gibb's sampling is a MCMC technique for simulating a target distribution if conditional distributions are known \pause
+		\item[]
+		\item Conditional distribution for concentration matrix columns:
+	\end{itemize}
+	\begin{align*}
+	p(\boldsymbol{\omega}_{12}, \omega_{22}|\boldsymbol{\Omega}_{11},\mathbfcal{T},\textbf{X},\lambda) & \propto \left(\omega_{22}-\boldsymbol{\omega}_{12}^T \boldsymbol{\Omega}_{11}^{-1}\boldsymbol{\omega}_{12} \right)^{n/2} \\ &\exp \left( - \frac{1}{2}\left[ \boldsymbol{\omega}_{12}^T \textbf{D}_{\boldsymbol{\tau}} \boldsymbol{\omega}_{12}+ 2 
+	\textbf{s}_{12}^T \boldsymbol{\omega}_{12} + (s_{22}+\lambda)\omega_{22}\right] \right)
+	\end{align*}
+\end{frame}
+
+\subsection{Computational nuances}
+
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\addtocounter{framenumber}{-1}
+\end{frame}
+
+\begin{frame}{Informative Bayesian estimation}{Block Gibbs Sampler}
+	\vspace{-15.5pt}
+	\begin{itemize}
+		\item Developed an R package for implementing this sampler: \emph{BayesianGLasso} \pause
+		\item[]
+		\item Sampler is written in C++ utilizing the Armadillo linear algebra library \pause
+		\item[]
+		\item To interface between R and C++, utilized \emph{Rcpp} and \emph{RcppArmadillo} \pause
+		\item[]
+		\item To utilize with $\approx 500$ metabolites significant optimization was required (openBLAS \& LAPACK routines)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Simulated experiment}
+	\begin{center}
+		\includegraphics[scale=.33]{../../Aim2/Plots/AR1}
+	\end{center}
+\end{frame}
+
+\subsection{Heart Disease interactome}
+
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\addtocounter{framenumber}{-1}
+\end{frame}
+
+\begin{frame}{Heart Disease Interactome}
+\vspace{-10 pt}
+		\begin{center}
+		\includegraphics[scale=.4]{../Metabolomics2018/FlowChart2}
+		
+		Trainor, P. (2018), \emph{J Biomed Info, 81}. doi: 10.1016/j.jbi.2018.03.007
+	\end{center}
+\end{frame}
+
+\begin{frame}{Heart Disease Interactome}
+	\vspace{-15.5pt}
+	\begin{itemize}
+		\item Goal: We sought to construct a stable heart disease plasma metabolite interactome \pause
+		\item[]
+		\item Long term motivation:  to serve as a reference for analyzing metabolic changes to an acute state (MI) \pause
+		\item[]
+		\item 47 plasma samples from human subjects with heart disease \pause
+		\item[]
+		\item 522 compounds identified from and quantified by UPLC-MS/MS and GC-MS
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Heart Disease Interactome}
+		\vspace{-15.5pt}
+	\begin{center}
+		\includegraphics[scale=.35]{../../Aim2/Plots/StructHeatmaps}
+		
+		Local substructure similarity measure adapted from Mitchell, J. (2014). doi: 10.3389/fgene.2014.00237 (collaboration)
+	\end{center}
+\end{frame}
+
+\begin{frame}{Heart Disease Interactome}{MCMC sampling}
+	\vspace{-10.5pt}
+	\begin{center}
+		\includegraphics[scale=.52]{../../Aim2/Plots/MCMC}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Heart Disease Interactome}
+	\vspace{-10.5pt}
+	\begin{center}
+		\includegraphics[scale=.52]{../../Aim2/Plots/aiBGL1CorBigGraph}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Heart Disease Interactome}
+	\vspace{-10.5pt}
+	\begin{center}
+		\includegraphics[scale=.175]{../../Aim2/Plots/aiBGL1Cor(2)}
+	\end{center}
+\end{frame}
+
+\begin{frame}{Continuing work}
+	\vspace{-15pt}
+	\begin{center}
+		\includegraphics[scale=.225]{../Metabolomics2018/FlowChart2}
+		
+		Trainor, P. (2018), \emph{J Biomed Info, 81}. doi: 10.1016/j.jbi.2018.03.007 \pause
+	\end{center}
+	\begin{itemize}
+		\item Use the stable disease interactome to determine systems-levels changes that occur in the relationships between metabolites in plasma following acute disease events (e.g. heart attacks) \pause
+		\item[]
+		\item Prior distributions that encourage sparsity / two-stage stochastic search + estimation 
+	\end{itemize}
+\end{frame}
+
+\section{A Bayesian diagnostic model for Acute MI}
+\subsection{Acute Myocardial Infarction}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=hide]
+\end{frame}
+
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{Acute Myocardial Infarction}
+\vspace{-5pt}
+\begin{itemize}
+\item Characterized by myocardial ischemia (exposure of cardiac myocytes to oxygen deprivation) and necrosis (a form of cell death)
+\end{itemize}
+\begin{center}
+\includegraphics[scale=.7]{miType}
+
+Thygesen, et al. (2012). doi: 10.1016/j.jacc.2012.08.001
+\end{center}
+\end{frame}
+
+\begin{frame}{Acute Myocardial Infarction}
+\vspace{-5pt}
+\begin{itemize}
+\item Criteria utilized for diagnosing MI (EKG, Troponin, symptoms) do not definitively rule in or out presence of a thrombus \pause
+\item Troponin elevation is not sufficient for determining the cause of an MI \pause
+\end{itemize}
+\begin{center}
+\includegraphics[scale=.4]{elevTrop}
+
+Newby, et al. (2012). doi: 10.1016/j.jacc.2012.08.969
+\end{center}
+\end{frame}
+
+\begin{frame}{Objective}
+\vspace{-10pt}
+\begin{itemize}
+\item Metabolite and lipid concentrations are a product of genetic factors, environmental exposures, and gene $\times$ environment \pause
+\item[]
+\item Metabolite and lipid concentrations are dynamic (especially in blood) \pause
+\item[]
+\item \textbf{Implicit hypothesis:} If we quantify metabolites and lipids in plasma will observe evidence of:
+\begin{itemize}
+\item Myocardial ischemia and necrosis (all MI types)
+\item Metabolic processes specific to thrombotic MI (platelet activation, platelet aggregation, fibrinolysis) \pause
+\item[]
+\end{itemize}
+\item \textbf{Goal:} Utilize this to construct a non-invasive diagnostic test capable of discriminating between thrombotic and non-thrombotic MI
+\end{itemize}
+\end{frame}
+%In the present work, we set out to develop a Bayesian model for differentiating thrombotic MI from both non-thrombotic MI and stable coronary artery disease (CAD) using metabolites detected in blood plasma. We regard plasma as a promising media for developing a non-invasive test as plasma contains hormones, enzymes, lipoproteins, and other metabolic intermediates found in circulation. As metabolite concentrations are a product of genetic factors, environmental exposures, and the interaction between the two, sampling metabolites may provide a more robust characterization of the state of an organism than other approaches such as genomics. 
+
+\subsection{Clinical cohort \& samples}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{Cohort}
+\vspace{-10pt}
+\begin{center}
+\includegraphics[scale=.65]{cohort}
+
+DeFilippis, Trainor, et al. (2017). doi: 10.1371/journal.pone.0175591
+\end{center}
+\end{frame}
+
+\begin{frame}{Cohort}
+\vspace{-10pt}
+\begin{itemize}
+\item Samples were analyzed by GC-MS, UPLC-MS/MS \pause
+\item[]
+\item Positive \& Negative mode ESI for UPLC-MS/MS \pause
+\item[]
+\item 1,032 distinct chemical features \pause
+\item[]
+\item 522 identified MSI Level 1
+\end{itemize}
+\end{frame}
+
+\subsection{Statistical model for discriminating MI type}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{Statistical model}
+\vspace{-10.5pt}
+\begin{itemize}
+\item Multinomial logistic regression model:
+\begin{align*}
+\eta_{ij} = \log \frac{\pi_{ij}}{\pi_{iJ}} = \alpha_j + \textbf{x}_i^T \boldsymbol{\beta}_j,
+\end{align*} \pause
+\item Parameters:
+\begin{itemize}
+\item $i$ indexes individual samples
+\item $j$ is the index of study groups
+\item $\textbf{x}_i$ vector of metabolite abundances for the individual $i$
+\item $\boldsymbol{\beta}_j$ is a vector of regression coefficients 
+\item $\alpha_j$ is a group specific intercept term
+\item $J$ represents the reference group.
+\end{itemize} \pause
+\item Membership probability for each group:
+\begin{align*}
+\hat{\pi}_{ij} = \frac{\exp \hat{\eta}_{ij}}{\sum_{k=1}^{J}\exp \hat{\eta}_{ik}}.
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Statistical model}
+\vspace{-10.5pt}
+\begin{itemize}
+\item As a Bayesian model with the following priors and deterministic component:
+\begin{align*}
+\begin{split}
+\alpha_j &\sim N(0,4) \\
+\beta_j &\sim N(0,1) \\
+\log \frac{\pi_{ij}}{\pi_{iJ}} &= \alpha_j + \textbf{x}_i^T \boldsymbol{\beta}_j \\
+Y &\sim Multinom(\boldsymbol{\pi})
+\end{split}
+\end{align*} \pause
+\item Why a Bayesian model? \pause
+\begin{itemize}
+	\item Suitable priors can be found to minimize risk of overfiting (especially given small sample sizes) \pause
+	\item A probability distribution of likely models is often superior to a single model (especially given small sample sizes)
+\end{itemize} 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Feature selection}
+\vspace{-10pt}
+\begin{center}
+\includegraphics[scale=.09]{../../../AthroMetab/WoAC/corrplot333}
+
+Trainor, P. (2018). doi: 10.1016/j.jbi.2018.03.007 
+\end{center}
+\end{frame}
+
+\subsection{Computational nuances}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{Computational nuances}
+\begin{align*}
+p(\theta|\textbf{x})&=\frac{p(\textbf{x}|\theta)p(\theta)}{\int_{\tilde{\theta} \in \Theta} p(\textbf{x}|\tilde{\theta})p(\tilde{\theta})d\tilde{\theta}}\\ &=\frac{p(\textbf{x}|\theta)p(\theta)}{p(\textbf{x})}\\
+&\propto p(\textbf{x}|\theta)p(\theta).
+\end{align*}
+\end{frame}
+
+\begin{frame}{Hamiltonian Systems}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.375]{phase}
+
+Lecture notes Physics 3210, Dr. Ethan Neil, CU Boulder
+\end{center}
+\end{frame}
+
+\begin{frame}{Target distributions as vector fields}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.6]{HMC1}
+
+Betancourt. (2017). arXiv:1701.02434
+\end{center}
+\end{frame}
+
+\begin{frame}{Target distributions as vector fields}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.55]{HMC2}
+
+Betancourt. (2017). arXiv:1701.02434
+\end{center}
+\end{frame}
+
+\begin{frame}{The No-U-Turn sampler}
+\vspace{-10pt}
+\begin{center}
+\includegraphics[scale=.48]{nuts}
+\vspace{2ex}
+Hoffman \& Gelman. (2014). \emph{Journal of Machine Learning Research}. dl.acm.org/citation.cfm?id=2638586
+\end{center}
+\end{frame}
+
+\subsection{Model parameters}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{MCMC for a metabolite parameter}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.5]{../../Aim3/MCMCEx.png}
+\end{center}
+\end{frame}
+
+
+\begin{frame}{Model coefficients}{No troponin}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.575]{../../Aim3/brm1Coef}
+\end{center}
+\end{frame}
+
+\begin{frame}{Model coefficients}{With troponin}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.575]{../../Aim3/brm2Coef}
+\end{center}
+\end{frame}
+
+\begin{frame}{Model coefficients}{Posterior distribution}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.15]{../../Aim3/coefPost}
+\end{center}
+\end{frame}
+
+\begin{frame}{Model coefficients}{Posterior distribution}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.6]{../../Aim3/coefPost2}
+\end{center}
+\end{frame}
+
+\subsection{Model goodness of fit \& predictions}
+\begin{frame}{Outline}
+\vspace{-10.5pt}
+\tableofcontents[currentsection,subsectionstyle=show/shaded/hide]
+\end{frame}
+
+\begin{frame}{To include troponin?}
+\vspace{-10.5pt}
+\begin{center}
+\begin{tabular}{lcc}
+\hline
+Model & WAIC  & SE \\
+\hline
+Without troponin & 15.43 & 4.05 \\ 
+With troponin & 14.60 & 3.72 \\
+Difference & 0.83 & 0.87 \\
+\hline
+\end{tabular}
+
+$\chi^2$-test $p=0.36$
+\end{center}
+\end{frame}
+
+\begin{frame}{Markov chain for a human subject}
+\vspace{-5pt}
+\begin{center}
+\includegraphics[scale=.6]{../../Aim3/ptid2010MCMC}
+\end{center}
+\end{frame}
+
+\begin{frame}{Markov chain for a human subject}
+\vspace{-7pt}
+\begin{center}
+\includegraphics[scale=.65]{../../Aim3/ptid2010Hist}
+\end{center}
+\end{frame}
+
+\begin{frame}{LOO-CV estimation of error}
+\vspace{-15pt}
+Model estimated by Maximum Likelihood Estimation (non-Bayesian):
+\vspace{4ex}
+
+\begin{tabular}{l|ccc}
+& \emph{Predicted} & & \\
+\emph{Actual}  & \textbf{sCAD} & \textbf{Thrombotic MI} & \textbf{Non-Thromb. MI} \\
+\hline
+\textbf{sCAD} & 13 &  0 & 2\\
+\textbf{Thrombotic MI} &   1 & 9 &  1\\
+\textbf{Non-Thromb. MI}  & 2  & 2 & 8 
+\end{tabular}
+\end{frame}
+
+\begin{frame}{LOO-CV estimation of error}
+\vspace{-15pt}
+Bayesian model without troponin:
+\vspace{4ex}
+
+\begin{tabular}{l|ccc}
+& \emph{Predicted} & & \\
+\emph{Actual} &  \textbf{sCAD} & \textbf{Thrombotic MI} & \textbf{Non-Thromb. MI} \\
+\hline
+\textbf{sCAD}   &     13    &     0    &     2\\
+\textbf{Thrombotic MI}  &  0    &    10    &     1\\
+\textbf{Non-Thromb. MI} &   1    &     1   &     10
+\end{tabular}
+\end{frame}
+
+\begin{frame}{LOO-CV estimation of error}
+\vspace{-15pt}
+Bayesian model with troponin:
+\vspace{4ex}
+
+\begin{tabular}{l|ccc}
+& \emph{Predicted} & & \\
+\emph{Actual}  &     \textbf{sCAD} & \textbf{Thrombotic MI} & \textbf{Non-Thromb. MI} \\
+\hline
+\textbf{sCAD}   &     13    &     0    &     2\\
+\textbf{Thrombotic MI}  &  0    &    10    &     1\\
+\textbf{Non-Thromb. MI} &   2  &   0 &    10
+\end{tabular}
+\end{frame}
+
+\begin{frame}{LOO-CV estimation of error}
+\vspace{-15pt}
+Bayesian model with troponin:
+\vspace{2ex}
+\begin{center}
+\begin{tabular}{|c|c|cc|cc|}
+\hline
+& & \multicolumn{2}{|c|}{Sensitivity} & \multicolumn{2}{|c|}{Specificity} \\
+Model & Accuracy & Thromb. & Non-Thromb. &  Thromb. & Non-Thromb.  \\
+\hline
+M0 & 78.9\% & 81.8\% & 66.7\% & 92.6\% & 88.5\% \\
+M1 & 86.8\% & 90.9\% & 83.3\% & 96.3\% & 88.5\% \\
+M2 & 86.8\% & 90.9\% & 83.3\% & 100.0\% & 88.5\% \\
+\hline
+\end{tabular}
+\end{center}
+\end{frame}
+
+\begin{frame}{Continuing work}
+	\vspace{-7pt}
+	\begin{itemize}
+		\item Awarded a grant for developing a targeted MRM assay for the ``important'' metabolites and lipids \pause
+		\item[]
+		\item Utilizing an expanded cohort including new human subjects for which we are blinded to the phenotype \pause
+		\item[]
+		\item Integrating with proteomics data (collaboration with Cedars Sinai and Thermo Fisher)
+	\end{itemize}
+\end{frame}
+
+\section{Acknowledgments}
+
+\begin{frame}{Acknowledgments}
+	\begin{columns}
+		\column{.5 \textwidth}
+			\textbf{Funding support}:
+			\begin{itemize}
+				\item NIH NIGMS 2P20GM103492-06 (Metabolomic Analysis of Atherothrombosis)
+				\item[]
+				\item Alpha Phi Foundation Heart-to-Heart Award
+				\item[]
+				\item NIH 1U24DK097154 (PI: Oliver Fiehn) Subproject Award
+			\end{itemize}
+		\column{.5 \textwidth}
+			\begin{itemize}
+				\item Atherosclerosis and Atherothrombois Research Lab (University of Louisville)
+				\begin{itemize}
+					\item Andrew DeFilippis, MD, MSc
+					\item Alok Amraotkar, MD, MPH
+					\item Amanda Coulter, BS
+					\item Allison Smith, BS
+				\end{itemize}
+				\item[]
+				\item Other important collaborators:
+				\begin{itemize}
+					\item Bradford Hill, PhD
+					\item Samantha Carlisle, PhD
+					\item Aruni Bhatnagar, PhD
+					\item Shesh Rai, PhD
+				\end{itemize}
+			\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{center}
+	\huge{Thank you!}	
+\end{center}
+\end{frame}
+
+%\section{Bioinformatic processing of LC-MS data}
+%\begin{frame}{Outline}
+%\vspace{-10.5pt}
+%\tableofcontents[currentsection,subsectionstyle=hide]
+%\addtocounter{framenumber}{-1}
+%\end{frame}
+%
+%\begin{frame}{Mass spectrometry is ubiquitous}
+%\vspace{-15pt}
+%\begin{center}
+%\includegraphics[scale=.4]{35168-8377116}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Chromatography}
+%\begin{center}
+%\includegraphics[scale=.6]{../../xcmsPlots/primer_e_lcsystem}
+%
+%\tiny{(From Waters product literature)}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Chromatography}
+%\begin{center}
+%\includegraphics[scale=.6]{../../xcmsPlots/primer_S-2_ReversedPhase}
+%
+%\tiny{(From Waters product literature)}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Ionization (Electrospray Ionization)}
+%\vspace{-7pt}
+%\begin{center}
+%\includegraphics[scale=.45]{../../ESI}
+%
+%\tiny{(Cartoon from Agilent Q-ToF MS manual)}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Quadrupole Time-of-Flight Instruments}
+%\vspace{-7pt}
+%\begin{center}
+%\includegraphics[scale=.6]{../../qtof}
+%
+%\tiny{(Cartoon from Agilent Q-ToF MS manual)}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Liquid Chromatography - Mass Spectrometry}{Form of the data}
+%\vspace{-7pt}
+%\includegraphics{johanes}
+%
+%\tiny{Sketch courtesy of Dr. Johannes Rainer (Institute for Biomedicine, Eurac Research, Bolzano, Italy)}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{Overview of steps}
+%\vspace{-10pt}
+%\begin{enumerate}
+%\setbeamertemplate{enumerate items}[default]
+%\item File conversion
+%\item[]
+%\item Peak detection
+%\item[]
+%\item Retention time alignment
+%\item[]
+%\item Peak grouping
+%\item[]
+%\item Peak filling
+%\item[]
+%\item Compound identification
+%\end{enumerate}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{1. File conversion}
+%\vspace{-10pt}
+%\begin{enumerate}
+%\setbeamertemplate{enumerate items}[default]
+%\item File conversion
+%\begin{itemize}
+%\item Vendor data files (or directories) containing scan-level data are non-standard
+%\item Need to convert to mzML or mzXML
+%\item msconvert from proteowizard
+%\end{itemize}
+%\end{enumerate}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{2. Peak detection}
+%\vspace{-7pt}
+%\begin{center}
+%\includegraphics[scale=.7]{../../xcmsPlots/TIC}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{2. Peak detection}
+%\vspace{-7pt}
+%\begin{center}
+%\includegraphics[scale=.7]{../../xcmsPlots/TICZoom}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{2. Peak detection}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.625]{../../xcmsPlots/Spec440}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{2. Peak detection}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.625]{../../xcmsPlots/Spec440Log}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{2. Peak detection}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.625]{../../xcmsPlots/nicePeak}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{2. Peak detection}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.625]{../../xcmsPlots/notNicePeak}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.7]{../../xcmsPlots/NotAligned}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.7]{../../xcmsPlots/rtAdjust}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{3. Retention time alignment}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.7]{../../xcmsPlots/Aligned}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{4. Peak grouping}
+%\vspace{-7pt}
+%\textbf{Peak grouping} can refer to: \pause
+%\begin{itemize}
+%\item Grouping the same peak across multiple samples \pause
+%\item Grouping isotopic peaks 
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{4. Peak grouping}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.625]{../../xcmsPlots/nicePeak}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{4. Peak grouping}
+%\vspace{-7pt}
+%\textbf{Peak grouping} can refer to:
+%\begin{itemize}
+%\item Grouping ``split peaks''
+%\item Grouping the same peak across multiple samples
+%\item Grouping isotopic peaks 
+%\item Grouping other molecular features (adducts, in-source fragments) together
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{4. Peak grouping}
+%These should not be grouped!
+%\begin{center}
+%\includegraphics[scale=.6]{../../xcmsPlots/chromPeakDensity}
+%\end{center}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{5. Peak filling}
+%\begin{itemize}
+%\item If peak detection is applied individually over each sample / replicate, there may be missing values \pause
+%\item[]
+%\item Sources of missingness: \pause
+%\begin{itemize}
+%\item Peak intensity is below a signal-to-noise or other filter threshold \pause
+%\item The peak was not detected \emph{because the ion is not actually there} \pause
+%\end{itemize}
+%\item[]
+%\item Peak intensity can be ``filled'' by re-examining the intensity in the sample / replicate 
+%\end{itemize}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{6. Compound identification}
+%\vspace{-11pt}
+%\begin{columns}
+%\column{0.45\textwidth}
+%Parameters we use:
+%\begin{itemize}
+%\item Retention time \pause
+%\item[]
+%\item m/z from MS1 scans \pause
+%\item[]
+%\item m/z spectra from MS\textsuperscript{2} / MS\textsuperscript{(n)} scans \pause
+%\begin{itemize}
+%\item Spectral matching using DBs: Metlin, NIST, HMDB, Lipid Maps
+%\end{itemize}
+%\end{itemize}
+%\column{0.55\textwidth}
+%\begin{center}
+%\includegraphics[scale=.38]{../../xcmsPlots/SpecEx}
+%\end{center}
+%\end{columns}
+%\end{frame}
+%
+%\begin{frame}{Bioinformatic processing}{5 + 6. Peak grouping + Compound identification}
+%\vspace{-10pt}
+%\begin{center}
+%\includegraphics[scale=.45]{../../xcmsPlots/metAssign}
+%\vspace{5mm}
+%\tiny{Ronan Daly, et al. (2014). MetAssign: probabilistic annotation of metabolites from LC–MS data using a Bayesian clustering approach. \emph{Bioinformatics, 19}.}
+%\end{center}
+%\end{frame}
+
+\end{document}
